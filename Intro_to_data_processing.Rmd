@@ -1,0 +1,301 @@
+---
+title: "Intro to data processing"
+subtitle: ""
+author: "Jakub Nowosad"
+date: ""
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+library('knitr')
+opts_chunk$set(cache=FALSE, warning=FALSE, message=FALSE)
+options(scipen = 5)
+options(htmltools.dir.version = FALSE)
+```
+
+
+---
+## Dataset
+
+```{r, eval=FALSE}
+# install.packages('devtools')
+# devtools::install_github("jennybc/gapminder")
+library('gapminder')
+```
+
+or
+
+```{r}
+gapminder <- readRDS('data/gapminder.rds')
+```
+
+http://www.gapminder.org/data/
+
+http://github.com/jennybc/gapminder
+
+http://www.youtube.com/watch?v=jbkSRLYSojo
+
+---
+# Vectors - indexing
+
+- brak indeksu
+- indeks dodatni
+- indeks zerowy
+- indeks ujemny
+- indeks logiczny
+- indeks tekstowy
+
+---
+## data.frame - indexing
+
+- object[row,column]
+```{r, eval=FALSE}
+gapminder[2, 1]
+gapminder[1, 3]
+gapminder[, 1]
+gapminder[1]
+gapminder[1, ]
+gapminder[0, 3]
+gapminder[-2, ]
+gapminder[, -1]
+gapminder[c(1,5,7), ]
+gapminder[, c(1,2)]
+gapminder[gapminder$pop<100000, ]
+gapminder[gapminder$year==1952, c(4)]
+```
+
+---
+## data.frame - indexing
+
+```{r, eval=FALSE}
+gapminder$lifeExp
+```
+
+```{r, echo=FALSE}
+head(gapminder$lifeExp)
+```
+
+```{r, eval=FALSE}
+gapminder$continent
+```
+
+```{r, echo=FALSE}
+head(gapminder$continent)
+```
+---
+## **dplyr**
+
+```{r}
+# install.packages('dplyr')
+# devtools::install_github("hadley/dplyr")
+library('dplyr')
+```
+
+- **dplyr** to pakiet służący do podstawowych operacji przetwarzania danych z wykrzystaniem obiektów typu data.frame
+- podstawowe funkcje pakietu **dplyr** to *select*, *arrange*, *filter*, *mutate*, oraz *summarize*
+- dodatkowo ważną rolę spełnia funkcja *group_by*
+- inne możliwości pakietu **dplyr** to operator łączący funkcje ( %>% ), złączenia ("join") czy operacje w ruchomym oknie 
+
+---
+## **dplyr** - *select*
+
+- funkcja *select* pozwala na stworzenie obiektu zawierającego tylko wybrane kolumny
+- ta funkcja pozwala zarówno na wybór pozytywny jak i negatywny
+- wiele dodatkowych możliwości - ?dplyr::select
+
+```{r, echo=FALSE}
+knitr::kable(head(gapminder), 'html')
+```
+
+---
+## **dplyr** - *select*
+
+```{r}
+gapminder_sel1 <- select(gapminder, country, year, pop)
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_sel1[1:2, ], 'html')
+```
+
+```{r}
+gapminder_sel2 <- select(gapminder, -continent)
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_sel2[1:2, ], 'html')
+```
+
+---
+## **dplyr** - *arrange*
+
+- funkcja *arrange* sortuje wybrane kolumny w kolejności rosnącej...
+
+```{r}
+gapminder_arr1 <- arrange(gapminder, lifeExp)
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_arr1[1:5, ], 'html')
+```
+
+---
+## **dplyr** - *arrange*
+
+- ...lub malejącej
+
+```{r}
+gapminder_arr1 <- arrange(gapminder, desc(lifeExp))
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_arr1[1:5, ], 'html')
+```
+
+---
+## **dplyr** - *filter*
+
+- funkcja *filter* pozwala na wybranie tylko tych obserwacji (wierszy), które spełniają zadane warunki
+- warunki określane są przez operatory logiczne: ==, !=, >, >=, <, <=, &, |
+
+```{r}
+gapminder_fil1 <- filter(gapminder, year == 2007)
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_fil1[1:2, ], 'html')
+```
+
+---
+## **dplyr** - *filter*
+
+```{r}
+gapminder_fil2 <- filter(gapminder, year == 2007 & pop <= 999999)
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_fil2[1:2, ], 'html')
+```
+
+```{r}
+gapminder_fil2 <- filter(gapminder, continent != 'Asia' |  lifeExp < 30)
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_fil2[1:2, ], 'html')
+```
+
+---
+## **dplyr** - *mutate*
+
+- funkcja *mutate* dodaje nowe zmienne (kolumny) na podstawe zadanego wyrażenia
+
+```{r}
+gapminder_mut1 <- mutate(gapminder, gdp_mil = (gdpPercap * pop) / 1000000)
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_mut1[1:5, ], 'html')
+```
+
+---
+## **dplyr** - *summarize*
+
+- funkcja *summarize* służy do tworzenia podsumowań statystycznych; tworzy kolumny z zadanymi statystykami opisowymi
+
+```{r}
+gapminder_sum1 <- summarize(gapminder, mean_le = mean(lifeExp))
+```
+
+```{r, echo=FALSE}
+gapminder_sum1
+```
+
+```{r}
+gapminder_sum2 <- summarize(gapminder, mean_le = mean(lifeExp), min_le = min(lifeExp), max_le = max(lifeExp))
+```
+
+```{r, echo=FALSE}
+gapminder_sum2
+```
+
+---
+## **dplyr** - *group_by*
+
+- funkcja *group_by* sama nie tworzy wyników, pozwala jednak na wyliczanie wyniów według zadanej agregacji
+
+```{r}
+gapminder2007 <- filter(gapminder, year == 2007)
+gapminder_grp1 <- group_by(gapminder2007, continent)
+```
+
+```{r, echo=FALSE}
+head(gapminder_grp1)
+```
+
+---
+## **dplyr** - *group_by*
+
+```{r}
+gapminder_grp1 <- summarize(gapminder_grp1, mean_lifeExp = mean(lifeExp))
+```
+
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_grp1[1:5, ], 'html')
+```
+
+---
+## **tidyr**
+
+```{r}
+# install.packages('tidyr')
+library('tidyr')
+```
+
+- często dane jakie posiadamy są ułożone nie w ten sposób jaki my czy też różne funkcje R oczekują; ważne jest, aby dane były uporządkowane (tzw. "tidy data"), co oznacza, że:
+    - każda kolumna to zmienna
+    - każdy wiersz to obserwacja
+- istnieją dwie podstawowe układy danych, tzw. dane szerokie (wide) oraz dane długie (long)      
+- więcej szczegółów można znaleźć pod adresem http://vita.had.co.nz/papers/tidy-data.html
+- pakiet **tidyr** posiada dwie główne funkcje - *gather* and *spread* oraz szereg dodatkowych
+
+---
+## **tidyr** - *spread*
+
+- celem funkcji *spread* jest przetworzenie danych na tzw. dane szerokie 
+- konieczne jest, aby dane miały tylko jeden unikalny identyfikator
+
+```{r}
+gapminder <- select(gapminder, -continent, -lifeExp, -gdpPercap)
+gapminder_spread <- spread(gapminder, country, pop)
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_spread[c(1:5), 1:10], 'html')
+```
+
+---
+## **tidyr** - *gather*
+
+- funkcja *gather* przetwarza dane na postać tzw. długą
+
+```{r}
+gapminder_gather <- gather(gapminder_spread, country, pop, -year)
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_gather[1:5, ], 'html')
+```
+
+
+---
+## ** %>% **
