@@ -18,10 +18,6 @@ class: center, middle, inverse, title-slide
 
 
 
-
----
-# Data processing
-
 ## Dataset
 
 
@@ -45,16 +41,2759 @@ http://github.com/jennybc/gapminder
 http://www.youtube.com/watch?v=jbkSRLYSojo
 
 ---
-# R 
+# Vectors - indexing
 
-## Vectors - indexing
+- empty index
+- positive index
+- zero index
+- negative index
+- logical index
+- name index
 
-- brak indeksu
-- indeks dodatni
-- indeks zerowy
-- indeks ujemny
-- indeks logiczny
-- indeks tekstowy
+---
+## data.frame - indexing
+- A data frame is (at least) a two-dimensional object
+- There are many ways to subset a data frame. Some of them are *[]* operator, *$* operator, or *subset()* function
+
+
+```r
+head(gapminder)
+```
+
+```
+##       country continent year lifeExp      pop gdpPercap
+## 1 Afghanistan      Asia 1952  28.801  8425333  779.4453
+## 2 Afghanistan      Asia 1957  30.332  9240934  820.8530
+## 3 Afghanistan      Asia 1962  31.997 10267083  853.1007
+## 4 Afghanistan      Asia 1967  34.020 11537966  836.1971
+## 5 Afghanistan      Asia 1972  36.088 13079460  739.9811
+## 6 Afghanistan      Asia 1977  38.438 14880372  786.1134
+```
+
+---
+## data.frame - indexing
+
+- *$* operator can be used to retrieve a variable (column) by its name
+- The result is a vector
+
+
+```r
+gapminder$country
+```
+
+```
+##    [1] Afghanistan              Afghanistan             
+##    [3] Afghanistan              Afghanistan             
+##    [5] Afghanistan              Afghanistan             
+##    [7] Afghanistan              Afghanistan             
+##    [9] Afghanistan              Afghanistan             
+##   [11] Afghanistan              Afghanistan             
+##   [13] Albania                  Albania                 
+##   [15] Albania                  Albania                 
+##   [17] Albania                  Albania                 
+##   [19] Albania                  Albania                 
+##   [21] Albania                  Albania                 
+##   [23] Albania                  Albania                 
+##   [25] Algeria                  Algeria                 
+##   [27] Algeria                  Algeria                 
+##   [29] Algeria                  Algeria                 
+##   [31] Algeria                  Algeria                 
+##   [33] Algeria                  Algeria                 
+##   [35] Algeria                  Algeria                 
+##   [37] Angola                   Angola                  
+##   [39] Angola                   Angola                  
+##   [41] Angola                   Angola                  
+##   [43] Angola                   Angola                  
+##   [45] Angola                   Angola                  
+##   [47] Angola                   Angola                  
+##   [49] Argentina                Argentina               
+##   [51] Argentina                Argentina               
+##   [53] Argentina                Argentina               
+##   [55] Argentina                Argentina               
+##   [57] Argentina                Argentina               
+##   [59] Argentina                Argentina               
+##   [61] Australia                Australia               
+##   [63] Australia                Australia               
+##   [65] Australia                Australia               
+##   [67] Australia                Australia               
+##   [69] Australia                Australia               
+##   [71] Australia                Australia               
+##   [73] Austria                  Austria                 
+##   [75] Austria                  Austria                 
+##   [77] Austria                  Austria                 
+##   [79] Austria                  Austria                 
+##   [81] Austria                  Austria                 
+##   [83] Austria                  Austria                 
+##   [85] Bahrain                  Bahrain                 
+##   [87] Bahrain                  Bahrain                 
+##   [89] Bahrain                  Bahrain                 
+##   [91] Bahrain                  Bahrain                 
+##   [93] Bahrain                  Bahrain                 
+##   [95] Bahrain                  Bahrain                 
+##   [97] Bangladesh               Bangladesh              
+##   [99] Bangladesh               Bangladesh              
+##  [101] Bangladesh               Bangladesh              
+##  [103] Bangladesh               Bangladesh              
+##  [105] Bangladesh               Bangladesh              
+##  [107] Bangladesh               Bangladesh              
+##  [109] Belgium                  Belgium                 
+##  [111] Belgium                  Belgium                 
+##  [113] Belgium                  Belgium                 
+##  [115] Belgium                  Belgium                 
+##  [117] Belgium                  Belgium                 
+##  [119] Belgium                  Belgium                 
+##  [121] Benin                    Benin                   
+##  [123] Benin                    Benin                   
+##  [125] Benin                    Benin                   
+##  [127] Benin                    Benin                   
+##  [129] Benin                    Benin                   
+##  [131] Benin                    Benin                   
+##  [133] Bolivia                  Bolivia                 
+##  [135] Bolivia                  Bolivia                 
+##  [137] Bolivia                  Bolivia                 
+##  [139] Bolivia                  Bolivia                 
+##  [141] Bolivia                  Bolivia                 
+##  [143] Bolivia                  Bolivia                 
+##  [145] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [147] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [149] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [151] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [153] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [155] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [157] Botswana                 Botswana                
+##  [159] Botswana                 Botswana                
+##  [161] Botswana                 Botswana                
+##  [163] Botswana                 Botswana                
+##  [165] Botswana                 Botswana                
+##  [167] Botswana                 Botswana                
+##  [169] Brazil                   Brazil                  
+##  [171] Brazil                   Brazil                  
+##  [173] Brazil                   Brazil                  
+##  [175] Brazil                   Brazil                  
+##  [177] Brazil                   Brazil                  
+##  [179] Brazil                   Brazil                  
+##  [181] Bulgaria                 Bulgaria                
+##  [183] Bulgaria                 Bulgaria                
+##  [185] Bulgaria                 Bulgaria                
+##  [187] Bulgaria                 Bulgaria                
+##  [189] Bulgaria                 Bulgaria                
+##  [191] Bulgaria                 Bulgaria                
+##  [193] Burkina Faso             Burkina Faso            
+##  [195] Burkina Faso             Burkina Faso            
+##  [197] Burkina Faso             Burkina Faso            
+##  [199] Burkina Faso             Burkina Faso            
+##  [201] Burkina Faso             Burkina Faso            
+##  [203] Burkina Faso             Burkina Faso            
+##  [205] Burundi                  Burundi                 
+##  [207] Burundi                  Burundi                 
+##  [209] Burundi                  Burundi                 
+##  [211] Burundi                  Burundi                 
+##  [213] Burundi                  Burundi                 
+##  [215] Burundi                  Burundi                 
+##  [217] Cambodia                 Cambodia                
+##  [219] Cambodia                 Cambodia                
+##  [221] Cambodia                 Cambodia                
+##  [223] Cambodia                 Cambodia                
+##  [225] Cambodia                 Cambodia                
+##  [227] Cambodia                 Cambodia                
+##  [229] Cameroon                 Cameroon                
+##  [231] Cameroon                 Cameroon                
+##  [233] Cameroon                 Cameroon                
+##  [235] Cameroon                 Cameroon                
+##  [237] Cameroon                 Cameroon                
+##  [239] Cameroon                 Cameroon                
+##  [241] Canada                   Canada                  
+##  [243] Canada                   Canada                  
+##  [245] Canada                   Canada                  
+##  [247] Canada                   Canada                  
+##  [249] Canada                   Canada                  
+##  [251] Canada                   Canada                  
+##  [253] Central African Republic Central African Republic
+##  [255] Central African Republic Central African Republic
+##  [257] Central African Republic Central African Republic
+##  [259] Central African Republic Central African Republic
+##  [261] Central African Republic Central African Republic
+##  [263] Central African Republic Central African Republic
+##  [265] Chad                     Chad                    
+##  [267] Chad                     Chad                    
+##  [269] Chad                     Chad                    
+##  [271] Chad                     Chad                    
+##  [273] Chad                     Chad                    
+##  [275] Chad                     Chad                    
+##  [277] Chile                    Chile                   
+##  [279] Chile                    Chile                   
+##  [281] Chile                    Chile                   
+##  [283] Chile                    Chile                   
+##  [285] Chile                    Chile                   
+##  [287] Chile                    Chile                   
+##  [289] China                    China                   
+##  [291] China                    China                   
+##  [293] China                    China                   
+##  [295] China                    China                   
+##  [297] China                    China                   
+##  [299] China                    China                   
+##  [301] Colombia                 Colombia                
+##  [303] Colombia                 Colombia                
+##  [305] Colombia                 Colombia                
+##  [307] Colombia                 Colombia                
+##  [309] Colombia                 Colombia                
+##  [311] Colombia                 Colombia                
+##  [313] Comoros                  Comoros                 
+##  [315] Comoros                  Comoros                 
+##  [317] Comoros                  Comoros                 
+##  [319] Comoros                  Comoros                 
+##  [321] Comoros                  Comoros                 
+##  [323] Comoros                  Comoros                 
+##  [325] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [327] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [329] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [331] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [333] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [335] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [337] Congo, Rep.              Congo, Rep.             
+##  [339] Congo, Rep.              Congo, Rep.             
+##  [341] Congo, Rep.              Congo, Rep.             
+##  [343] Congo, Rep.              Congo, Rep.             
+##  [345] Congo, Rep.              Congo, Rep.             
+##  [347] Congo, Rep.              Congo, Rep.             
+##  [349] Costa Rica               Costa Rica              
+##  [351] Costa Rica               Costa Rica              
+##  [353] Costa Rica               Costa Rica              
+##  [355] Costa Rica               Costa Rica              
+##  [357] Costa Rica               Costa Rica              
+##  [359] Costa Rica               Costa Rica              
+##  [361] Cote d'Ivoire            Cote d'Ivoire           
+##  [363] Cote d'Ivoire            Cote d'Ivoire           
+##  [365] Cote d'Ivoire            Cote d'Ivoire           
+##  [367] Cote d'Ivoire            Cote d'Ivoire           
+##  [369] Cote d'Ivoire            Cote d'Ivoire           
+##  [371] Cote d'Ivoire            Cote d'Ivoire           
+##  [373] Croatia                  Croatia                 
+##  [375] Croatia                  Croatia                 
+##  [377] Croatia                  Croatia                 
+##  [379] Croatia                  Croatia                 
+##  [381] Croatia                  Croatia                 
+##  [383] Croatia                  Croatia                 
+##  [385] Cuba                     Cuba                    
+##  [387] Cuba                     Cuba                    
+##  [389] Cuba                     Cuba                    
+##  [391] Cuba                     Cuba                    
+##  [393] Cuba                     Cuba                    
+##  [395] Cuba                     Cuba                    
+##  [397] Czech Republic           Czech Republic          
+##  [399] Czech Republic           Czech Republic          
+##  [401] Czech Republic           Czech Republic          
+##  [403] Czech Republic           Czech Republic          
+##  [405] Czech Republic           Czech Republic          
+##  [407] Czech Republic           Czech Republic          
+##  [409] Denmark                  Denmark                 
+##  [411] Denmark                  Denmark                 
+##  [413] Denmark                  Denmark                 
+##  [415] Denmark                  Denmark                 
+##  [417] Denmark                  Denmark                 
+##  [419] Denmark                  Denmark                 
+##  [421] Djibouti                 Djibouti                
+##  [423] Djibouti                 Djibouti                
+##  [425] Djibouti                 Djibouti                
+##  [427] Djibouti                 Djibouti                
+##  [429] Djibouti                 Djibouti                
+##  [431] Djibouti                 Djibouti                
+##  [433] Dominican Republic       Dominican Republic      
+##  [435] Dominican Republic       Dominican Republic      
+##  [437] Dominican Republic       Dominican Republic      
+##  [439] Dominican Republic       Dominican Republic      
+##  [441] Dominican Republic       Dominican Republic      
+##  [443] Dominican Republic       Dominican Republic      
+##  [445] Ecuador                  Ecuador                 
+##  [447] Ecuador                  Ecuador                 
+##  [449] Ecuador                  Ecuador                 
+##  [451] Ecuador                  Ecuador                 
+##  [453] Ecuador                  Ecuador                 
+##  [455] Ecuador                  Ecuador                 
+##  [457] Egypt                    Egypt                   
+##  [459] Egypt                    Egypt                   
+##  [461] Egypt                    Egypt                   
+##  [463] Egypt                    Egypt                   
+##  [465] Egypt                    Egypt                   
+##  [467] Egypt                    Egypt                   
+##  [469] El Salvador              El Salvador             
+##  [471] El Salvador              El Salvador             
+##  [473] El Salvador              El Salvador             
+##  [475] El Salvador              El Salvador             
+##  [477] El Salvador              El Salvador             
+##  [479] El Salvador              El Salvador             
+##  [481] Equatorial Guinea        Equatorial Guinea       
+##  [483] Equatorial Guinea        Equatorial Guinea       
+##  [485] Equatorial Guinea        Equatorial Guinea       
+##  [487] Equatorial Guinea        Equatorial Guinea       
+##  [489] Equatorial Guinea        Equatorial Guinea       
+##  [491] Equatorial Guinea        Equatorial Guinea       
+##  [493] Eritrea                  Eritrea                 
+##  [495] Eritrea                  Eritrea                 
+##  [497] Eritrea                  Eritrea                 
+##  [499] Eritrea                  Eritrea                 
+##  [501] Eritrea                  Eritrea                 
+##  [503] Eritrea                  Eritrea                 
+##  [505] Ethiopia                 Ethiopia                
+##  [507] Ethiopia                 Ethiopia                
+##  [509] Ethiopia                 Ethiopia                
+##  [511] Ethiopia                 Ethiopia                
+##  [513] Ethiopia                 Ethiopia                
+##  [515] Ethiopia                 Ethiopia                
+##  [517] Finland                  Finland                 
+##  [519] Finland                  Finland                 
+##  [521] Finland                  Finland                 
+##  [523] Finland                  Finland                 
+##  [525] Finland                  Finland                 
+##  [527] Finland                  Finland                 
+##  [529] France                   France                  
+##  [531] France                   France                  
+##  [533] France                   France                  
+##  [535] France                   France                  
+##  [537] France                   France                  
+##  [539] France                   France                  
+##  [541] Gabon                    Gabon                   
+##  [543] Gabon                    Gabon                   
+##  [545] Gabon                    Gabon                   
+##  [547] Gabon                    Gabon                   
+##  [549] Gabon                    Gabon                   
+##  [551] Gabon                    Gabon                   
+##  [553] Gambia                   Gambia                  
+##  [555] Gambia                   Gambia                  
+##  [557] Gambia                   Gambia                  
+##  [559] Gambia                   Gambia                  
+##  [561] Gambia                   Gambia                  
+##  [563] Gambia                   Gambia                  
+##  [565] Germany                  Germany                 
+##  [567] Germany                  Germany                 
+##  [569] Germany                  Germany                 
+##  [571] Germany                  Germany                 
+##  [573] Germany                  Germany                 
+##  [575] Germany                  Germany                 
+##  [577] Ghana                    Ghana                   
+##  [579] Ghana                    Ghana                   
+##  [581] Ghana                    Ghana                   
+##  [583] Ghana                    Ghana                   
+##  [585] Ghana                    Ghana                   
+##  [587] Ghana                    Ghana                   
+##  [589] Greece                   Greece                  
+##  [591] Greece                   Greece                  
+##  [593] Greece                   Greece                  
+##  [595] Greece                   Greece                  
+##  [597] Greece                   Greece                  
+##  [599] Greece                   Greece                  
+##  [601] Guatemala                Guatemala               
+##  [603] Guatemala                Guatemala               
+##  [605] Guatemala                Guatemala               
+##  [607] Guatemala                Guatemala               
+##  [609] Guatemala                Guatemala               
+##  [611] Guatemala                Guatemala               
+##  [613] Guinea                   Guinea                  
+##  [615] Guinea                   Guinea                  
+##  [617] Guinea                   Guinea                  
+##  [619] Guinea                   Guinea                  
+##  [621] Guinea                   Guinea                  
+##  [623] Guinea                   Guinea                  
+##  [625] Guinea-Bissau            Guinea-Bissau           
+##  [627] Guinea-Bissau            Guinea-Bissau           
+##  [629] Guinea-Bissau            Guinea-Bissau           
+##  [631] Guinea-Bissau            Guinea-Bissau           
+##  [633] Guinea-Bissau            Guinea-Bissau           
+##  [635] Guinea-Bissau            Guinea-Bissau           
+##  [637] Haiti                    Haiti                   
+##  [639] Haiti                    Haiti                   
+##  [641] Haiti                    Haiti                   
+##  [643] Haiti                    Haiti                   
+##  [645] Haiti                    Haiti                   
+##  [647] Haiti                    Haiti                   
+##  [649] Honduras                 Honduras                
+##  [651] Honduras                 Honduras                
+##  [653] Honduras                 Honduras                
+##  [655] Honduras                 Honduras                
+##  [657] Honduras                 Honduras                
+##  [659] Honduras                 Honduras                
+##  [661] Hong Kong, China         Hong Kong, China        
+##  [663] Hong Kong, China         Hong Kong, China        
+##  [665] Hong Kong, China         Hong Kong, China        
+##  [667] Hong Kong, China         Hong Kong, China        
+##  [669] Hong Kong, China         Hong Kong, China        
+##  [671] Hong Kong, China         Hong Kong, China        
+##  [673] Hungary                  Hungary                 
+##  [675] Hungary                  Hungary                 
+##  [677] Hungary                  Hungary                 
+##  [679] Hungary                  Hungary                 
+##  [681] Hungary                  Hungary                 
+##  [683] Hungary                  Hungary                 
+##  [685] Iceland                  Iceland                 
+##  [687] Iceland                  Iceland                 
+##  [689] Iceland                  Iceland                 
+##  [691] Iceland                  Iceland                 
+##  [693] Iceland                  Iceland                 
+##  [695] Iceland                  Iceland                 
+##  [697] India                    India                   
+##  [699] India                    India                   
+##  [701] India                    India                   
+##  [703] India                    India                   
+##  [705] India                    India                   
+##  [707] India                    India                   
+##  [709] Indonesia                Indonesia               
+##  [711] Indonesia                Indonesia               
+##  [713] Indonesia                Indonesia               
+##  [715] Indonesia                Indonesia               
+##  [717] Indonesia                Indonesia               
+##  [719] Indonesia                Indonesia               
+##  [721] Iran                     Iran                    
+##  [723] Iran                     Iran                    
+##  [725] Iran                     Iran                    
+##  [727] Iran                     Iran                    
+##  [729] Iran                     Iran                    
+##  [731] Iran                     Iran                    
+##  [733] Iraq                     Iraq                    
+##  [735] Iraq                     Iraq                    
+##  [737] Iraq                     Iraq                    
+##  [739] Iraq                     Iraq                    
+##  [741] Iraq                     Iraq                    
+##  [743] Iraq                     Iraq                    
+##  [745] Ireland                  Ireland                 
+##  [747] Ireland                  Ireland                 
+##  [749] Ireland                  Ireland                 
+##  [751] Ireland                  Ireland                 
+##  [753] Ireland                  Ireland                 
+##  [755] Ireland                  Ireland                 
+##  [757] Israel                   Israel                  
+##  [759] Israel                   Israel                  
+##  [761] Israel                   Israel                  
+##  [763] Israel                   Israel                  
+##  [765] Israel                   Israel                  
+##  [767] Israel                   Israel                  
+##  [769] Italy                    Italy                   
+##  [771] Italy                    Italy                   
+##  [773] Italy                    Italy                   
+##  [775] Italy                    Italy                   
+##  [777] Italy                    Italy                   
+##  [779] Italy                    Italy                   
+##  [781] Jamaica                  Jamaica                 
+##  [783] Jamaica                  Jamaica                 
+##  [785] Jamaica                  Jamaica                 
+##  [787] Jamaica                  Jamaica                 
+##  [789] Jamaica                  Jamaica                 
+##  [791] Jamaica                  Jamaica                 
+##  [793] Japan                    Japan                   
+##  [795] Japan                    Japan                   
+##  [797] Japan                    Japan                   
+##  [799] Japan                    Japan                   
+##  [801] Japan                    Japan                   
+##  [803] Japan                    Japan                   
+##  [805] Jordan                   Jordan                  
+##  [807] Jordan                   Jordan                  
+##  [809] Jordan                   Jordan                  
+##  [811] Jordan                   Jordan                  
+##  [813] Jordan                   Jordan                  
+##  [815] Jordan                   Jordan                  
+##  [817] Kenya                    Kenya                   
+##  [819] Kenya                    Kenya                   
+##  [821] Kenya                    Kenya                   
+##  [823] Kenya                    Kenya                   
+##  [825] Kenya                    Kenya                   
+##  [827] Kenya                    Kenya                   
+##  [829] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [831] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [833] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [835] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [837] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [839] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [841] Korea, Rep.              Korea, Rep.             
+##  [843] Korea, Rep.              Korea, Rep.             
+##  [845] Korea, Rep.              Korea, Rep.             
+##  [847] Korea, Rep.              Korea, Rep.             
+##  [849] Korea, Rep.              Korea, Rep.             
+##  [851] Korea, Rep.              Korea, Rep.             
+##  [853] Kuwait                   Kuwait                  
+##  [855] Kuwait                   Kuwait                  
+##  [857] Kuwait                   Kuwait                  
+##  [859] Kuwait                   Kuwait                  
+##  [861] Kuwait                   Kuwait                  
+##  [863] Kuwait                   Kuwait                  
+##  [865] Lebanon                  Lebanon                 
+##  [867] Lebanon                  Lebanon                 
+##  [869] Lebanon                  Lebanon                 
+##  [871] Lebanon                  Lebanon                 
+##  [873] Lebanon                  Lebanon                 
+##  [875] Lebanon                  Lebanon                 
+##  [877] Lesotho                  Lesotho                 
+##  [879] Lesotho                  Lesotho                 
+##  [881] Lesotho                  Lesotho                 
+##  [883] Lesotho                  Lesotho                 
+##  [885] Lesotho                  Lesotho                 
+##  [887] Lesotho                  Lesotho                 
+##  [889] Liberia                  Liberia                 
+##  [891] Liberia                  Liberia                 
+##  [893] Liberia                  Liberia                 
+##  [895] Liberia                  Liberia                 
+##  [897] Liberia                  Liberia                 
+##  [899] Liberia                  Liberia                 
+##  [901] Libya                    Libya                   
+##  [903] Libya                    Libya                   
+##  [905] Libya                    Libya                   
+##  [907] Libya                    Libya                   
+##  [909] Libya                    Libya                   
+##  [911] Libya                    Libya                   
+##  [913] Madagascar               Madagascar              
+##  [915] Madagascar               Madagascar              
+##  [917] Madagascar               Madagascar              
+##  [919] Madagascar               Madagascar              
+##  [921] Madagascar               Madagascar              
+##  [923] Madagascar               Madagascar              
+##  [925] Malawi                   Malawi                  
+##  [927] Malawi                   Malawi                  
+##  [929] Malawi                   Malawi                  
+##  [931] Malawi                   Malawi                  
+##  [933] Malawi                   Malawi                  
+##  [935] Malawi                   Malawi                  
+##  [937] Malaysia                 Malaysia                
+##  [939] Malaysia                 Malaysia                
+##  [941] Malaysia                 Malaysia                
+##  [943] Malaysia                 Malaysia                
+##  [945] Malaysia                 Malaysia                
+##  [947] Malaysia                 Malaysia                
+##  [949] Mali                     Mali                    
+##  [951] Mali                     Mali                    
+##  [953] Mali                     Mali                    
+##  [955] Mali                     Mali                    
+##  [957] Mali                     Mali                    
+##  [959] Mali                     Mali                    
+##  [961] Mauritania               Mauritania              
+##  [963] Mauritania               Mauritania              
+##  [965] Mauritania               Mauritania              
+##  [967] Mauritania               Mauritania              
+##  [969] Mauritania               Mauritania              
+##  [971] Mauritania               Mauritania              
+##  [973] Mauritius                Mauritius               
+##  [975] Mauritius                Mauritius               
+##  [977] Mauritius                Mauritius               
+##  [979] Mauritius                Mauritius               
+##  [981] Mauritius                Mauritius               
+##  [983] Mauritius                Mauritius               
+##  [985] Mexico                   Mexico                  
+##  [987] Mexico                   Mexico                  
+##  [989] Mexico                   Mexico                  
+##  [991] Mexico                   Mexico                  
+##  [993] Mexico                   Mexico                  
+##  [995] Mexico                   Mexico                  
+##  [997] Mongolia                 Mongolia                
+##  [999] Mongolia                 Mongolia                
+## [1001] Mongolia                 Mongolia                
+## [1003] Mongolia                 Mongolia                
+## [1005] Mongolia                 Mongolia                
+## [1007] Mongolia                 Mongolia                
+## [1009] Montenegro               Montenegro              
+## [1011] Montenegro               Montenegro              
+## [1013] Montenegro               Montenegro              
+## [1015] Montenegro               Montenegro              
+## [1017] Montenegro               Montenegro              
+## [1019] Montenegro               Montenegro              
+## [1021] Morocco                  Morocco                 
+## [1023] Morocco                  Morocco                 
+## [1025] Morocco                  Morocco                 
+## [1027] Morocco                  Morocco                 
+## [1029] Morocco                  Morocco                 
+## [1031] Morocco                  Morocco                 
+## [1033] Mozambique               Mozambique              
+## [1035] Mozambique               Mozambique              
+## [1037] Mozambique               Mozambique              
+## [1039] Mozambique               Mozambique              
+## [1041] Mozambique               Mozambique              
+## [1043] Mozambique               Mozambique              
+## [1045] Myanmar                  Myanmar                 
+## [1047] Myanmar                  Myanmar                 
+## [1049] Myanmar                  Myanmar                 
+## [1051] Myanmar                  Myanmar                 
+## [1053] Myanmar                  Myanmar                 
+## [1055] Myanmar                  Myanmar                 
+## [1057] Namibia                  Namibia                 
+## [1059] Namibia                  Namibia                 
+## [1061] Namibia                  Namibia                 
+## [1063] Namibia                  Namibia                 
+## [1065] Namibia                  Namibia                 
+## [1067] Namibia                  Namibia                 
+## [1069] Nepal                    Nepal                   
+## [1071] Nepal                    Nepal                   
+## [1073] Nepal                    Nepal                   
+## [1075] Nepal                    Nepal                   
+## [1077] Nepal                    Nepal                   
+## [1079] Nepal                    Nepal                   
+## [1081] Netherlands              Netherlands             
+## [1083] Netherlands              Netherlands             
+## [1085] Netherlands              Netherlands             
+## [1087] Netherlands              Netherlands             
+## [1089] Netherlands              Netherlands             
+## [1091] Netherlands              Netherlands             
+## [1093] New Zealand              New Zealand             
+## [1095] New Zealand              New Zealand             
+## [1097] New Zealand              New Zealand             
+## [1099] New Zealand              New Zealand             
+## [1101] New Zealand              New Zealand             
+## [1103] New Zealand              New Zealand             
+## [1105] Nicaragua                Nicaragua               
+## [1107] Nicaragua                Nicaragua               
+## [1109] Nicaragua                Nicaragua               
+## [1111] Nicaragua                Nicaragua               
+## [1113] Nicaragua                Nicaragua               
+## [1115] Nicaragua                Nicaragua               
+## [1117] Niger                    Niger                   
+## [1119] Niger                    Niger                   
+## [1121] Niger                    Niger                   
+## [1123] Niger                    Niger                   
+## [1125] Niger                    Niger                   
+## [1127] Niger                    Niger                   
+## [1129] Nigeria                  Nigeria                 
+## [1131] Nigeria                  Nigeria                 
+## [1133] Nigeria                  Nigeria                 
+## [1135] Nigeria                  Nigeria                 
+## [1137] Nigeria                  Nigeria                 
+## [1139] Nigeria                  Nigeria                 
+## [1141] Norway                   Norway                  
+## [1143] Norway                   Norway                  
+## [1145] Norway                   Norway                  
+## [1147] Norway                   Norway                  
+## [1149] Norway                   Norway                  
+## [1151] Norway                   Norway                  
+## [1153] Oman                     Oman                    
+## [1155] Oman                     Oman                    
+## [1157] Oman                     Oman                    
+## [1159] Oman                     Oman                    
+## [1161] Oman                     Oman                    
+## [1163] Oman                     Oman                    
+## [1165] Pakistan                 Pakistan                
+## [1167] Pakistan                 Pakistan                
+## [1169] Pakistan                 Pakistan                
+## [1171] Pakistan                 Pakistan                
+## [1173] Pakistan                 Pakistan                
+## [1175] Pakistan                 Pakistan                
+## [1177] Panama                   Panama                  
+## [1179] Panama                   Panama                  
+## [1181] Panama                   Panama                  
+## [1183] Panama                   Panama                  
+## [1185] Panama                   Panama                  
+## [1187] Panama                   Panama                  
+## [1189] Paraguay                 Paraguay                
+## [1191] Paraguay                 Paraguay                
+## [1193] Paraguay                 Paraguay                
+## [1195] Paraguay                 Paraguay                
+## [1197] Paraguay                 Paraguay                
+## [1199] Paraguay                 Paraguay                
+## [1201] Peru                     Peru                    
+## [1203] Peru                     Peru                    
+## [1205] Peru                     Peru                    
+## [1207] Peru                     Peru                    
+## [1209] Peru                     Peru                    
+## [1211] Peru                     Peru                    
+## [1213] Philippines              Philippines             
+## [1215] Philippines              Philippines             
+## [1217] Philippines              Philippines             
+## [1219] Philippines              Philippines             
+## [1221] Philippines              Philippines             
+## [1223] Philippines              Philippines             
+## [1225] Poland                   Poland                  
+## [1227] Poland                   Poland                  
+## [1229] Poland                   Poland                  
+## [1231] Poland                   Poland                  
+## [1233] Poland                   Poland                  
+## [1235] Poland                   Poland                  
+## [1237] Portugal                 Portugal                
+## [1239] Portugal                 Portugal                
+## [1241] Portugal                 Portugal                
+## [1243] Portugal                 Portugal                
+## [1245] Portugal                 Portugal                
+## [1247] Portugal                 Portugal                
+## [1249] Puerto Rico              Puerto Rico             
+## [1251] Puerto Rico              Puerto Rico             
+## [1253] Puerto Rico              Puerto Rico             
+## [1255] Puerto Rico              Puerto Rico             
+## [1257] Puerto Rico              Puerto Rico             
+## [1259] Puerto Rico              Puerto Rico             
+## [1261] Reunion                  Reunion                 
+## [1263] Reunion                  Reunion                 
+## [1265] Reunion                  Reunion                 
+## [1267] Reunion                  Reunion                 
+## [1269] Reunion                  Reunion                 
+## [1271] Reunion                  Reunion                 
+## [1273] Romania                  Romania                 
+## [1275] Romania                  Romania                 
+## [1277] Romania                  Romania                 
+## [1279] Romania                  Romania                 
+## [1281] Romania                  Romania                 
+## [1283] Romania                  Romania                 
+## [1285] Rwanda                   Rwanda                  
+## [1287] Rwanda                   Rwanda                  
+## [1289] Rwanda                   Rwanda                  
+## [1291] Rwanda                   Rwanda                  
+## [1293] Rwanda                   Rwanda                  
+## [1295] Rwanda                   Rwanda                  
+## [1297] Sao Tome and Principe    Sao Tome and Principe   
+## [1299] Sao Tome and Principe    Sao Tome and Principe   
+## [1301] Sao Tome and Principe    Sao Tome and Principe   
+## [1303] Sao Tome and Principe    Sao Tome and Principe   
+## [1305] Sao Tome and Principe    Sao Tome and Principe   
+## [1307] Sao Tome and Principe    Sao Tome and Principe   
+## [1309] Saudi Arabia             Saudi Arabia            
+## [1311] Saudi Arabia             Saudi Arabia            
+## [1313] Saudi Arabia             Saudi Arabia            
+## [1315] Saudi Arabia             Saudi Arabia            
+## [1317] Saudi Arabia             Saudi Arabia            
+## [1319] Saudi Arabia             Saudi Arabia            
+## [1321] Senegal                  Senegal                 
+## [1323] Senegal                  Senegal                 
+## [1325] Senegal                  Senegal                 
+## [1327] Senegal                  Senegal                 
+## [1329] Senegal                  Senegal                 
+## [1331] Senegal                  Senegal                 
+## [1333] Serbia                   Serbia                  
+## [1335] Serbia                   Serbia                  
+## [1337] Serbia                   Serbia                  
+## [1339] Serbia                   Serbia                  
+## [1341] Serbia                   Serbia                  
+## [1343] Serbia                   Serbia                  
+## [1345] Sierra Leone             Sierra Leone            
+## [1347] Sierra Leone             Sierra Leone            
+## [1349] Sierra Leone             Sierra Leone            
+## [1351] Sierra Leone             Sierra Leone            
+## [1353] Sierra Leone             Sierra Leone            
+## [1355] Sierra Leone             Sierra Leone            
+## [1357] Singapore                Singapore               
+## [1359] Singapore                Singapore               
+## [1361] Singapore                Singapore               
+## [1363] Singapore                Singapore               
+## [1365] Singapore                Singapore               
+## [1367] Singapore                Singapore               
+## [1369] Slovak Republic          Slovak Republic         
+## [1371] Slovak Republic          Slovak Republic         
+## [1373] Slovak Republic          Slovak Republic         
+## [1375] Slovak Republic          Slovak Republic         
+## [1377] Slovak Republic          Slovak Republic         
+## [1379] Slovak Republic          Slovak Republic         
+## [1381] Slovenia                 Slovenia                
+## [1383] Slovenia                 Slovenia                
+## [1385] Slovenia                 Slovenia                
+## [1387] Slovenia                 Slovenia                
+## [1389] Slovenia                 Slovenia                
+## [1391] Slovenia                 Slovenia                
+## [1393] Somalia                  Somalia                 
+## [1395] Somalia                  Somalia                 
+## [1397] Somalia                  Somalia                 
+## [1399] Somalia                  Somalia                 
+## [1401] Somalia                  Somalia                 
+## [1403] Somalia                  Somalia                 
+## [1405] South Africa             South Africa            
+## [1407] South Africa             South Africa            
+## [1409] South Africa             South Africa            
+## [1411] South Africa             South Africa            
+## [1413] South Africa             South Africa            
+## [1415] South Africa             South Africa            
+## [1417] Spain                    Spain                   
+## [1419] Spain                    Spain                   
+## [1421] Spain                    Spain                   
+## [1423] Spain                    Spain                   
+## [1425] Spain                    Spain                   
+## [1427] Spain                    Spain                   
+## [1429] Sri Lanka                Sri Lanka               
+## [1431] Sri Lanka                Sri Lanka               
+## [1433] Sri Lanka                Sri Lanka               
+## [1435] Sri Lanka                Sri Lanka               
+## [1437] Sri Lanka                Sri Lanka               
+## [1439] Sri Lanka                Sri Lanka               
+## [1441] Sudan                    Sudan                   
+## [1443] Sudan                    Sudan                   
+## [1445] Sudan                    Sudan                   
+## [1447] Sudan                    Sudan                   
+## [1449] Sudan                    Sudan                   
+## [1451] Sudan                    Sudan                   
+## [1453] Swaziland                Swaziland               
+## [1455] Swaziland                Swaziland               
+## [1457] Swaziland                Swaziland               
+## [1459] Swaziland                Swaziland               
+## [1461] Swaziland                Swaziland               
+## [1463] Swaziland                Swaziland               
+## [1465] Sweden                   Sweden                  
+## [1467] Sweden                   Sweden                  
+## [1469] Sweden                   Sweden                  
+## [1471] Sweden                   Sweden                  
+## [1473] Sweden                   Sweden                  
+## [1475] Sweden                   Sweden                  
+## [1477] Switzerland              Switzerland             
+## [1479] Switzerland              Switzerland             
+## [1481] Switzerland              Switzerland             
+## [1483] Switzerland              Switzerland             
+## [1485] Switzerland              Switzerland             
+## [1487] Switzerland              Switzerland             
+## [1489] Syria                    Syria                   
+## [1491] Syria                    Syria                   
+## [1493] Syria                    Syria                   
+## [1495] Syria                    Syria                   
+## [1497] Syria                    Syria                   
+## [1499] Syria                    Syria                   
+## [1501] Taiwan                   Taiwan                  
+## [1503] Taiwan                   Taiwan                  
+## [1505] Taiwan                   Taiwan                  
+## [1507] Taiwan                   Taiwan                  
+## [1509] Taiwan                   Taiwan                  
+## [1511] Taiwan                   Taiwan                  
+## [1513] Tanzania                 Tanzania                
+## [1515] Tanzania                 Tanzania                
+## [1517] Tanzania                 Tanzania                
+## [1519] Tanzania                 Tanzania                
+## [1521] Tanzania                 Tanzania                
+## [1523] Tanzania                 Tanzania                
+## [1525] Thailand                 Thailand                
+## [1527] Thailand                 Thailand                
+## [1529] Thailand                 Thailand                
+## [1531] Thailand                 Thailand                
+## [1533] Thailand                 Thailand                
+## [1535] Thailand                 Thailand                
+## [1537] Togo                     Togo                    
+## [1539] Togo                     Togo                    
+## [1541] Togo                     Togo                    
+## [1543] Togo                     Togo                    
+## [1545] Togo                     Togo                    
+## [1547] Togo                     Togo                    
+## [1549] Trinidad and Tobago      Trinidad and Tobago     
+## [1551] Trinidad and Tobago      Trinidad and Tobago     
+## [1553] Trinidad and Tobago      Trinidad and Tobago     
+## [1555] Trinidad and Tobago      Trinidad and Tobago     
+## [1557] Trinidad and Tobago      Trinidad and Tobago     
+## [1559] Trinidad and Tobago      Trinidad and Tobago     
+## [1561] Tunisia                  Tunisia                 
+## [1563] Tunisia                  Tunisia                 
+## [1565] Tunisia                  Tunisia                 
+## [1567] Tunisia                  Tunisia                 
+## [1569] Tunisia                  Tunisia                 
+## [1571] Tunisia                  Tunisia                 
+## [1573] Turkey                   Turkey                  
+## [1575] Turkey                   Turkey                  
+## [1577] Turkey                   Turkey                  
+## [1579] Turkey                   Turkey                  
+## [1581] Turkey                   Turkey                  
+## [1583] Turkey                   Turkey                  
+## [1585] Uganda                   Uganda                  
+## [1587] Uganda                   Uganda                  
+## [1589] Uganda                   Uganda                  
+## [1591] Uganda                   Uganda                  
+## [1593] Uganda                   Uganda                  
+## [1595] Uganda                   Uganda                  
+## [1597] United Kingdom           United Kingdom          
+## [1599] United Kingdom           United Kingdom          
+## [1601] United Kingdom           United Kingdom          
+## [1603] United Kingdom           United Kingdom          
+## [1605] United Kingdom           United Kingdom          
+## [1607] United Kingdom           United Kingdom          
+## [1609] United States            United States           
+## [1611] United States            United States           
+## [1613] United States            United States           
+## [1615] United States            United States           
+## [1617] United States            United States           
+## [1619] United States            United States           
+## [1621] Uruguay                  Uruguay                 
+## [1623] Uruguay                  Uruguay                 
+## [1625] Uruguay                  Uruguay                 
+## [1627] Uruguay                  Uruguay                 
+## [1629] Uruguay                  Uruguay                 
+## [1631] Uruguay                  Uruguay                 
+## [1633] Venezuela                Venezuela               
+## [1635] Venezuela                Venezuela               
+## [1637] Venezuela                Venezuela               
+## [1639] Venezuela                Venezuela               
+## [1641] Venezuela                Venezuela               
+## [1643] Venezuela                Venezuela               
+## [1645] Vietnam                  Vietnam                 
+## [1647] Vietnam                  Vietnam                 
+## [1649] Vietnam                  Vietnam                 
+## [1651] Vietnam                  Vietnam                 
+## [1653] Vietnam                  Vietnam                 
+## [1655] Vietnam                  Vietnam                 
+## [1657] West Bank and Gaza       West Bank and Gaza      
+## [1659] West Bank and Gaza       West Bank and Gaza      
+## [1661] West Bank and Gaza       West Bank and Gaza      
+## [1663] West Bank and Gaza       West Bank and Gaza      
+## [1665] West Bank and Gaza       West Bank and Gaza      
+## [1667] West Bank and Gaza       West Bank and Gaza      
+## [1669] Yemen, Rep.              Yemen, Rep.             
+## [1671] Yemen, Rep.              Yemen, Rep.             
+## [1673] Yemen, Rep.              Yemen, Rep.             
+## [1675] Yemen, Rep.              Yemen, Rep.             
+## [1677] Yemen, Rep.              Yemen, Rep.             
+## [1679] Yemen, Rep.              Yemen, Rep.             
+## [1681] Zambia                   Zambia                  
+## [1683] Zambia                   Zambia                  
+## [1685] Zambia                   Zambia                  
+## [1687] Zambia                   Zambia                  
+## [1689] Zambia                   Zambia                  
+## [1691] Zambia                   Zambia                  
+## [1693] Zimbabwe                 Zimbabwe                
+## [1695] Zimbabwe                 Zimbabwe                
+## [1697] Zimbabwe                 Zimbabwe                
+## [1699] Zimbabwe                 Zimbabwe                
+## [1701] Zimbabwe                 Zimbabwe                
+## [1703] Zimbabwe                 Zimbabwe                
+## 142 Levels: Afghanistan Albania Algeria Angola Argentina ... Zimbabwe
+```
+
+---
+## data.frame - indexing
+
+- *$* operator can be used to retrieve a variable (column) by its name
+- The result is a vector
+
+
+```r
+countries &lt;- gapminder$country
+countries
+```
+
+```
+##    [1] Afghanistan              Afghanistan             
+##    [3] Afghanistan              Afghanistan             
+##    [5] Afghanistan              Afghanistan             
+##    [7] Afghanistan              Afghanistan             
+##    [9] Afghanistan              Afghanistan             
+##   [11] Afghanistan              Afghanistan             
+##   [13] Albania                  Albania                 
+##   [15] Albania                  Albania                 
+##   [17] Albania                  Albania                 
+##   [19] Albania                  Albania                 
+##   [21] Albania                  Albania                 
+##   [23] Albania                  Albania                 
+##   [25] Algeria                  Algeria                 
+##   [27] Algeria                  Algeria                 
+##   [29] Algeria                  Algeria                 
+##   [31] Algeria                  Algeria                 
+##   [33] Algeria                  Algeria                 
+##   [35] Algeria                  Algeria                 
+##   [37] Angola                   Angola                  
+##   [39] Angola                   Angola                  
+##   [41] Angola                   Angola                  
+##   [43] Angola                   Angola                  
+##   [45] Angola                   Angola                  
+##   [47] Angola                   Angola                  
+##   [49] Argentina                Argentina               
+##   [51] Argentina                Argentina               
+##   [53] Argentina                Argentina               
+##   [55] Argentina                Argentina               
+##   [57] Argentina                Argentina               
+##   [59] Argentina                Argentina               
+##   [61] Australia                Australia               
+##   [63] Australia                Australia               
+##   [65] Australia                Australia               
+##   [67] Australia                Australia               
+##   [69] Australia                Australia               
+##   [71] Australia                Australia               
+##   [73] Austria                  Austria                 
+##   [75] Austria                  Austria                 
+##   [77] Austria                  Austria                 
+##   [79] Austria                  Austria                 
+##   [81] Austria                  Austria                 
+##   [83] Austria                  Austria                 
+##   [85] Bahrain                  Bahrain                 
+##   [87] Bahrain                  Bahrain                 
+##   [89] Bahrain                  Bahrain                 
+##   [91] Bahrain                  Bahrain                 
+##   [93] Bahrain                  Bahrain                 
+##   [95] Bahrain                  Bahrain                 
+##   [97] Bangladesh               Bangladesh              
+##   [99] Bangladesh               Bangladesh              
+##  [101] Bangladesh               Bangladesh              
+##  [103] Bangladesh               Bangladesh              
+##  [105] Bangladesh               Bangladesh              
+##  [107] Bangladesh               Bangladesh              
+##  [109] Belgium                  Belgium                 
+##  [111] Belgium                  Belgium                 
+##  [113] Belgium                  Belgium                 
+##  [115] Belgium                  Belgium                 
+##  [117] Belgium                  Belgium                 
+##  [119] Belgium                  Belgium                 
+##  [121] Benin                    Benin                   
+##  [123] Benin                    Benin                   
+##  [125] Benin                    Benin                   
+##  [127] Benin                    Benin                   
+##  [129] Benin                    Benin                   
+##  [131] Benin                    Benin                   
+##  [133] Bolivia                  Bolivia                 
+##  [135] Bolivia                  Bolivia                 
+##  [137] Bolivia                  Bolivia                 
+##  [139] Bolivia                  Bolivia                 
+##  [141] Bolivia                  Bolivia                 
+##  [143] Bolivia                  Bolivia                 
+##  [145] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [147] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [149] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [151] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [153] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [155] Bosnia and Herzegovina   Bosnia and Herzegovina  
+##  [157] Botswana                 Botswana                
+##  [159] Botswana                 Botswana                
+##  [161] Botswana                 Botswana                
+##  [163] Botswana                 Botswana                
+##  [165] Botswana                 Botswana                
+##  [167] Botswana                 Botswana                
+##  [169] Brazil                   Brazil                  
+##  [171] Brazil                   Brazil                  
+##  [173] Brazil                   Brazil                  
+##  [175] Brazil                   Brazil                  
+##  [177] Brazil                   Brazil                  
+##  [179] Brazil                   Brazil                  
+##  [181] Bulgaria                 Bulgaria                
+##  [183] Bulgaria                 Bulgaria                
+##  [185] Bulgaria                 Bulgaria                
+##  [187] Bulgaria                 Bulgaria                
+##  [189] Bulgaria                 Bulgaria                
+##  [191] Bulgaria                 Bulgaria                
+##  [193] Burkina Faso             Burkina Faso            
+##  [195] Burkina Faso             Burkina Faso            
+##  [197] Burkina Faso             Burkina Faso            
+##  [199] Burkina Faso             Burkina Faso            
+##  [201] Burkina Faso             Burkina Faso            
+##  [203] Burkina Faso             Burkina Faso            
+##  [205] Burundi                  Burundi                 
+##  [207] Burundi                  Burundi                 
+##  [209] Burundi                  Burundi                 
+##  [211] Burundi                  Burundi                 
+##  [213] Burundi                  Burundi                 
+##  [215] Burundi                  Burundi                 
+##  [217] Cambodia                 Cambodia                
+##  [219] Cambodia                 Cambodia                
+##  [221] Cambodia                 Cambodia                
+##  [223] Cambodia                 Cambodia                
+##  [225] Cambodia                 Cambodia                
+##  [227] Cambodia                 Cambodia                
+##  [229] Cameroon                 Cameroon                
+##  [231] Cameroon                 Cameroon                
+##  [233] Cameroon                 Cameroon                
+##  [235] Cameroon                 Cameroon                
+##  [237] Cameroon                 Cameroon                
+##  [239] Cameroon                 Cameroon                
+##  [241] Canada                   Canada                  
+##  [243] Canada                   Canada                  
+##  [245] Canada                   Canada                  
+##  [247] Canada                   Canada                  
+##  [249] Canada                   Canada                  
+##  [251] Canada                   Canada                  
+##  [253] Central African Republic Central African Republic
+##  [255] Central African Republic Central African Republic
+##  [257] Central African Republic Central African Republic
+##  [259] Central African Republic Central African Republic
+##  [261] Central African Republic Central African Republic
+##  [263] Central African Republic Central African Republic
+##  [265] Chad                     Chad                    
+##  [267] Chad                     Chad                    
+##  [269] Chad                     Chad                    
+##  [271] Chad                     Chad                    
+##  [273] Chad                     Chad                    
+##  [275] Chad                     Chad                    
+##  [277] Chile                    Chile                   
+##  [279] Chile                    Chile                   
+##  [281] Chile                    Chile                   
+##  [283] Chile                    Chile                   
+##  [285] Chile                    Chile                   
+##  [287] Chile                    Chile                   
+##  [289] China                    China                   
+##  [291] China                    China                   
+##  [293] China                    China                   
+##  [295] China                    China                   
+##  [297] China                    China                   
+##  [299] China                    China                   
+##  [301] Colombia                 Colombia                
+##  [303] Colombia                 Colombia                
+##  [305] Colombia                 Colombia                
+##  [307] Colombia                 Colombia                
+##  [309] Colombia                 Colombia                
+##  [311] Colombia                 Colombia                
+##  [313] Comoros                  Comoros                 
+##  [315] Comoros                  Comoros                 
+##  [317] Comoros                  Comoros                 
+##  [319] Comoros                  Comoros                 
+##  [321] Comoros                  Comoros                 
+##  [323] Comoros                  Comoros                 
+##  [325] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [327] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [329] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [331] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [333] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [335] Congo, Dem. Rep.         Congo, Dem. Rep.        
+##  [337] Congo, Rep.              Congo, Rep.             
+##  [339] Congo, Rep.              Congo, Rep.             
+##  [341] Congo, Rep.              Congo, Rep.             
+##  [343] Congo, Rep.              Congo, Rep.             
+##  [345] Congo, Rep.              Congo, Rep.             
+##  [347] Congo, Rep.              Congo, Rep.             
+##  [349] Costa Rica               Costa Rica              
+##  [351] Costa Rica               Costa Rica              
+##  [353] Costa Rica               Costa Rica              
+##  [355] Costa Rica               Costa Rica              
+##  [357] Costa Rica               Costa Rica              
+##  [359] Costa Rica               Costa Rica              
+##  [361] Cote d'Ivoire            Cote d'Ivoire           
+##  [363] Cote d'Ivoire            Cote d'Ivoire           
+##  [365] Cote d'Ivoire            Cote d'Ivoire           
+##  [367] Cote d'Ivoire            Cote d'Ivoire           
+##  [369] Cote d'Ivoire            Cote d'Ivoire           
+##  [371] Cote d'Ivoire            Cote d'Ivoire           
+##  [373] Croatia                  Croatia                 
+##  [375] Croatia                  Croatia                 
+##  [377] Croatia                  Croatia                 
+##  [379] Croatia                  Croatia                 
+##  [381] Croatia                  Croatia                 
+##  [383] Croatia                  Croatia                 
+##  [385] Cuba                     Cuba                    
+##  [387] Cuba                     Cuba                    
+##  [389] Cuba                     Cuba                    
+##  [391] Cuba                     Cuba                    
+##  [393] Cuba                     Cuba                    
+##  [395] Cuba                     Cuba                    
+##  [397] Czech Republic           Czech Republic          
+##  [399] Czech Republic           Czech Republic          
+##  [401] Czech Republic           Czech Republic          
+##  [403] Czech Republic           Czech Republic          
+##  [405] Czech Republic           Czech Republic          
+##  [407] Czech Republic           Czech Republic          
+##  [409] Denmark                  Denmark                 
+##  [411] Denmark                  Denmark                 
+##  [413] Denmark                  Denmark                 
+##  [415] Denmark                  Denmark                 
+##  [417] Denmark                  Denmark                 
+##  [419] Denmark                  Denmark                 
+##  [421] Djibouti                 Djibouti                
+##  [423] Djibouti                 Djibouti                
+##  [425] Djibouti                 Djibouti                
+##  [427] Djibouti                 Djibouti                
+##  [429] Djibouti                 Djibouti                
+##  [431] Djibouti                 Djibouti                
+##  [433] Dominican Republic       Dominican Republic      
+##  [435] Dominican Republic       Dominican Republic      
+##  [437] Dominican Republic       Dominican Republic      
+##  [439] Dominican Republic       Dominican Republic      
+##  [441] Dominican Republic       Dominican Republic      
+##  [443] Dominican Republic       Dominican Republic      
+##  [445] Ecuador                  Ecuador                 
+##  [447] Ecuador                  Ecuador                 
+##  [449] Ecuador                  Ecuador                 
+##  [451] Ecuador                  Ecuador                 
+##  [453] Ecuador                  Ecuador                 
+##  [455] Ecuador                  Ecuador                 
+##  [457] Egypt                    Egypt                   
+##  [459] Egypt                    Egypt                   
+##  [461] Egypt                    Egypt                   
+##  [463] Egypt                    Egypt                   
+##  [465] Egypt                    Egypt                   
+##  [467] Egypt                    Egypt                   
+##  [469] El Salvador              El Salvador             
+##  [471] El Salvador              El Salvador             
+##  [473] El Salvador              El Salvador             
+##  [475] El Salvador              El Salvador             
+##  [477] El Salvador              El Salvador             
+##  [479] El Salvador              El Salvador             
+##  [481] Equatorial Guinea        Equatorial Guinea       
+##  [483] Equatorial Guinea        Equatorial Guinea       
+##  [485] Equatorial Guinea        Equatorial Guinea       
+##  [487] Equatorial Guinea        Equatorial Guinea       
+##  [489] Equatorial Guinea        Equatorial Guinea       
+##  [491] Equatorial Guinea        Equatorial Guinea       
+##  [493] Eritrea                  Eritrea                 
+##  [495] Eritrea                  Eritrea                 
+##  [497] Eritrea                  Eritrea                 
+##  [499] Eritrea                  Eritrea                 
+##  [501] Eritrea                  Eritrea                 
+##  [503] Eritrea                  Eritrea                 
+##  [505] Ethiopia                 Ethiopia                
+##  [507] Ethiopia                 Ethiopia                
+##  [509] Ethiopia                 Ethiopia                
+##  [511] Ethiopia                 Ethiopia                
+##  [513] Ethiopia                 Ethiopia                
+##  [515] Ethiopia                 Ethiopia                
+##  [517] Finland                  Finland                 
+##  [519] Finland                  Finland                 
+##  [521] Finland                  Finland                 
+##  [523] Finland                  Finland                 
+##  [525] Finland                  Finland                 
+##  [527] Finland                  Finland                 
+##  [529] France                   France                  
+##  [531] France                   France                  
+##  [533] France                   France                  
+##  [535] France                   France                  
+##  [537] France                   France                  
+##  [539] France                   France                  
+##  [541] Gabon                    Gabon                   
+##  [543] Gabon                    Gabon                   
+##  [545] Gabon                    Gabon                   
+##  [547] Gabon                    Gabon                   
+##  [549] Gabon                    Gabon                   
+##  [551] Gabon                    Gabon                   
+##  [553] Gambia                   Gambia                  
+##  [555] Gambia                   Gambia                  
+##  [557] Gambia                   Gambia                  
+##  [559] Gambia                   Gambia                  
+##  [561] Gambia                   Gambia                  
+##  [563] Gambia                   Gambia                  
+##  [565] Germany                  Germany                 
+##  [567] Germany                  Germany                 
+##  [569] Germany                  Germany                 
+##  [571] Germany                  Germany                 
+##  [573] Germany                  Germany                 
+##  [575] Germany                  Germany                 
+##  [577] Ghana                    Ghana                   
+##  [579] Ghana                    Ghana                   
+##  [581] Ghana                    Ghana                   
+##  [583] Ghana                    Ghana                   
+##  [585] Ghana                    Ghana                   
+##  [587] Ghana                    Ghana                   
+##  [589] Greece                   Greece                  
+##  [591] Greece                   Greece                  
+##  [593] Greece                   Greece                  
+##  [595] Greece                   Greece                  
+##  [597] Greece                   Greece                  
+##  [599] Greece                   Greece                  
+##  [601] Guatemala                Guatemala               
+##  [603] Guatemala                Guatemala               
+##  [605] Guatemala                Guatemala               
+##  [607] Guatemala                Guatemala               
+##  [609] Guatemala                Guatemala               
+##  [611] Guatemala                Guatemala               
+##  [613] Guinea                   Guinea                  
+##  [615] Guinea                   Guinea                  
+##  [617] Guinea                   Guinea                  
+##  [619] Guinea                   Guinea                  
+##  [621] Guinea                   Guinea                  
+##  [623] Guinea                   Guinea                  
+##  [625] Guinea-Bissau            Guinea-Bissau           
+##  [627] Guinea-Bissau            Guinea-Bissau           
+##  [629] Guinea-Bissau            Guinea-Bissau           
+##  [631] Guinea-Bissau            Guinea-Bissau           
+##  [633] Guinea-Bissau            Guinea-Bissau           
+##  [635] Guinea-Bissau            Guinea-Bissau           
+##  [637] Haiti                    Haiti                   
+##  [639] Haiti                    Haiti                   
+##  [641] Haiti                    Haiti                   
+##  [643] Haiti                    Haiti                   
+##  [645] Haiti                    Haiti                   
+##  [647] Haiti                    Haiti                   
+##  [649] Honduras                 Honduras                
+##  [651] Honduras                 Honduras                
+##  [653] Honduras                 Honduras                
+##  [655] Honduras                 Honduras                
+##  [657] Honduras                 Honduras                
+##  [659] Honduras                 Honduras                
+##  [661] Hong Kong, China         Hong Kong, China        
+##  [663] Hong Kong, China         Hong Kong, China        
+##  [665] Hong Kong, China         Hong Kong, China        
+##  [667] Hong Kong, China         Hong Kong, China        
+##  [669] Hong Kong, China         Hong Kong, China        
+##  [671] Hong Kong, China         Hong Kong, China        
+##  [673] Hungary                  Hungary                 
+##  [675] Hungary                  Hungary                 
+##  [677] Hungary                  Hungary                 
+##  [679] Hungary                  Hungary                 
+##  [681] Hungary                  Hungary                 
+##  [683] Hungary                  Hungary                 
+##  [685] Iceland                  Iceland                 
+##  [687] Iceland                  Iceland                 
+##  [689] Iceland                  Iceland                 
+##  [691] Iceland                  Iceland                 
+##  [693] Iceland                  Iceland                 
+##  [695] Iceland                  Iceland                 
+##  [697] India                    India                   
+##  [699] India                    India                   
+##  [701] India                    India                   
+##  [703] India                    India                   
+##  [705] India                    India                   
+##  [707] India                    India                   
+##  [709] Indonesia                Indonesia               
+##  [711] Indonesia                Indonesia               
+##  [713] Indonesia                Indonesia               
+##  [715] Indonesia                Indonesia               
+##  [717] Indonesia                Indonesia               
+##  [719] Indonesia                Indonesia               
+##  [721] Iran                     Iran                    
+##  [723] Iran                     Iran                    
+##  [725] Iran                     Iran                    
+##  [727] Iran                     Iran                    
+##  [729] Iran                     Iran                    
+##  [731] Iran                     Iran                    
+##  [733] Iraq                     Iraq                    
+##  [735] Iraq                     Iraq                    
+##  [737] Iraq                     Iraq                    
+##  [739] Iraq                     Iraq                    
+##  [741] Iraq                     Iraq                    
+##  [743] Iraq                     Iraq                    
+##  [745] Ireland                  Ireland                 
+##  [747] Ireland                  Ireland                 
+##  [749] Ireland                  Ireland                 
+##  [751] Ireland                  Ireland                 
+##  [753] Ireland                  Ireland                 
+##  [755] Ireland                  Ireland                 
+##  [757] Israel                   Israel                  
+##  [759] Israel                   Israel                  
+##  [761] Israel                   Israel                  
+##  [763] Israel                   Israel                  
+##  [765] Israel                   Israel                  
+##  [767] Israel                   Israel                  
+##  [769] Italy                    Italy                   
+##  [771] Italy                    Italy                   
+##  [773] Italy                    Italy                   
+##  [775] Italy                    Italy                   
+##  [777] Italy                    Italy                   
+##  [779] Italy                    Italy                   
+##  [781] Jamaica                  Jamaica                 
+##  [783] Jamaica                  Jamaica                 
+##  [785] Jamaica                  Jamaica                 
+##  [787] Jamaica                  Jamaica                 
+##  [789] Jamaica                  Jamaica                 
+##  [791] Jamaica                  Jamaica                 
+##  [793] Japan                    Japan                   
+##  [795] Japan                    Japan                   
+##  [797] Japan                    Japan                   
+##  [799] Japan                    Japan                   
+##  [801] Japan                    Japan                   
+##  [803] Japan                    Japan                   
+##  [805] Jordan                   Jordan                  
+##  [807] Jordan                   Jordan                  
+##  [809] Jordan                   Jordan                  
+##  [811] Jordan                   Jordan                  
+##  [813] Jordan                   Jordan                  
+##  [815] Jordan                   Jordan                  
+##  [817] Kenya                    Kenya                   
+##  [819] Kenya                    Kenya                   
+##  [821] Kenya                    Kenya                   
+##  [823] Kenya                    Kenya                   
+##  [825] Kenya                    Kenya                   
+##  [827] Kenya                    Kenya                   
+##  [829] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [831] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [833] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [835] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [837] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [839] Korea, Dem. Rep.         Korea, Dem. Rep.        
+##  [841] Korea, Rep.              Korea, Rep.             
+##  [843] Korea, Rep.              Korea, Rep.             
+##  [845] Korea, Rep.              Korea, Rep.             
+##  [847] Korea, Rep.              Korea, Rep.             
+##  [849] Korea, Rep.              Korea, Rep.             
+##  [851] Korea, Rep.              Korea, Rep.             
+##  [853] Kuwait                   Kuwait                  
+##  [855] Kuwait                   Kuwait                  
+##  [857] Kuwait                   Kuwait                  
+##  [859] Kuwait                   Kuwait                  
+##  [861] Kuwait                   Kuwait                  
+##  [863] Kuwait                   Kuwait                  
+##  [865] Lebanon                  Lebanon                 
+##  [867] Lebanon                  Lebanon                 
+##  [869] Lebanon                  Lebanon                 
+##  [871] Lebanon                  Lebanon                 
+##  [873] Lebanon                  Lebanon                 
+##  [875] Lebanon                  Lebanon                 
+##  [877] Lesotho                  Lesotho                 
+##  [879] Lesotho                  Lesotho                 
+##  [881] Lesotho                  Lesotho                 
+##  [883] Lesotho                  Lesotho                 
+##  [885] Lesotho                  Lesotho                 
+##  [887] Lesotho                  Lesotho                 
+##  [889] Liberia                  Liberia                 
+##  [891] Liberia                  Liberia                 
+##  [893] Liberia                  Liberia                 
+##  [895] Liberia                  Liberia                 
+##  [897] Liberia                  Liberia                 
+##  [899] Liberia                  Liberia                 
+##  [901] Libya                    Libya                   
+##  [903] Libya                    Libya                   
+##  [905] Libya                    Libya                   
+##  [907] Libya                    Libya                   
+##  [909] Libya                    Libya                   
+##  [911] Libya                    Libya                   
+##  [913] Madagascar               Madagascar              
+##  [915] Madagascar               Madagascar              
+##  [917] Madagascar               Madagascar              
+##  [919] Madagascar               Madagascar              
+##  [921] Madagascar               Madagascar              
+##  [923] Madagascar               Madagascar              
+##  [925] Malawi                   Malawi                  
+##  [927] Malawi                   Malawi                  
+##  [929] Malawi                   Malawi                  
+##  [931] Malawi                   Malawi                  
+##  [933] Malawi                   Malawi                  
+##  [935] Malawi                   Malawi                  
+##  [937] Malaysia                 Malaysia                
+##  [939] Malaysia                 Malaysia                
+##  [941] Malaysia                 Malaysia                
+##  [943] Malaysia                 Malaysia                
+##  [945] Malaysia                 Malaysia                
+##  [947] Malaysia                 Malaysia                
+##  [949] Mali                     Mali                    
+##  [951] Mali                     Mali                    
+##  [953] Mali                     Mali                    
+##  [955] Mali                     Mali                    
+##  [957] Mali                     Mali                    
+##  [959] Mali                     Mali                    
+##  [961] Mauritania               Mauritania              
+##  [963] Mauritania               Mauritania              
+##  [965] Mauritania               Mauritania              
+##  [967] Mauritania               Mauritania              
+##  [969] Mauritania               Mauritania              
+##  [971] Mauritania               Mauritania              
+##  [973] Mauritius                Mauritius               
+##  [975] Mauritius                Mauritius               
+##  [977] Mauritius                Mauritius               
+##  [979] Mauritius                Mauritius               
+##  [981] Mauritius                Mauritius               
+##  [983] Mauritius                Mauritius               
+##  [985] Mexico                   Mexico                  
+##  [987] Mexico                   Mexico                  
+##  [989] Mexico                   Mexico                  
+##  [991] Mexico                   Mexico                  
+##  [993] Mexico                   Mexico                  
+##  [995] Mexico                   Mexico                  
+##  [997] Mongolia                 Mongolia                
+##  [999] Mongolia                 Mongolia                
+## [1001] Mongolia                 Mongolia                
+## [1003] Mongolia                 Mongolia                
+## [1005] Mongolia                 Mongolia                
+## [1007] Mongolia                 Mongolia                
+## [1009] Montenegro               Montenegro              
+## [1011] Montenegro               Montenegro              
+## [1013] Montenegro               Montenegro              
+## [1015] Montenegro               Montenegro              
+## [1017] Montenegro               Montenegro              
+## [1019] Montenegro               Montenegro              
+## [1021] Morocco                  Morocco                 
+## [1023] Morocco                  Morocco                 
+## [1025] Morocco                  Morocco                 
+## [1027] Morocco                  Morocco                 
+## [1029] Morocco                  Morocco                 
+## [1031] Morocco                  Morocco                 
+## [1033] Mozambique               Mozambique              
+## [1035] Mozambique               Mozambique              
+## [1037] Mozambique               Mozambique              
+## [1039] Mozambique               Mozambique              
+## [1041] Mozambique               Mozambique              
+## [1043] Mozambique               Mozambique              
+## [1045] Myanmar                  Myanmar                 
+## [1047] Myanmar                  Myanmar                 
+## [1049] Myanmar                  Myanmar                 
+## [1051] Myanmar                  Myanmar                 
+## [1053] Myanmar                  Myanmar                 
+## [1055] Myanmar                  Myanmar                 
+## [1057] Namibia                  Namibia                 
+## [1059] Namibia                  Namibia                 
+## [1061] Namibia                  Namibia                 
+## [1063] Namibia                  Namibia                 
+## [1065] Namibia                  Namibia                 
+## [1067] Namibia                  Namibia                 
+## [1069] Nepal                    Nepal                   
+## [1071] Nepal                    Nepal                   
+## [1073] Nepal                    Nepal                   
+## [1075] Nepal                    Nepal                   
+## [1077] Nepal                    Nepal                   
+## [1079] Nepal                    Nepal                   
+## [1081] Netherlands              Netherlands             
+## [1083] Netherlands              Netherlands             
+## [1085] Netherlands              Netherlands             
+## [1087] Netherlands              Netherlands             
+## [1089] Netherlands              Netherlands             
+## [1091] Netherlands              Netherlands             
+## [1093] New Zealand              New Zealand             
+## [1095] New Zealand              New Zealand             
+## [1097] New Zealand              New Zealand             
+## [1099] New Zealand              New Zealand             
+## [1101] New Zealand              New Zealand             
+## [1103] New Zealand              New Zealand             
+## [1105] Nicaragua                Nicaragua               
+## [1107] Nicaragua                Nicaragua               
+## [1109] Nicaragua                Nicaragua               
+## [1111] Nicaragua                Nicaragua               
+## [1113] Nicaragua                Nicaragua               
+## [1115] Nicaragua                Nicaragua               
+## [1117] Niger                    Niger                   
+## [1119] Niger                    Niger                   
+## [1121] Niger                    Niger                   
+## [1123] Niger                    Niger                   
+## [1125] Niger                    Niger                   
+## [1127] Niger                    Niger                   
+## [1129] Nigeria                  Nigeria                 
+## [1131] Nigeria                  Nigeria                 
+## [1133] Nigeria                  Nigeria                 
+## [1135] Nigeria                  Nigeria                 
+## [1137] Nigeria                  Nigeria                 
+## [1139] Nigeria                  Nigeria                 
+## [1141] Norway                   Norway                  
+## [1143] Norway                   Norway                  
+## [1145] Norway                   Norway                  
+## [1147] Norway                   Norway                  
+## [1149] Norway                   Norway                  
+## [1151] Norway                   Norway                  
+## [1153] Oman                     Oman                    
+## [1155] Oman                     Oman                    
+## [1157] Oman                     Oman                    
+## [1159] Oman                     Oman                    
+## [1161] Oman                     Oman                    
+## [1163] Oman                     Oman                    
+## [1165] Pakistan                 Pakistan                
+## [1167] Pakistan                 Pakistan                
+## [1169] Pakistan                 Pakistan                
+## [1171] Pakistan                 Pakistan                
+## [1173] Pakistan                 Pakistan                
+## [1175] Pakistan                 Pakistan                
+## [1177] Panama                   Panama                  
+## [1179] Panama                   Panama                  
+## [1181] Panama                   Panama                  
+## [1183] Panama                   Panama                  
+## [1185] Panama                   Panama                  
+## [1187] Panama                   Panama                  
+## [1189] Paraguay                 Paraguay                
+## [1191] Paraguay                 Paraguay                
+## [1193] Paraguay                 Paraguay                
+## [1195] Paraguay                 Paraguay                
+## [1197] Paraguay                 Paraguay                
+## [1199] Paraguay                 Paraguay                
+## [1201] Peru                     Peru                    
+## [1203] Peru                     Peru                    
+## [1205] Peru                     Peru                    
+## [1207] Peru                     Peru                    
+## [1209] Peru                     Peru                    
+## [1211] Peru                     Peru                    
+## [1213] Philippines              Philippines             
+## [1215] Philippines              Philippines             
+## [1217] Philippines              Philippines             
+## [1219] Philippines              Philippines             
+## [1221] Philippines              Philippines             
+## [1223] Philippines              Philippines             
+## [1225] Poland                   Poland                  
+## [1227] Poland                   Poland                  
+## [1229] Poland                   Poland                  
+## [1231] Poland                   Poland                  
+## [1233] Poland                   Poland                  
+## [1235] Poland                   Poland                  
+## [1237] Portugal                 Portugal                
+## [1239] Portugal                 Portugal                
+## [1241] Portugal                 Portugal                
+## [1243] Portugal                 Portugal                
+## [1245] Portugal                 Portugal                
+## [1247] Portugal                 Portugal                
+## [1249] Puerto Rico              Puerto Rico             
+## [1251] Puerto Rico              Puerto Rico             
+## [1253] Puerto Rico              Puerto Rico             
+## [1255] Puerto Rico              Puerto Rico             
+## [1257] Puerto Rico              Puerto Rico             
+## [1259] Puerto Rico              Puerto Rico             
+## [1261] Reunion                  Reunion                 
+## [1263] Reunion                  Reunion                 
+## [1265] Reunion                  Reunion                 
+## [1267] Reunion                  Reunion                 
+## [1269] Reunion                  Reunion                 
+## [1271] Reunion                  Reunion                 
+## [1273] Romania                  Romania                 
+## [1275] Romania                  Romania                 
+## [1277] Romania                  Romania                 
+## [1279] Romania                  Romania                 
+## [1281] Romania                  Romania                 
+## [1283] Romania                  Romania                 
+## [1285] Rwanda                   Rwanda                  
+## [1287] Rwanda                   Rwanda                  
+## [1289] Rwanda                   Rwanda                  
+## [1291] Rwanda                   Rwanda                  
+## [1293] Rwanda                   Rwanda                  
+## [1295] Rwanda                   Rwanda                  
+## [1297] Sao Tome and Principe    Sao Tome and Principe   
+## [1299] Sao Tome and Principe    Sao Tome and Principe   
+## [1301] Sao Tome and Principe    Sao Tome and Principe   
+## [1303] Sao Tome and Principe    Sao Tome and Principe   
+## [1305] Sao Tome and Principe    Sao Tome and Principe   
+## [1307] Sao Tome and Principe    Sao Tome and Principe   
+## [1309] Saudi Arabia             Saudi Arabia            
+## [1311] Saudi Arabia             Saudi Arabia            
+## [1313] Saudi Arabia             Saudi Arabia            
+## [1315] Saudi Arabia             Saudi Arabia            
+## [1317] Saudi Arabia             Saudi Arabia            
+## [1319] Saudi Arabia             Saudi Arabia            
+## [1321] Senegal                  Senegal                 
+## [1323] Senegal                  Senegal                 
+## [1325] Senegal                  Senegal                 
+## [1327] Senegal                  Senegal                 
+## [1329] Senegal                  Senegal                 
+## [1331] Senegal                  Senegal                 
+## [1333] Serbia                   Serbia                  
+## [1335] Serbia                   Serbia                  
+## [1337] Serbia                   Serbia                  
+## [1339] Serbia                   Serbia                  
+## [1341] Serbia                   Serbia                  
+## [1343] Serbia                   Serbia                  
+## [1345] Sierra Leone             Sierra Leone            
+## [1347] Sierra Leone             Sierra Leone            
+## [1349] Sierra Leone             Sierra Leone            
+## [1351] Sierra Leone             Sierra Leone            
+## [1353] Sierra Leone             Sierra Leone            
+## [1355] Sierra Leone             Sierra Leone            
+## [1357] Singapore                Singapore               
+## [1359] Singapore                Singapore               
+## [1361] Singapore                Singapore               
+## [1363] Singapore                Singapore               
+## [1365] Singapore                Singapore               
+## [1367] Singapore                Singapore               
+## [1369] Slovak Republic          Slovak Republic         
+## [1371] Slovak Republic          Slovak Republic         
+## [1373] Slovak Republic          Slovak Republic         
+## [1375] Slovak Republic          Slovak Republic         
+## [1377] Slovak Republic          Slovak Republic         
+## [1379] Slovak Republic          Slovak Republic         
+## [1381] Slovenia                 Slovenia                
+## [1383] Slovenia                 Slovenia                
+## [1385] Slovenia                 Slovenia                
+## [1387] Slovenia                 Slovenia                
+## [1389] Slovenia                 Slovenia                
+## [1391] Slovenia                 Slovenia                
+## [1393] Somalia                  Somalia                 
+## [1395] Somalia                  Somalia                 
+## [1397] Somalia                  Somalia                 
+## [1399] Somalia                  Somalia                 
+## [1401] Somalia                  Somalia                 
+## [1403] Somalia                  Somalia                 
+## [1405] South Africa             South Africa            
+## [1407] South Africa             South Africa            
+## [1409] South Africa             South Africa            
+## [1411] South Africa             South Africa            
+## [1413] South Africa             South Africa            
+## [1415] South Africa             South Africa            
+## [1417] Spain                    Spain                   
+## [1419] Spain                    Spain                   
+## [1421] Spain                    Spain                   
+## [1423] Spain                    Spain                   
+## [1425] Spain                    Spain                   
+## [1427] Spain                    Spain                   
+## [1429] Sri Lanka                Sri Lanka               
+## [1431] Sri Lanka                Sri Lanka               
+## [1433] Sri Lanka                Sri Lanka               
+## [1435] Sri Lanka                Sri Lanka               
+## [1437] Sri Lanka                Sri Lanka               
+## [1439] Sri Lanka                Sri Lanka               
+## [1441] Sudan                    Sudan                   
+## [1443] Sudan                    Sudan                   
+## [1445] Sudan                    Sudan                   
+## [1447] Sudan                    Sudan                   
+## [1449] Sudan                    Sudan                   
+## [1451] Sudan                    Sudan                   
+## [1453] Swaziland                Swaziland               
+## [1455] Swaziland                Swaziland               
+## [1457] Swaziland                Swaziland               
+## [1459] Swaziland                Swaziland               
+## [1461] Swaziland                Swaziland               
+## [1463] Swaziland                Swaziland               
+## [1465] Sweden                   Sweden                  
+## [1467] Sweden                   Sweden                  
+## [1469] Sweden                   Sweden                  
+## [1471] Sweden                   Sweden                  
+## [1473] Sweden                   Sweden                  
+## [1475] Sweden                   Sweden                  
+## [1477] Switzerland              Switzerland             
+## [1479] Switzerland              Switzerland             
+## [1481] Switzerland              Switzerland             
+## [1483] Switzerland              Switzerland             
+## [1485] Switzerland              Switzerland             
+## [1487] Switzerland              Switzerland             
+## [1489] Syria                    Syria                   
+## [1491] Syria                    Syria                   
+## [1493] Syria                    Syria                   
+## [1495] Syria                    Syria                   
+## [1497] Syria                    Syria                   
+## [1499] Syria                    Syria                   
+## [1501] Taiwan                   Taiwan                  
+## [1503] Taiwan                   Taiwan                  
+## [1505] Taiwan                   Taiwan                  
+## [1507] Taiwan                   Taiwan                  
+## [1509] Taiwan                   Taiwan                  
+## [1511] Taiwan                   Taiwan                  
+## [1513] Tanzania                 Tanzania                
+## [1515] Tanzania                 Tanzania                
+## [1517] Tanzania                 Tanzania                
+## [1519] Tanzania                 Tanzania                
+## [1521] Tanzania                 Tanzania                
+## [1523] Tanzania                 Tanzania                
+## [1525] Thailand                 Thailand                
+## [1527] Thailand                 Thailand                
+## [1529] Thailand                 Thailand                
+## [1531] Thailand                 Thailand                
+## [1533] Thailand                 Thailand                
+## [1535] Thailand                 Thailand                
+## [1537] Togo                     Togo                    
+## [1539] Togo                     Togo                    
+## [1541] Togo                     Togo                    
+## [1543] Togo                     Togo                    
+## [1545] Togo                     Togo                    
+## [1547] Togo                     Togo                    
+## [1549] Trinidad and Tobago      Trinidad and Tobago     
+## [1551] Trinidad and Tobago      Trinidad and Tobago     
+## [1553] Trinidad and Tobago      Trinidad and Tobago     
+## [1555] Trinidad and Tobago      Trinidad and Tobago     
+## [1557] Trinidad and Tobago      Trinidad and Tobago     
+## [1559] Trinidad and Tobago      Trinidad and Tobago     
+## [1561] Tunisia                  Tunisia                 
+## [1563] Tunisia                  Tunisia                 
+## [1565] Tunisia                  Tunisia                 
+## [1567] Tunisia                  Tunisia                 
+## [1569] Tunisia                  Tunisia                 
+## [1571] Tunisia                  Tunisia                 
+## [1573] Turkey                   Turkey                  
+## [1575] Turkey                   Turkey                  
+## [1577] Turkey                   Turkey                  
+## [1579] Turkey                   Turkey                  
+## [1581] Turkey                   Turkey                  
+## [1583] Turkey                   Turkey                  
+## [1585] Uganda                   Uganda                  
+## [1587] Uganda                   Uganda                  
+## [1589] Uganda                   Uganda                  
+## [1591] Uganda                   Uganda                  
+## [1593] Uganda                   Uganda                  
+## [1595] Uganda                   Uganda                  
+## [1597] United Kingdom           United Kingdom          
+## [1599] United Kingdom           United Kingdom          
+## [1601] United Kingdom           United Kingdom          
+## [1603] United Kingdom           United Kingdom          
+## [1605] United Kingdom           United Kingdom          
+## [1607] United Kingdom           United Kingdom          
+## [1609] United States            United States           
+## [1611] United States            United States           
+## [1613] United States            United States           
+## [1615] United States            United States           
+## [1617] United States            United States           
+## [1619] United States            United States           
+## [1621] Uruguay                  Uruguay                 
+## [1623] Uruguay                  Uruguay                 
+## [1625] Uruguay                  Uruguay                 
+## [1627] Uruguay                  Uruguay                 
+## [1629] Uruguay                  Uruguay                 
+## [1631] Uruguay                  Uruguay                 
+## [1633] Venezuela                Venezuela               
+## [1635] Venezuela                Venezuela               
+## [1637] Venezuela                Venezuela               
+## [1639] Venezuela                Venezuela               
+## [1641] Venezuela                Venezuela               
+## [1643] Venezuela                Venezuela               
+## [1645] Vietnam                  Vietnam                 
+## [1647] Vietnam                  Vietnam                 
+## [1649] Vietnam                  Vietnam                 
+## [1651] Vietnam                  Vietnam                 
+## [1653] Vietnam                  Vietnam                 
+## [1655] Vietnam                  Vietnam                 
+## [1657] West Bank and Gaza       West Bank and Gaza      
+## [1659] West Bank and Gaza       West Bank and Gaza      
+## [1661] West Bank and Gaza       West Bank and Gaza      
+## [1663] West Bank and Gaza       West Bank and Gaza      
+## [1665] West Bank and Gaza       West Bank and Gaza      
+## [1667] West Bank and Gaza       West Bank and Gaza      
+## [1669] Yemen, Rep.              Yemen, Rep.             
+## [1671] Yemen, Rep.              Yemen, Rep.             
+## [1673] Yemen, Rep.              Yemen, Rep.             
+## [1675] Yemen, Rep.              Yemen, Rep.             
+## [1677] Yemen, Rep.              Yemen, Rep.             
+## [1679] Yemen, Rep.              Yemen, Rep.             
+## [1681] Zambia                   Zambia                  
+## [1683] Zambia                   Zambia                  
+## [1685] Zambia                   Zambia                  
+## [1687] Zambia                   Zambia                  
+## [1689] Zambia                   Zambia                  
+## [1691] Zambia                   Zambia                  
+## [1693] Zimbabwe                 Zimbabwe                
+## [1695] Zimbabwe                 Zimbabwe                
+## [1697] Zimbabwe                 Zimbabwe                
+## [1699] Zimbabwe                 Zimbabwe                
+## [1701] Zimbabwe                 Zimbabwe                
+## [1703] Zimbabwe                 Zimbabwe                
+## 142 Levels: Afghanistan Albania Algeria Angola Argentina ... Zimbabwe
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+
+```r
+head(gapminder)
+```
+
+```
+##       country continent year lifeExp      pop gdpPercap
+## 1 Afghanistan      Asia 1952  28.801  8425333  779.4453
+## 2 Afghanistan      Asia 1957  30.332  9240934  820.8530
+## 3 Afghanistan      Asia 1962  31.997 10267083  853.1007
+## 4 Afghanistan      Asia 1967  34.020 11537966  836.1971
+## 5 Afghanistan      Asia 1972  36.088 13079460  739.9811
+## 6 Afghanistan      Asia 1977  38.438 14880372  786.1134
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+
+```r
+gapminder[3, ]
+```
+
+```
+##       country continent year lifeExp      pop gdpPercap
+## 3 Afghanistan      Asia 1962  31.997 10267083  853.1007
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+
+```r
+gapminder[2, 3]
+```
+
+```
+## [1] 1957
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+
+```r
+gapminder[-(1:1650), 3]
+```
+
+```
+##  [1] 1982 1987 1992 1997 2002 2007 1952 1957 1962 1967 1972 1977 1982 1987
+## [15] 1992 1997 2002 2007 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997
+## [29] 2002 2007 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007
+## [43] 1952 1957 1962 1967 1972 1977 1982 1987 1992 1997 2002 2007
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+
+```r
+gapminder[c(2,4), -3]
+```
+
+```
+##       country continent lifeExp      pop gdpPercap
+## 2 Afghanistan      Asia  30.332  9240934  820.8530
+## 4 Afghanistan      Asia  34.020 11537966  836.1971
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+
+```r
+gapminder[c(2,4), c("country", "pop")]
+```
+
+```
+##       country      pop
+## 2 Afghanistan  9240934
+## 4 Afghanistan 11537966
+```
+
+---
+## data.frame - indexing
+
+- Logical operators, such as ==, !=, &gt;, &gt;=, &lt;, &lt;=, &amp;, | can be also used for indexing
+
+
+```r
+gapminder[gapminder$lifeExp&gt;82, c("country", "pop")]
+```
+
+```
+##              country       pop
+## 672 Hong Kong, China   6980412
+## 804            Japan 127467972
+```
+
+
+```r
+subset(gapminder, pop&gt;1000000000)
+```
+
+```
+##     country continent year lifeExp        pop gdpPercap
+## 295   China      Asia 1982  65.525 1000281000  962.4214
+## 296   China      Asia 1987  67.274 1084035000 1378.9040
+## 297   China      Asia 1992  68.690 1164970000 1655.7842
+## 298   China      Asia 1997  70.426 1230075000 2289.2341
+## 299   China      Asia 2002  72.028 1280400000 3119.2809
+## 300   China      Asia 2007  72.961 1318683096 4959.1149
+## 707   India      Asia 2002  62.879 1034172547 1746.7695
+## 708   India      Asia 2007  64.698 1110396331 2452.2104
+```
+
+---
+## data.frame - indexing
+
+- Logical operators, such as ==, !=, &gt;, &gt;=, &lt;, &lt;=, &amp;, | can be also used for indexing
+
+
+```r
+subset(gapminder, pop&gt;1000000000 &amp; country=='India')
+```
+
+```
+##     country continent year lifeExp        pop gdpPercap
+## 707   India      Asia 2002  62.879 1034172547  1746.769
+## 708   India      Asia 2007  64.698 1110396331  2452.210
+```
+
+
+```r
+subset(gapminder, pop&gt;1000000000 | continent=='Oceania')
+```
+
+```
+##          country continent year lifeExp        pop  gdpPercap
+## 61     Australia   Oceania 1952  69.120    8691212 10039.5956
+## 62     Australia   Oceania 1957  70.330    9712569 10949.6496
+## 63     Australia   Oceania 1962  70.930   10794968 12217.2269
+## 64     Australia   Oceania 1967  71.100   11872264 14526.1246
+## 65     Australia   Oceania 1972  71.930   13177000 16788.6295
+## 66     Australia   Oceania 1977  73.490   14074100 18334.1975
+## 67     Australia   Oceania 1982  74.740   15184200 19477.0093
+## 68     Australia   Oceania 1987  76.320   16257249 21888.8890
+## 69     Australia   Oceania 1992  77.560   17481977 23424.7668
+## 70     Australia   Oceania 1997  78.830   18565243 26997.9366
+## 71     Australia   Oceania 2002  80.370   19546792 30687.7547
+## 72     Australia   Oceania 2007  81.235   20434176 34435.3674
+## 295        China      Asia 1982  65.525 1000281000   962.4214
+## 296        China      Asia 1987  67.274 1084035000  1378.9040
+## 297        China      Asia 1992  68.690 1164970000  1655.7842
+## 298        China      Asia 1997  70.426 1230075000  2289.2341
+## 299        China      Asia 2002  72.028 1280400000  3119.2809
+## 300        China      Asia 2007  72.961 1318683096  4959.1149
+## 707        India      Asia 2002  62.879 1034172547  1746.7695
+## 708        India      Asia 2007  64.698 1110396331  2452.2104
+## 1093 New Zealand   Oceania 1952  69.390    1994794 10556.5757
+## 1094 New Zealand   Oceania 1957  70.260    2229407 12247.3953
+## 1095 New Zealand   Oceania 1962  71.240    2488550 13175.6780
+## 1096 New Zealand   Oceania 1967  71.520    2728150 14463.9189
+## 1097 New Zealand   Oceania 1972  71.890    2929100 16046.0373
+## 1098 New Zealand   Oceania 1977  72.220    3164900 16233.7177
+## 1099 New Zealand   Oceania 1982  73.840    3210650 17632.4104
+## 1100 New Zealand   Oceania 1987  74.320    3317166 19007.1913
+## 1101 New Zealand   Oceania 1992  76.330    3437674 18363.3249
+## 1102 New Zealand   Oceania 1997  77.550    3676187 21050.4138
+## 1103 New Zealand   Oceania 2002  79.110    3908037 23189.8014
+## 1104 New Zealand   Oceania 2007  80.204    4115771 25185.0091
+```
+
+---
+## data.frame - indexing
+
+- A new object can be created from the results of indexing
+
+
+```r
+africa &lt;- subset(gapminder, continent=='Africa')
+africa
+```
+
+```
+##                       country continent year lifeExp       pop  gdpPercap
+## 25                    Algeria    Africa 1952  43.077   9279525  2449.0082
+## 26                    Algeria    Africa 1957  45.685  10270856  3013.9760
+## 27                    Algeria    Africa 1962  48.303  11000948  2550.8169
+## 28                    Algeria    Africa 1967  51.407  12760499  3246.9918
+## 29                    Algeria    Africa 1972  54.518  14760787  4182.6638
+## 30                    Algeria    Africa 1977  58.014  17152804  4910.4168
+## 31                    Algeria    Africa 1982  61.368  20033753  5745.1602
+## 32                    Algeria    Africa 1987  65.799  23254956  5681.3585
+## 33                    Algeria    Africa 1992  67.744  26298373  5023.2166
+## 34                    Algeria    Africa 1997  69.152  29072015  4797.2951
+## 35                    Algeria    Africa 2002  70.994  31287142  5288.0404
+## 36                    Algeria    Africa 2007  72.301  33333216  6223.3675
+## 37                     Angola    Africa 1952  30.015   4232095  3520.6103
+## 38                     Angola    Africa 1957  31.999   4561361  3827.9405
+## 39                     Angola    Africa 1962  34.000   4826015  4269.2767
+## 40                     Angola    Africa 1967  35.985   5247469  5522.7764
+## 41                     Angola    Africa 1972  37.928   5894858  5473.2880
+## 42                     Angola    Africa 1977  39.483   6162675  3008.6474
+## 43                     Angola    Africa 1982  39.942   7016384  2756.9537
+## 44                     Angola    Africa 1987  39.906   7874230  2430.2083
+## 45                     Angola    Africa 1992  40.647   8735988  2627.8457
+## 46                     Angola    Africa 1997  40.963   9875024  2277.1409
+## 47                     Angola    Africa 2002  41.003  10866106  2773.2873
+## 48                     Angola    Africa 2007  42.731  12420476  4797.2313
+## 121                     Benin    Africa 1952  38.223   1738315  1062.7522
+## 122                     Benin    Africa 1957  40.358   1925173   959.6011
+## 123                     Benin    Africa 1962  42.618   2151895   949.4991
+## 124                     Benin    Africa 1967  44.885   2427334  1035.8314
+## 125                     Benin    Africa 1972  47.014   2761407  1085.7969
+## 126                     Benin    Africa 1977  49.190   3168267  1029.1613
+## 127                     Benin    Africa 1982  50.904   3641603  1277.8976
+## 128                     Benin    Africa 1987  52.337   4243788  1225.8560
+## 129                     Benin    Africa 1992  53.919   4981671  1191.2077
+## 130                     Benin    Africa 1997  54.777   6066080  1232.9753
+## 131                     Benin    Africa 2002  54.406   7026113  1372.8779
+## 132                     Benin    Africa 2007  56.728   8078314  1441.2849
+## 157                  Botswana    Africa 1952  47.622    442308   851.2411
+## 158                  Botswana    Africa 1957  49.618    474639   918.2325
+## 159                  Botswana    Africa 1962  51.520    512764   983.6540
+## 160                  Botswana    Africa 1967  53.298    553541  1214.7093
+## 161                  Botswana    Africa 1972  56.024    619351  2263.6111
+## 162                  Botswana    Africa 1977  59.319    781472  3214.8578
+## 163                  Botswana    Africa 1982  61.484    970347  4551.1421
+## 164                  Botswana    Africa 1987  63.622   1151184  6205.8839
+## 165                  Botswana    Africa 1992  62.745   1342614  7954.1116
+## 166                  Botswana    Africa 1997  52.556   1536536  8647.1423
+## 167                  Botswana    Africa 2002  46.634   1630347 11003.6051
+## 168                  Botswana    Africa 2007  50.728   1639131 12569.8518
+## 193              Burkina Faso    Africa 1952  31.975   4469979   543.2552
+## 194              Burkina Faso    Africa 1957  34.906   4713416   617.1835
+## 195              Burkina Faso    Africa 1962  37.814   4919632   722.5120
+## 196              Burkina Faso    Africa 1967  40.697   5127935   794.8266
+## 197              Burkina Faso    Africa 1972  43.591   5433886   854.7360
+## 198              Burkina Faso    Africa 1977  46.137   5889574   743.3870
+## 199              Burkina Faso    Africa 1982  48.122   6634596   807.1986
+## 200              Burkina Faso    Africa 1987  49.557   7586551   912.0631
+## 201              Burkina Faso    Africa 1992  50.260   8878303   931.7528
+## 202              Burkina Faso    Africa 1997  50.324  10352843   946.2950
+## 203              Burkina Faso    Africa 2002  50.650  12251209  1037.6452
+## 204              Burkina Faso    Africa 2007  52.295  14326203  1217.0330
+## 205                   Burundi    Africa 1952  39.031   2445618   339.2965
+## 206                   Burundi    Africa 1957  40.533   2667518   379.5646
+## 207                   Burundi    Africa 1962  42.045   2961915   355.2032
+## 208                   Burundi    Africa 1967  43.548   3330989   412.9775
+## 209                   Burundi    Africa 1972  44.057   3529983   464.0995
+## 210                   Burundi    Africa 1977  45.910   3834415   556.1033
+## 211                   Burundi    Africa 1982  47.471   4580410   559.6032
+## 212                   Burundi    Africa 1987  48.211   5126023   621.8188
+## 213                   Burundi    Africa 1992  44.736   5809236   631.6999
+## 214                   Burundi    Africa 1997  45.326   6121610   463.1151
+## 215                   Burundi    Africa 2002  47.360   7021078   446.4035
+## 216                   Burundi    Africa 2007  49.580   8390505   430.0707
+## 229                  Cameroon    Africa 1952  38.523   5009067  1172.6677
+## 230                  Cameroon    Africa 1957  40.428   5359923  1313.0481
+## 231                  Cameroon    Africa 1962  42.643   5793633  1399.6074
+## 232                  Cameroon    Africa 1967  44.799   6335506  1508.4531
+## 233                  Cameroon    Africa 1972  47.049   7021028  1684.1465
+## 234                  Cameroon    Africa 1977  49.355   7959865  1783.4329
+## 235                  Cameroon    Africa 1982  52.961   9250831  2367.9833
+## 236                  Cameroon    Africa 1987  54.985  10780667  2602.6642
+## 237                  Cameroon    Africa 1992  54.314  12467171  1793.1633
+## 238                  Cameroon    Africa 1997  52.199  14195809  1694.3375
+## 239                  Cameroon    Africa 2002  49.856  15929988  1934.0114
+## 240                  Cameroon    Africa 2007  50.430  17696293  2042.0952
+## 253  Central African Republic    Africa 1952  35.463   1291695  1071.3107
+## 254  Central African Republic    Africa 1957  37.464   1392284  1190.8443
+## 255  Central African Republic    Africa 1962  39.475   1523478  1193.0688
+## 256  Central African Republic    Africa 1967  41.478   1733638  1136.0566
+## 257  Central African Republic    Africa 1972  43.457   1927260  1070.0133
+## 258  Central African Republic    Africa 1977  46.775   2167533  1109.3743
+## 259  Central African Republic    Africa 1982  48.295   2476971   956.7530
+## 260  Central African Republic    Africa 1987  50.485   2840009   844.8764
+## 261  Central African Republic    Africa 1992  49.396   3265124   747.9055
+## 262  Central African Republic    Africa 1997  46.066   3696513   740.5063
+## 263  Central African Republic    Africa 2002  43.308   4048013   738.6906
+## 264  Central African Republic    Africa 2007  44.741   4369038   706.0165
+## 265                      Chad    Africa 1952  38.092   2682462  1178.6659
+## 266                      Chad    Africa 1957  39.881   2894855  1308.4956
+## 267                      Chad    Africa 1962  41.716   3150417  1389.8176
+## 268                      Chad    Africa 1967  43.601   3495967  1196.8106
+## 269                      Chad    Africa 1972  45.569   3899068  1104.1040
+## 270                      Chad    Africa 1977  47.383   4388260  1133.9850
+## 271                      Chad    Africa 1982  49.517   4875118   797.9081
+## 272                      Chad    Africa 1987  51.051   5498955   952.3861
+## 273                      Chad    Africa 1992  51.724   6429417  1058.0643
+## 274                      Chad    Africa 1997  51.573   7562011  1004.9614
+## 275                      Chad    Africa 2002  50.525   8835739  1156.1819
+## 276                      Chad    Africa 2007  50.651  10238807  1704.0637
+## 313                   Comoros    Africa 1952  40.715    153936  1102.9909
+## 314                   Comoros    Africa 1957  42.460    170928  1211.1485
+## 315                   Comoros    Africa 1962  44.467    191689  1406.6483
+## 316                   Comoros    Africa 1967  46.472    217378  1876.0296
+## 317                   Comoros    Africa 1972  48.944    250027  1937.5777
+## 318                   Comoros    Africa 1977  50.939    304739  1172.6030
+## 319                   Comoros    Africa 1982  52.933    348643  1267.1001
+## 320                   Comoros    Africa 1987  54.926    395114  1315.9808
+## 321                   Comoros    Africa 1992  57.939    454429  1246.9074
+## 322                   Comoros    Africa 1997  60.660    527982  1173.6182
+## 323                   Comoros    Africa 2002  62.974    614382  1075.8116
+## 324                   Comoros    Africa 2007  65.152    710960   986.1479
+## 325          Congo, Dem. Rep.    Africa 1952  39.143  14100005   780.5423
+## 326          Congo, Dem. Rep.    Africa 1957  40.652  15577932   905.8602
+## 327          Congo, Dem. Rep.    Africa 1962  42.122  17486434   896.3146
+## 328          Congo, Dem. Rep.    Africa 1967  44.056  19941073   861.5932
+## 329          Congo, Dem. Rep.    Africa 1972  45.989  23007669   904.8961
+## 330          Congo, Dem. Rep.    Africa 1977  47.804  26480870   795.7573
+## 331          Congo, Dem. Rep.    Africa 1982  47.784  30646495   673.7478
+## 332          Congo, Dem. Rep.    Africa 1987  47.412  35481645   672.7748
+## 333          Congo, Dem. Rep.    Africa 1992  45.548  41672143   457.7192
+## 334          Congo, Dem. Rep.    Africa 1997  42.587  47798986   312.1884
+## 335          Congo, Dem. Rep.    Africa 2002  44.966  55379852   241.1659
+## 336          Congo, Dem. Rep.    Africa 2007  46.462  64606759   277.5519
+## 337               Congo, Rep.    Africa 1952  42.111    854885  2125.6214
+## 338               Congo, Rep.    Africa 1957  45.053    940458  2315.0566
+## 339               Congo, Rep.    Africa 1962  48.435   1047924  2464.7832
+## 340               Congo, Rep.    Africa 1967  52.040   1179760  2677.9396
+## 341               Congo, Rep.    Africa 1972  54.907   1340458  3213.1527
+## 342               Congo, Rep.    Africa 1977  55.625   1536769  3259.1790
+## 343               Congo, Rep.    Africa 1982  56.695   1774735  4879.5075
+## 344               Congo, Rep.    Africa 1987  57.470   2064095  4201.1949
+## 345               Congo, Rep.    Africa 1992  56.433   2409073  4016.2395
+## 346               Congo, Rep.    Africa 1997  52.962   2800947  3484.1644
+## 347               Congo, Rep.    Africa 2002  52.970   3328795  3484.0620
+## 348               Congo, Rep.    Africa 2007  55.322   3800610  3632.5578
+## 361             Cote d'Ivoire    Africa 1952  40.477   2977019  1388.5947
+## 362             Cote d'Ivoire    Africa 1957  42.469   3300000  1500.8959
+## 363             Cote d'Ivoire    Africa 1962  44.930   3832408  1728.8694
+## 364             Cote d'Ivoire    Africa 1967  47.350   4744870  2052.0505
+## 365             Cote d'Ivoire    Africa 1972  49.801   6071696  2378.2011
+## 366             Cote d'Ivoire    Africa 1977  52.374   7459574  2517.7365
+## 367             Cote d'Ivoire    Africa 1982  53.983   9025951  2602.7102
+## 368             Cote d'Ivoire    Africa 1987  54.655  10761098  2156.9561
+## 369             Cote d'Ivoire    Africa 1992  52.044  12772596  1648.0738
+## 370             Cote d'Ivoire    Africa 1997  47.991  14625967  1786.2654
+## 371             Cote d'Ivoire    Africa 2002  46.832  16252726  1648.8008
+## 372             Cote d'Ivoire    Africa 2007  48.328  18013409  1544.7501
+## 421                  Djibouti    Africa 1952  34.812     63149  2669.5295
+## 422                  Djibouti    Africa 1957  37.328     71851  2864.9691
+## 423                  Djibouti    Africa 1962  39.693     89898  3020.9893
+## 424                  Djibouti    Africa 1967  42.074    127617  3020.0505
+## 425                  Djibouti    Africa 1972  44.366    178848  3694.2124
+## 426                  Djibouti    Africa 1977  46.519    228694  3081.7610
+## 427                  Djibouti    Africa 1982  48.812    305991  2879.4681
+## 428                  Djibouti    Africa 1987  50.040    311025  2880.1026
+## 429                  Djibouti    Africa 1992  51.604    384156  2377.1562
+## 430                  Djibouti    Africa 1997  53.157    417908  1895.0170
+## 431                  Djibouti    Africa 2002  53.373    447416  1908.2609
+## 432                  Djibouti    Africa 2007  54.791    496374  2082.4816
+## 457                     Egypt    Africa 1952  41.893  22223309  1418.8224
+## 458                     Egypt    Africa 1957  44.444  25009741  1458.9153
+## 459                     Egypt    Africa 1962  46.992  28173309  1693.3359
+## 460                     Egypt    Africa 1967  49.293  31681188  1814.8807
+## 461                     Egypt    Africa 1972  51.137  34807417  2024.0081
+## 462                     Egypt    Africa 1977  53.319  38783863  2785.4936
+## 463                     Egypt    Africa 1982  56.006  45681811  3503.7296
+## 464                     Egypt    Africa 1987  59.797  52799062  3885.4607
+## 465                     Egypt    Africa 1992  63.674  59402198  3794.7552
+## 466                     Egypt    Africa 1997  67.217  66134291  4173.1818
+## 467                     Egypt    Africa 2002  69.806  73312559  4754.6044
+## 468                     Egypt    Africa 2007  71.338  80264543  5581.1810
+## 481         Equatorial Guinea    Africa 1952  34.482    216964   375.6431
+## 482         Equatorial Guinea    Africa 1957  35.983    232922   426.0964
+## 483         Equatorial Guinea    Africa 1962  37.485    249220   582.8420
+## 484         Equatorial Guinea    Africa 1967  38.987    259864   915.5960
+## 485         Equatorial Guinea    Africa 1972  40.516    277603   672.4123
+## 486         Equatorial Guinea    Africa 1977  42.024    192675   958.5668
+## 487         Equatorial Guinea    Africa 1982  43.662    285483   927.8253
+## 488         Equatorial Guinea    Africa 1987  45.664    341244   966.8968
+## 489         Equatorial Guinea    Africa 1992  47.545    387838  1132.0550
+## 490         Equatorial Guinea    Africa 1997  48.245    439971  2814.4808
+## 491         Equatorial Guinea    Africa 2002  49.348    495627  7703.4959
+## 492         Equatorial Guinea    Africa 2007  51.579    551201 12154.0897
+## 493                   Eritrea    Africa 1952  35.928   1438760   328.9406
+## 494                   Eritrea    Africa 1957  38.047   1542611   344.1619
+## 495                   Eritrea    Africa 1962  40.158   1666618   380.9958
+## 496                   Eritrea    Africa 1967  42.189   1820319   468.7950
+## 497                   Eritrea    Africa 1972  44.142   2260187   514.3242
+## 498                   Eritrea    Africa 1977  44.535   2512642   505.7538
+## 499                   Eritrea    Africa 1982  43.890   2637297   524.8758
+## 500                   Eritrea    Africa 1987  46.453   2915959   521.1341
+## 501                   Eritrea    Africa 1992  49.991   3668440   582.8585
+## 502                   Eritrea    Africa 1997  53.378   4058319   913.4708
+## 503                   Eritrea    Africa 2002  55.240   4414865   765.3500
+## 504                   Eritrea    Africa 2007  58.040   4906585   641.3695
+## 505                  Ethiopia    Africa 1952  34.078  20860941   362.1463
+## 506                  Ethiopia    Africa 1957  36.667  22815614   378.9042
+## 507                  Ethiopia    Africa 1962  40.059  25145372   419.4564
+## 508                  Ethiopia    Africa 1967  42.115  27860297   516.1186
+## 509                  Ethiopia    Africa 1972  43.515  30770372   566.2439
+## 510                  Ethiopia    Africa 1977  44.510  34617799   556.8084
+## 511                  Ethiopia    Africa 1982  44.916  38111756   577.8607
+## 512                  Ethiopia    Africa 1987  46.684  42999530   573.7413
+## 513                  Ethiopia    Africa 1992  48.091  52088559   421.3535
+## 514                  Ethiopia    Africa 1997  49.402  59861301   515.8894
+## 515                  Ethiopia    Africa 2002  50.725  67946797   530.0535
+## 516                  Ethiopia    Africa 2007  52.947  76511887   690.8056
+## 541                     Gabon    Africa 1952  37.003    420702  4293.4765
+## 542                     Gabon    Africa 1957  38.999    434904  4976.1981
+## 543                     Gabon    Africa 1962  40.489    455661  6631.4592
+## 544                     Gabon    Africa 1967  44.598    489004  8358.7620
+## 545                     Gabon    Africa 1972  48.690    537977 11401.9484
+## 546                     Gabon    Africa 1977  52.790    706367 21745.5733
+## 547                     Gabon    Africa 1982  56.564    753874 15113.3619
+## 548                     Gabon    Africa 1987  60.190    880397 11864.4084
+## 549                     Gabon    Africa 1992  61.366    985739 13522.1575
+## 550                     Gabon    Africa 1997  60.461   1126189 14722.8419
+## 551                     Gabon    Africa 2002  56.761   1299304 12521.7139
+## 552                     Gabon    Africa 2007  56.735   1454867 13206.4845
+## 553                    Gambia    Africa 1952  30.000    284320   485.2307
+## 554                    Gambia    Africa 1957  32.065    323150   520.9267
+## 555                    Gambia    Africa 1962  33.896    374020   599.6503
+## 556                    Gambia    Africa 1967  35.857    439593   734.7829
+## 557                    Gambia    Africa 1972  38.308    517101   756.0868
+## 558                    Gambia    Africa 1977  41.842    608274   884.7553
+## 559                    Gambia    Africa 1982  45.580    715523   835.8096
+## 560                    Gambia    Africa 1987  49.265    848406   611.6589
+## 561                    Gambia    Africa 1992  52.644   1025384   665.6244
+## 562                    Gambia    Africa 1997  55.861   1235767   653.7302
+## 563                    Gambia    Africa 2002  58.041   1457766   660.5856
+## 564                    Gambia    Africa 2007  59.448   1688359   752.7497
+## 577                     Ghana    Africa 1952  43.149   5581001   911.2989
+## 578                     Ghana    Africa 1957  44.779   6391288  1043.5615
+## 579                     Ghana    Africa 1962  46.452   7355248  1190.0411
+## 580                     Ghana    Africa 1967  48.072   8490213  1125.6972
+## 581                     Ghana    Africa 1972  49.875   9354120  1178.2237
+## 582                     Ghana    Africa 1977  51.756  10538093   993.2240
+## 583                     Ghana    Africa 1982  53.744  11400338   876.0326
+## 584                     Ghana    Africa 1987  55.729  14168101   847.0061
+## 585                     Ghana    Africa 1992  57.501  16278738   925.0602
+## 586                     Ghana    Africa 1997  58.556  18418288  1005.2458
+## 587                     Ghana    Africa 2002  58.453  20550751  1111.9846
+## 588                     Ghana    Africa 2007  60.022  22873338  1327.6089
+## 613                    Guinea    Africa 1952  33.609   2664249   510.1965
+## 614                    Guinea    Africa 1957  34.558   2876726   576.2670
+## 615                    Guinea    Africa 1962  35.753   3140003   686.3737
+## 616                    Guinea    Africa 1967  37.197   3451418   708.7595
+## 617                    Guinea    Africa 1972  38.842   3811387   741.6662
+## 618                    Guinea    Africa 1977  40.762   4227026   874.6859
+## 619                    Guinea    Africa 1982  42.891   4710497   857.2504
+## 620                    Guinea    Africa 1987  45.552   5650262   805.5725
+## 621                    Guinea    Africa 1992  48.576   6990574   794.3484
+## 622                    Guinea    Africa 1997  51.455   8048834   869.4498
+## 623                    Guinea    Africa 2002  53.676   8807818   945.5836
+## 624                    Guinea    Africa 2007  56.007   9947814   942.6542
+## 625             Guinea-Bissau    Africa 1952  32.500    580653   299.8503
+## 626             Guinea-Bissau    Africa 1957  33.489    601095   431.7905
+## 627             Guinea-Bissau    Africa 1962  34.488    627820   522.0344
+## 628             Guinea-Bissau    Africa 1967  35.492    601287   715.5806
+## 629             Guinea-Bissau    Africa 1972  36.486    625361   820.2246
+## 630             Guinea-Bissau    Africa 1977  37.465    745228   764.7260
+## 631             Guinea-Bissau    Africa 1982  39.327    825987   838.1240
+## 632             Guinea-Bissau    Africa 1987  41.245    927524   736.4154
+## 633             Guinea-Bissau    Africa 1992  43.266   1050938   745.5399
+## 634             Guinea-Bissau    Africa 1997  44.873   1193708   796.6645
+## 635             Guinea-Bissau    Africa 2002  45.504   1332459   575.7047
+## 636             Guinea-Bissau    Africa 2007  46.388   1472041   579.2317
+## 817                     Kenya    Africa 1952  42.270   6464046   853.5409
+## 818                     Kenya    Africa 1957  44.686   7454779   944.4383
+## 819                     Kenya    Africa 1962  47.949   8678557   896.9664
+## 820                     Kenya    Africa 1967  50.654  10191512  1056.7365
+## 821                     Kenya    Africa 1972  53.559  12044785  1222.3600
+## 822                     Kenya    Africa 1977  56.155  14500404  1267.6132
+## 823                     Kenya    Africa 1982  58.766  17661452  1348.2258
+## 824                     Kenya    Africa 1987  59.339  21198082  1361.9369
+## 825                     Kenya    Africa 1992  59.285  25020539  1341.9217
+## 826                     Kenya    Africa 1997  54.407  28263827  1360.4850
+## 827                     Kenya    Africa 2002  50.992  31386842  1287.5147
+## 828                     Kenya    Africa 2007  54.110  35610177  1463.2493
+## 877                   Lesotho    Africa 1952  42.138    748747   298.8462
+## 878                   Lesotho    Africa 1957  45.047    813338   335.9971
+## 879                   Lesotho    Africa 1962  47.747    893143   411.8006
+## 880                   Lesotho    Africa 1967  48.492    996380   498.6390
+## 881                   Lesotho    Africa 1972  49.767   1116779   496.5816
+## 882                   Lesotho    Africa 1977  52.208   1251524   745.3695
+## 883                   Lesotho    Africa 1982  55.078   1411807   797.2631
+## 884                   Lesotho    Africa 1987  57.180   1599200   773.9932
+## 885                   Lesotho    Africa 1992  59.685   1803195   977.4863
+## 886                   Lesotho    Africa 1997  55.558   1982823  1186.1480
+## 887                   Lesotho    Africa 2002  44.593   2046772  1275.1846
+## 888                   Lesotho    Africa 2007  42.592   2012649  1569.3314
+## 889                   Liberia    Africa 1952  38.480    863308   575.5730
+## 890                   Liberia    Africa 1957  39.486    975950   620.9700
+## 891                   Liberia    Africa 1962  40.502   1112796   634.1952
+## 892                   Liberia    Africa 1967  41.536   1279406   713.6036
+## 893                   Liberia    Africa 1972  42.614   1482628   803.0055
+## 894                   Liberia    Africa 1977  43.764   1703617   640.3224
+## 895                   Liberia    Africa 1982  44.852   1956875   572.1996
+## 896                   Liberia    Africa 1987  46.027   2269414   506.1139
+## 897                   Liberia    Africa 1992  40.802   1912974   636.6229
+## 898                   Liberia    Africa 1997  42.221   2200725   609.1740
+## 899                   Liberia    Africa 2002  43.753   2814651   531.4824
+## 900                   Liberia    Africa 2007  45.678   3193942   414.5073
+## 901                     Libya    Africa 1952  42.723   1019729  2387.5481
+## 902                     Libya    Africa 1957  45.289   1201578  3448.2844
+## 903                     Libya    Africa 1962  47.808   1441863  6757.0308
+## 904                     Libya    Africa 1967  50.227   1759224 18772.7517
+## 905                     Libya    Africa 1972  52.773   2183877 21011.4972
+## 906                     Libya    Africa 1977  57.442   2721783 21951.2118
+## 907                     Libya    Africa 1982  62.155   3344074 17364.2754
+## 908                     Libya    Africa 1987  66.234   3799845 11770.5898
+## 909                     Libya    Africa 1992  68.755   4364501  9640.1385
+## 910                     Libya    Africa 1997  71.555   4759670  9467.4461
+## 911                     Libya    Africa 2002  72.737   5368585  9534.6775
+## 912                     Libya    Africa 2007  73.952   6036914 12057.4993
+## 913                Madagascar    Africa 1952  36.681   4762912  1443.0117
+## 914                Madagascar    Africa 1957  38.865   5181679  1589.2027
+## 915                Madagascar    Africa 1962  40.848   5703324  1643.3871
+## 916                Madagascar    Africa 1967  42.881   6334556  1634.0473
+## 917                Madagascar    Africa 1972  44.851   7082430  1748.5630
+## 918                Madagascar    Africa 1977  46.881   8007166  1544.2286
+## 919                Madagascar    Africa 1982  48.969   9171477  1302.8787
+## 920                Madagascar    Africa 1987  49.350  10568642  1155.4419
+## 921                Madagascar    Africa 1992  52.214  12210395  1040.6762
+## 922                Madagascar    Africa 1997  54.978  14165114   986.2959
+## 923                Madagascar    Africa 2002  57.286  16473477   894.6371
+## 924                Madagascar    Africa 2007  59.443  19167654  1044.7701
+## 925                    Malawi    Africa 1952  36.256   2917802   369.1651
+## 926                    Malawi    Africa 1957  37.207   3221238   416.3698
+## 927                    Malawi    Africa 1962  38.410   3628608   427.9011
+## 928                    Malawi    Africa 1967  39.487   4147252   495.5148
+## 929                    Malawi    Africa 1972  41.766   4730997   584.6220
+## 930                    Malawi    Africa 1977  43.767   5637246   663.2237
+## 931                    Malawi    Africa 1982  45.642   6502825   632.8039
+## 932                    Malawi    Africa 1987  47.457   7824747   635.5174
+## 933                    Malawi    Africa 1992  49.420  10014249   563.2000
+## 934                    Malawi    Africa 1997  47.495  10419991   692.2758
+## 935                    Malawi    Africa 2002  45.009  11824495   665.4231
+## 936                    Malawi    Africa 2007  48.303  13327079   759.3499
+## 949                      Mali    Africa 1952  33.685   3838168   452.3370
+## 950                      Mali    Africa 1957  35.307   4241884   490.3822
+## 951                      Mali    Africa 1962  36.936   4690372   496.1743
+## 952                      Mali    Africa 1967  38.487   5212416   545.0099
+## 953                      Mali    Africa 1972  39.977   5828158   581.3689
+## 954                      Mali    Africa 1977  41.714   6491649   686.3953
+## 955                      Mali    Africa 1982  43.916   6998256   618.0141
+## 956                      Mali    Africa 1987  46.364   7634008   684.1716
+## 957                      Mali    Africa 1992  48.388   8416215   739.0144
+## 958                      Mali    Africa 1997  49.903   9384984   790.2580
+## 959                      Mali    Africa 2002  51.818  10580176   951.4098
+## 960                      Mali    Africa 2007  54.467  12031795  1042.5816
+## 961                Mauritania    Africa 1952  40.543   1022556   743.1159
+## 962                Mauritania    Africa 1957  42.338   1076852   846.1203
+## 963                Mauritania    Africa 1962  44.248   1146757  1055.8960
+## 964                Mauritania    Africa 1967  46.289   1230542  1421.1452
+## 965                Mauritania    Africa 1972  48.437   1332786  1586.8518
+## 966                Mauritania    Africa 1977  50.852   1456688  1497.4922
+## 967                Mauritania    Africa 1982  53.599   1622136  1481.1502
+## 968                Mauritania    Africa 1987  56.145   1841240  1421.6036
+## 969                Mauritania    Africa 1992  58.333   2119465  1361.3698
+## 970                Mauritania    Africa 1997  60.430   2444741  1483.1361
+## 971                Mauritania    Africa 2002  62.247   2828858  1579.0195
+## 972                Mauritania    Africa 2007  64.164   3270065  1803.1515
+## 973                 Mauritius    Africa 1952  50.986    516556  1967.9557
+## 974                 Mauritius    Africa 1957  58.089    609816  2034.0380
+## 975                 Mauritius    Africa 1962  60.246    701016  2529.0675
+## 976                 Mauritius    Africa 1967  61.557    789309  2475.3876
+## 977                 Mauritius    Africa 1972  62.944    851334  2575.4842
+## 978                 Mauritius    Africa 1977  64.930    913025  3710.9830
+## 979                 Mauritius    Africa 1982  66.711    992040  3688.0377
+## 980                 Mauritius    Africa 1987  68.740   1042663  4783.5869
+## 981                 Mauritius    Africa 1992  69.745   1096202  6058.2538
+## 982                 Mauritius    Africa 1997  70.736   1149818  7425.7053
+## 983                 Mauritius    Africa 2002  71.954   1200206  9021.8159
+## 984                 Mauritius    Africa 2007  72.801   1250882 10956.9911
+## 1021                  Morocco    Africa 1952  42.873   9939217  1688.2036
+## 1022                  Morocco    Africa 1957  45.423  11406350  1642.0023
+## 1023                  Morocco    Africa 1962  47.924  13056604  1566.3535
+## 1024                  Morocco    Africa 1967  50.335  14770296  1711.0448
+## 1025                  Morocco    Africa 1972  52.862  16660670  1930.1950
+## 1026                  Morocco    Africa 1977  55.730  18396941  2370.6200
+## 1027                  Morocco    Africa 1982  59.650  20198730  2702.6204
+## 1028                  Morocco    Africa 1987  62.677  22987397  2755.0470
+## 1029                  Morocco    Africa 1992  65.393  25798239  2948.0473
+## 1030                  Morocco    Africa 1997  67.660  28529501  2982.1019
+## 1031                  Morocco    Africa 2002  69.615  31167783  3258.4956
+## 1032                  Morocco    Africa 2007  71.164  33757175  3820.1752
+## 1033               Mozambique    Africa 1952  31.286   6446316   468.5260
+## 1034               Mozambique    Africa 1957  33.779   7038035   495.5868
+## 1035               Mozambique    Africa 1962  36.161   7788944   556.6864
+## 1036               Mozambique    Africa 1967  38.113   8680909   566.6692
+## 1037               Mozambique    Africa 1972  40.328   9809596   724.9178
+## 1038               Mozambique    Africa 1977  42.495  11127868   502.3197
+## 1039               Mozambique    Africa 1982  42.795  12587223   462.2114
+## 1040               Mozambique    Africa 1987  42.861  12891952   389.8762
+## 1041               Mozambique    Africa 1992  44.284  13160731   410.8968
+## 1042               Mozambique    Africa 1997  46.344  16603334   472.3461
+## 1043               Mozambique    Africa 2002  44.026  18473780   633.6179
+## 1044               Mozambique    Africa 2007  42.082  19951656   823.6856
+## 1057                  Namibia    Africa 1952  41.725    485831  2423.7804
+## 1058                  Namibia    Africa 1957  45.226    548080  2621.4481
+## 1059                  Namibia    Africa 1962  48.386    621392  3173.2156
+## 1060                  Namibia    Africa 1967  51.159    706640  3793.6948
+## 1061                  Namibia    Africa 1972  53.867    821782  3746.0809
+## 1062                  Namibia    Africa 1977  56.437    977026  3876.4860
+## 1063                  Namibia    Africa 1982  58.968   1099010  4191.1005
+## 1064                  Namibia    Africa 1987  60.835   1278184  3693.7313
+## 1065                  Namibia    Africa 1992  61.999   1554253  3804.5380
+## 1066                  Namibia    Africa 1997  58.909   1774766  3899.5243
+## 1067                  Namibia    Africa 2002  51.479   1972153  4072.3248
+## 1068                  Namibia    Africa 2007  52.906   2055080  4811.0604
+## 1117                    Niger    Africa 1952  37.444   3379468   761.8794
+## 1118                    Niger    Africa 1957  38.598   3692184   835.5234
+## 1119                    Niger    Africa 1962  39.487   4076008   997.7661
+## 1120                    Niger    Africa 1967  40.118   4534062  1054.3849
+## 1121                    Niger    Africa 1972  40.546   5060262   954.2092
+## 1122                    Niger    Africa 1977  41.291   5682086   808.8971
+## 1123                    Niger    Africa 1982  42.598   6437188   909.7221
+## 1124                    Niger    Africa 1987  44.555   7332638   668.3000
+## 1125                    Niger    Africa 1992  47.391   8392818   581.1827
+## 1126                    Niger    Africa 1997  51.313   9666252   580.3052
+## 1127                    Niger    Africa 2002  54.496  11140655   601.0745
+## 1128                    Niger    Africa 2007  56.867  12894865   619.6769
+## 1129                  Nigeria    Africa 1952  36.324  33119096  1077.2819
+## 1130                  Nigeria    Africa 1957  37.802  37173340  1100.5926
+## 1131                  Nigeria    Africa 1962  39.360  41871351  1150.9275
+## 1132                  Nigeria    Africa 1967  41.040  47287752  1014.5141
+## 1133                  Nigeria    Africa 1972  42.821  53740085  1698.3888
+## 1134                  Nigeria    Africa 1977  44.514  62209173  1981.9518
+## 1135                  Nigeria    Africa 1982  45.826  73039376  1576.9738
+## 1136                  Nigeria    Africa 1987  46.886  81551520  1385.0296
+## 1137                  Nigeria    Africa 1992  47.472  93364244  1619.8482
+## 1138                  Nigeria    Africa 1997  47.464 106207839  1624.9413
+## 1139                  Nigeria    Africa 2002  46.608 119901274  1615.2864
+## 1140                  Nigeria    Africa 2007  46.859 135031164  2013.9773
+## 1261                  Reunion    Africa 1952  52.724    257700  2718.8853
+## 1262                  Reunion    Africa 1957  55.090    308700  2769.4518
+## 1263                  Reunion    Africa 1962  57.666    358900  3173.7233
+## 1264                  Reunion    Africa 1967  60.542    414024  4021.1757
+## 1265                  Reunion    Africa 1972  64.274    461633  5047.6586
+## 1266                  Reunion    Africa 1977  67.064    492095  4319.8041
+## 1267                  Reunion    Africa 1982  69.885    517810  5267.2194
+## 1268                  Reunion    Africa 1987  71.913    562035  5303.3775
+## 1269                  Reunion    Africa 1992  73.615    622191  6101.2558
+## 1270                  Reunion    Africa 1997  74.772    684810  6071.9414
+## 1271                  Reunion    Africa 2002  75.744    743981  6316.1652
+## 1272                  Reunion    Africa 2007  76.442    798094  7670.1226
+## 1285                   Rwanda    Africa 1952  40.000   2534927   493.3239
+## 1286                   Rwanda    Africa 1957  41.500   2822082   540.2894
+## 1287                   Rwanda    Africa 1962  43.000   3051242   597.4731
+## 1288                   Rwanda    Africa 1967  44.100   3451079   510.9637
+## 1289                   Rwanda    Africa 1972  44.600   3992121   590.5807
+## 1290                   Rwanda    Africa 1977  45.000   4657072   670.0806
+## 1291                   Rwanda    Africa 1982  46.218   5507565   881.5706
+## 1292                   Rwanda    Africa 1987  44.020   6349365   847.9912
+## 1293                   Rwanda    Africa 1992  23.599   7290203   737.0686
+## 1294                   Rwanda    Africa 1997  36.087   7212583   589.9445
+## 1295                   Rwanda    Africa 2002  43.413   7852401   785.6538
+## 1296                   Rwanda    Africa 2007  46.242   8860588   863.0885
+## 1297    Sao Tome and Principe    Africa 1952  46.471     60011   879.5836
+## 1298    Sao Tome and Principe    Africa 1957  48.945     61325   860.7369
+## 1299    Sao Tome and Principe    Africa 1962  51.893     65345  1071.5511
+## 1300    Sao Tome and Principe    Africa 1967  54.425     70787  1384.8406
+## 1301    Sao Tome and Principe    Africa 1972  56.480     76595  1532.9853
+## 1302    Sao Tome and Principe    Africa 1977  58.550     86796  1737.5617
+## 1303    Sao Tome and Principe    Africa 1982  60.351     98593  1890.2181
+## 1304    Sao Tome and Principe    Africa 1987  61.728    110812  1516.5255
+## 1305    Sao Tome and Principe    Africa 1992  62.742    125911  1428.7778
+## 1306    Sao Tome and Principe    Africa 1997  63.306    145608  1339.0760
+## 1307    Sao Tome and Principe    Africa 2002  64.337    170372  1353.0924
+## 1308    Sao Tome and Principe    Africa 2007  65.528    199579  1598.4351
+## 1321                  Senegal    Africa 1952  37.278   2755589  1450.3570
+## 1322                  Senegal    Africa 1957  39.329   3054547  1567.6530
+## 1323                  Senegal    Africa 1962  41.454   3430243  1654.9887
+## 1324                  Senegal    Africa 1967  43.563   3965841  1612.4046
+## 1325                  Senegal    Africa 1972  45.815   4588696  1597.7121
+## 1326                  Senegal    Africa 1977  48.879   5260855  1561.7691
+## 1327                  Senegal    Africa 1982  52.379   6147783  1518.4800
+## 1328                  Senegal    Africa 1987  55.769   7171347  1441.7207
+## 1329                  Senegal    Africa 1992  58.196   8307920  1367.8994
+## 1330                  Senegal    Africa 1997  60.187   9535314  1392.3683
+## 1331                  Senegal    Africa 2002  61.600  10870037  1519.6353
+## 1332                  Senegal    Africa 2007  63.062  12267493  1712.4721
+## 1345             Sierra Leone    Africa 1952  30.331   2143249   879.7877
+## 1346             Sierra Leone    Africa 1957  31.570   2295678  1004.4844
+## 1347             Sierra Leone    Africa 1962  32.767   2467895  1116.6399
+## 1348             Sierra Leone    Africa 1967  34.113   2662190  1206.0435
+## 1349             Sierra Leone    Africa 1972  35.400   2879013  1353.7598
+## 1350             Sierra Leone    Africa 1977  36.788   3140897  1348.2852
+## 1351             Sierra Leone    Africa 1982  38.445   3464522  1465.0108
+## 1352             Sierra Leone    Africa 1987  40.006   3868905  1294.4478
+## 1353             Sierra Leone    Africa 1992  38.333   4260884  1068.6963
+## 1354             Sierra Leone    Africa 1997  39.897   4578212   574.6482
+## 1355             Sierra Leone    Africa 2002  41.012   5359092   699.4897
+## 1356             Sierra Leone    Africa 2007  42.568   6144562   862.5408
+## 1393                  Somalia    Africa 1952  32.978   2526994  1135.7498
+## 1394                  Somalia    Africa 1957  34.977   2780415  1258.1474
+## 1395                  Somalia    Africa 1962  36.981   3080153  1369.4883
+## 1396                  Somalia    Africa 1967  38.977   3428839  1284.7332
+## 1397                  Somalia    Africa 1972  40.973   3840161  1254.5761
+## 1398                  Somalia    Africa 1977  41.974   4353666  1450.9925
+## 1399                  Somalia    Africa 1982  42.955   5828892  1176.8070
+## 1400                  Somalia    Africa 1987  44.501   6921858  1093.2450
+## 1401                  Somalia    Africa 1992  39.658   6099799   926.9603
+## 1402                  Somalia    Africa 1997  43.795   6633514   930.5964
+## 1403                  Somalia    Africa 2002  45.936   7753310   882.0818
+## 1404                  Somalia    Africa 2007  48.159   9118773   926.1411
+## 1405             South Africa    Africa 1952  45.009  14264935  4725.2955
+## 1406             South Africa    Africa 1957  47.985  16151549  5487.1042
+## 1407             South Africa    Africa 1962  49.951  18356657  5768.7297
+## 1408             South Africa    Africa 1967  51.927  20997321  7114.4780
+## 1409             South Africa    Africa 1972  53.696  23935810  7765.9626
+## 1410             South Africa    Africa 1977  55.527  27129932  8028.6514
+## 1411             South Africa    Africa 1982  58.161  31140029  8568.2662
+## 1412             South Africa    Africa 1987  60.834  35933379  7825.8234
+## 1413             South Africa    Africa 1992  61.888  39964159  7225.0693
+## 1414             South Africa    Africa 1997  60.236  42835005  7479.1882
+## 1415             South Africa    Africa 2002  53.365  44433622  7710.9464
+## 1416             South Africa    Africa 2007  49.339  43997828  9269.6578
+## 1441                    Sudan    Africa 1952  38.635   8504667  1615.9911
+## 1442                    Sudan    Africa 1957  39.624   9753392  1770.3371
+## 1443                    Sudan    Africa 1962  40.870  11183227  1959.5938
+## 1444                    Sudan    Africa 1967  42.858  12716129  1687.9976
+## 1445                    Sudan    Africa 1972  45.083  14597019  1659.6528
+## 1446                    Sudan    Africa 1977  47.800  17104986  2202.9884
+## 1447                    Sudan    Africa 1982  50.338  20367053  1895.5441
+## 1448                    Sudan    Africa 1987  51.744  24725960  1507.8192
+## 1449                    Sudan    Africa 1992  53.556  28227588  1492.1970
+## 1450                    Sudan    Africa 1997  55.373  32160729  1632.2108
+## 1451                    Sudan    Africa 2002  56.369  37090298  1993.3983
+## 1452                    Sudan    Africa 2007  58.556  42292929  2602.3950
+## 1453                Swaziland    Africa 1952  41.407    290243  1148.3766
+## 1454                Swaziland    Africa 1957  43.424    326741  1244.7084
+## 1455                Swaziland    Africa 1962  44.992    370006  1856.1821
+## 1456                Swaziland    Africa 1967  46.633    420690  2613.1017
+## 1457                Swaziland    Africa 1972  49.552    480105  3364.8366
+## 1458                Swaziland    Africa 1977  52.537    551425  3781.4106
+## 1459                Swaziland    Africa 1982  55.561    649901  3895.3840
+## 1460                Swaziland    Africa 1987  57.678    779348  3984.8398
+## 1461                Swaziland    Africa 1992  58.474    962344  3553.0224
+## 1462                Swaziland    Africa 1997  54.289   1054486  3876.7685
+## 1463                Swaziland    Africa 2002  43.869   1130269  4128.1169
+## 1464                Swaziland    Africa 2007  39.613   1133066  4513.4806
+## 1513                 Tanzania    Africa 1952  41.215   8322925   716.6501
+## 1514                 Tanzania    Africa 1957  42.974   9452826   698.5356
+## 1515                 Tanzania    Africa 1962  44.246  10863958   722.0038
+## 1516                 Tanzania    Africa 1967  45.757  12607312   848.2187
+## 1517                 Tanzania    Africa 1972  47.620  14706593   915.9851
+## 1518                 Tanzania    Africa 1977  49.919  17129565   962.4923
+## 1519                 Tanzania    Africa 1982  50.608  19844382   874.2426
+## 1520                 Tanzania    Africa 1987  51.535  23040630   831.8221
+## 1521                 Tanzania    Africa 1992  50.440  26605473   825.6825
+## 1522                 Tanzania    Africa 1997  48.466  30686889   789.1862
+## 1523                 Tanzania    Africa 2002  49.651  34593779   899.0742
+## 1524                 Tanzania    Africa 2007  52.517  38139640  1107.4822
+## 1537                     Togo    Africa 1952  38.596   1219113   859.8087
+## 1538                     Togo    Africa 1957  41.208   1357445   925.9083
+## 1539                     Togo    Africa 1962  43.922   1528098  1067.5348
+## 1540                     Togo    Africa 1967  46.769   1735550  1477.5968
+## 1541                     Togo    Africa 1972  49.759   2056351  1649.6602
+## 1542                     Togo    Africa 1977  52.887   2308582  1532.7770
+## 1543                     Togo    Africa 1982  55.471   2644765  1344.5780
+## 1544                     Togo    Africa 1987  56.941   3154264  1202.2014
+## 1545                     Togo    Africa 1992  58.061   3747553  1034.2989
+## 1546                     Togo    Africa 1997  58.390   4320890   982.2869
+## 1547                     Togo    Africa 2002  57.561   4977378   886.2206
+## 1548                     Togo    Africa 2007  58.420   5701579   882.9699
+## 1561                  Tunisia    Africa 1952  44.600   3647735  1468.4756
+## 1562                  Tunisia    Africa 1957  47.100   3950849  1395.2325
+## 1563                  Tunisia    Africa 1962  49.579   4286552  1660.3032
+## 1564                  Tunisia    Africa 1967  52.053   4786986  1932.3602
+## 1565                  Tunisia    Africa 1972  55.602   5303507  2753.2860
+## 1566                  Tunisia    Africa 1977  59.837   6005061  3120.8768
+## 1567                  Tunisia    Africa 1982  64.048   6734098  3560.2332
+## 1568                  Tunisia    Africa 1987  66.894   7724976  3810.4193
+## 1569                  Tunisia    Africa 1992  70.001   8523077  4332.7202
+## 1570                  Tunisia    Africa 1997  71.973   9231669  4876.7986
+## 1571                  Tunisia    Africa 2002  73.042   9770575  5722.8957
+## 1572                  Tunisia    Africa 2007  73.923  10276158  7092.9230
+## 1585                   Uganda    Africa 1952  39.978   5824797   734.7535
+## 1586                   Uganda    Africa 1957  42.571   6675501   774.3711
+## 1587                   Uganda    Africa 1962  45.344   7688797   767.2717
+## 1588                   Uganda    Africa 1967  48.051   8900294   908.9185
+## 1589                   Uganda    Africa 1972  51.016  10190285   950.7359
+## 1590                   Uganda    Africa 1977  50.350  11457758   843.7331
+## 1591                   Uganda    Africa 1982  49.849  12939400   682.2662
+## 1592                   Uganda    Africa 1987  51.509  15283050   617.7244
+## 1593                   Uganda    Africa 1992  48.825  18252190   644.1708
+## 1594                   Uganda    Africa 1997  44.578  21210254   816.5591
+## 1595                   Uganda    Africa 2002  47.813  24739869   927.7210
+## 1596                   Uganda    Africa 2007  51.542  29170398  1056.3801
+## 1681                   Zambia    Africa 1952  42.038   2672000  1147.3888
+## 1682                   Zambia    Africa 1957  44.077   3016000  1311.9568
+## 1683                   Zambia    Africa 1962  46.023   3421000  1452.7258
+## 1684                   Zambia    Africa 1967  47.768   3900000  1777.0773
+## 1685                   Zambia    Africa 1972  50.107   4506497  1773.4983
+## 1686                   Zambia    Africa 1977  51.386   5216550  1588.6883
+## 1687                   Zambia    Africa 1982  51.821   6100407  1408.6786
+## 1688                   Zambia    Africa 1987  50.821   7272406  1213.3151
+## 1689                   Zambia    Africa 1992  46.100   8381163  1210.8846
+## 1690                   Zambia    Africa 1997  40.238   9417789  1071.3538
+## 1691                   Zambia    Africa 2002  39.193  10595811  1071.6139
+## 1692                   Zambia    Africa 2007  42.384  11746035  1271.2116
+## 1693                 Zimbabwe    Africa 1952  48.451   3080907   406.8841
+## 1694                 Zimbabwe    Africa 1957  50.469   3646340   518.7643
+## 1695                 Zimbabwe    Africa 1962  52.358   4277736   527.2722
+## 1696                 Zimbabwe    Africa 1967  53.995   4995432   569.7951
+## 1697                 Zimbabwe    Africa 1972  55.635   5861135   799.3622
+## 1698                 Zimbabwe    Africa 1977  57.674   6642107   685.5877
+## 1699                 Zimbabwe    Africa 1982  60.363   7636524   788.8550
+## 1700                 Zimbabwe    Africa 1987  62.351   9216418   706.1573
+## 1701                 Zimbabwe    Africa 1992  60.377  10704340   693.4208
+## 1702                 Zimbabwe    Africa 1997  46.809  11404948   792.4500
+## 1703                 Zimbabwe    Africa 2002  39.989  11926563   672.0386
+## 1704                 Zimbabwe    Africa 2007  43.487  12311143   469.7093
+```
+
+---
+## data.frame - indexing
+
+- A new object can be created from the results of indexing
+
+
+```r
+year_2007 &lt;- gapminder[gapminder$year==2007, ]
+year_2007
+```
+
+```
+##                       country continent year lifeExp        pop  gdpPercap
+## 12                Afghanistan      Asia 2007  43.828   31889923   974.5803
+## 24                    Albania    Europe 2007  76.423    3600523  5937.0295
+## 36                    Algeria    Africa 2007  72.301   33333216  6223.3675
+## 48                     Angola    Africa 2007  42.731   12420476  4797.2313
+## 60                  Argentina  Americas 2007  75.320   40301927 12779.3796
+## 72                  Australia   Oceania 2007  81.235   20434176 34435.3674
+## 84                    Austria    Europe 2007  79.829    8199783 36126.4927
+## 96                    Bahrain      Asia 2007  75.635     708573 29796.0483
+## 108                Bangladesh      Asia 2007  64.062  150448339  1391.2538
+## 120                   Belgium    Europe 2007  79.441   10392226 33692.6051
+## 132                     Benin    Africa 2007  56.728    8078314  1441.2849
+## 144                   Bolivia  Americas 2007  65.554    9119152  3822.1371
+## 156    Bosnia and Herzegovina    Europe 2007  74.852    4552198  7446.2988
+## 168                  Botswana    Africa 2007  50.728    1639131 12569.8518
+## 180                    Brazil  Americas 2007  72.390  190010647  9065.8008
+## 192                  Bulgaria    Europe 2007  73.005    7322858 10680.7928
+## 204              Burkina Faso    Africa 2007  52.295   14326203  1217.0330
+## 216                   Burundi    Africa 2007  49.580    8390505   430.0707
+## 228                  Cambodia      Asia 2007  59.723   14131858  1713.7787
+## 240                  Cameroon    Africa 2007  50.430   17696293  2042.0952
+## 252                    Canada  Americas 2007  80.653   33390141 36319.2350
+## 264  Central African Republic    Africa 2007  44.741    4369038   706.0165
+## 276                      Chad    Africa 2007  50.651   10238807  1704.0637
+## 288                     Chile  Americas 2007  78.553   16284741 13171.6388
+## 300                     China      Asia 2007  72.961 1318683096  4959.1149
+## 312                  Colombia  Americas 2007  72.889   44227550  7006.5804
+## 324                   Comoros    Africa 2007  65.152     710960   986.1479
+## 336          Congo, Dem. Rep.    Africa 2007  46.462   64606759   277.5519
+## 348               Congo, Rep.    Africa 2007  55.322    3800610  3632.5578
+## 360                Costa Rica  Americas 2007  78.782    4133884  9645.0614
+## 372             Cote d'Ivoire    Africa 2007  48.328   18013409  1544.7501
+## 384                   Croatia    Europe 2007  75.748    4493312 14619.2227
+## 396                      Cuba  Americas 2007  78.273   11416987  8948.1029
+## 408            Czech Republic    Europe 2007  76.486   10228744 22833.3085
+## 420                   Denmark    Europe 2007  78.332    5468120 35278.4187
+## 432                  Djibouti    Africa 2007  54.791     496374  2082.4816
+## 444        Dominican Republic  Americas 2007  72.235    9319622  6025.3748
+## 456                   Ecuador  Americas 2007  74.994   13755680  6873.2623
+## 468                     Egypt    Africa 2007  71.338   80264543  5581.1810
+## 480               El Salvador  Americas 2007  71.878    6939688  5728.3535
+## 492         Equatorial Guinea    Africa 2007  51.579     551201 12154.0897
+## 504                   Eritrea    Africa 2007  58.040    4906585   641.3695
+## 516                  Ethiopia    Africa 2007  52.947   76511887   690.8056
+## 528                   Finland    Europe 2007  79.313    5238460 33207.0844
+## 540                    France    Europe 2007  80.657   61083916 30470.0167
+## 552                     Gabon    Africa 2007  56.735    1454867 13206.4845
+## 564                    Gambia    Africa 2007  59.448    1688359   752.7497
+## 576                   Germany    Europe 2007  79.406   82400996 32170.3744
+## 588                     Ghana    Africa 2007  60.022   22873338  1327.6089
+## 600                    Greece    Europe 2007  79.483   10706290 27538.4119
+## 612                 Guatemala  Americas 2007  70.259   12572928  5186.0500
+## 624                    Guinea    Africa 2007  56.007    9947814   942.6542
+## 636             Guinea-Bissau    Africa 2007  46.388    1472041   579.2317
+## 648                     Haiti  Americas 2007  60.916    8502814  1201.6372
+## 660                  Honduras  Americas 2007  70.198    7483763  3548.3308
+## 672          Hong Kong, China      Asia 2007  82.208    6980412 39724.9787
+## 684                   Hungary    Europe 2007  73.338    9956108 18008.9444
+## 696                   Iceland    Europe 2007  81.757     301931 36180.7892
+## 708                     India      Asia 2007  64.698 1110396331  2452.2104
+## 720                 Indonesia      Asia 2007  70.650  223547000  3540.6516
+## 732                      Iran      Asia 2007  70.964   69453570 11605.7145
+## 744                      Iraq      Asia 2007  59.545   27499638  4471.0619
+## 756                   Ireland    Europe 2007  78.885    4109086 40675.9964
+## 768                    Israel      Asia 2007  80.745    6426679 25523.2771
+## 780                     Italy    Europe 2007  80.546   58147733 28569.7197
+## 792                   Jamaica  Americas 2007  72.567    2780132  7320.8803
+## 804                     Japan      Asia 2007  82.603  127467972 31656.0681
+## 816                    Jordan      Asia 2007  72.535    6053193  4519.4612
+## 828                     Kenya    Africa 2007  54.110   35610177  1463.2493
+## 840          Korea, Dem. Rep.      Asia 2007  67.297   23301725  1593.0655
+## 852               Korea, Rep.      Asia 2007  78.623   49044790 23348.1397
+## 864                    Kuwait      Asia 2007  77.588    2505559 47306.9898
+## 876                   Lebanon      Asia 2007  71.993    3921278 10461.0587
+## 888                   Lesotho    Africa 2007  42.592    2012649  1569.3314
+## 900                   Liberia    Africa 2007  45.678    3193942   414.5073
+## 912                     Libya    Africa 2007  73.952    6036914 12057.4993
+## 924                Madagascar    Africa 2007  59.443   19167654  1044.7701
+## 936                    Malawi    Africa 2007  48.303   13327079   759.3499
+## 948                  Malaysia      Asia 2007  74.241   24821286 12451.6558
+## 960                      Mali    Africa 2007  54.467   12031795  1042.5816
+## 972                Mauritania    Africa 2007  64.164    3270065  1803.1515
+## 984                 Mauritius    Africa 2007  72.801    1250882 10956.9911
+## 996                    Mexico  Americas 2007  76.195  108700891 11977.5750
+## 1008                 Mongolia      Asia 2007  66.803    2874127  3095.7723
+## 1020               Montenegro    Europe 2007  74.543     684736  9253.8961
+## 1032                  Morocco    Africa 2007  71.164   33757175  3820.1752
+## 1044               Mozambique    Africa 2007  42.082   19951656   823.6856
+## 1056                  Myanmar      Asia 2007  62.069   47761980   944.0000
+## 1068                  Namibia    Africa 2007  52.906    2055080  4811.0604
+## 1080                    Nepal      Asia 2007  63.785   28901790  1091.3598
+## 1092              Netherlands    Europe 2007  79.762   16570613 36797.9333
+## 1104              New Zealand   Oceania 2007  80.204    4115771 25185.0091
+## 1116                Nicaragua  Americas 2007  72.899    5675356  2749.3210
+## 1128                    Niger    Africa 2007  56.867   12894865   619.6769
+## 1140                  Nigeria    Africa 2007  46.859  135031164  2013.9773
+## 1152                   Norway    Europe 2007  80.196    4627926 49357.1902
+## 1164                     Oman      Asia 2007  75.640    3204897 22316.1929
+## 1176                 Pakistan      Asia 2007  65.483  169270617  2605.9476
+## 1188                   Panama  Americas 2007  75.537    3242173  9809.1856
+## 1200                 Paraguay  Americas 2007  71.752    6667147  4172.8385
+## 1212                     Peru  Americas 2007  71.421   28674757  7408.9056
+## 1224              Philippines      Asia 2007  71.688   91077287  3190.4810
+## 1236                   Poland    Europe 2007  75.563   38518241 15389.9247
+## 1248                 Portugal    Europe 2007  78.098   10642836 20509.6478
+## 1260              Puerto Rico  Americas 2007  78.746    3942491 19328.7090
+## 1272                  Reunion    Africa 2007  76.442     798094  7670.1226
+## 1284                  Romania    Europe 2007  72.476   22276056 10808.4756
+## 1296                   Rwanda    Africa 2007  46.242    8860588   863.0885
+## 1308    Sao Tome and Principe    Africa 2007  65.528     199579  1598.4351
+## 1320             Saudi Arabia      Asia 2007  72.777   27601038 21654.8319
+## 1332                  Senegal    Africa 2007  63.062   12267493  1712.4721
+## 1344                   Serbia    Europe 2007  74.002   10150265  9786.5347
+## 1356             Sierra Leone    Africa 2007  42.568    6144562   862.5408
+## 1368                Singapore      Asia 2007  79.972    4553009 47143.1796
+## 1380          Slovak Republic    Europe 2007  74.663    5447502 18678.3144
+## 1392                 Slovenia    Europe 2007  77.926    2009245 25768.2576
+## 1404                  Somalia    Africa 2007  48.159    9118773   926.1411
+## 1416             South Africa    Africa 2007  49.339   43997828  9269.6578
+## 1428                    Spain    Europe 2007  80.941   40448191 28821.0637
+## 1440                Sri Lanka      Asia 2007  72.396   20378239  3970.0954
+## 1452                    Sudan    Africa 2007  58.556   42292929  2602.3950
+## 1464                Swaziland    Africa 2007  39.613    1133066  4513.4806
+## 1476                   Sweden    Europe 2007  80.884    9031088 33859.7484
+## 1488              Switzerland    Europe 2007  81.701    7554661 37506.4191
+## 1500                    Syria      Asia 2007  74.143   19314747  4184.5481
+## 1512                   Taiwan      Asia 2007  78.400   23174294 28718.2768
+## 1524                 Tanzania    Africa 2007  52.517   38139640  1107.4822
+## 1536                 Thailand      Asia 2007  70.616   65068149  7458.3963
+## 1548                     Togo    Africa 2007  58.420    5701579   882.9699
+## 1560      Trinidad and Tobago  Americas 2007  69.819    1056608 18008.5092
+## 1572                  Tunisia    Africa 2007  73.923   10276158  7092.9230
+## 1584                   Turkey    Europe 2007  71.777   71158647  8458.2764
+## 1596                   Uganda    Africa 2007  51.542   29170398  1056.3801
+## 1608           United Kingdom    Europe 2007  79.425   60776238 33203.2613
+## 1620            United States  Americas 2007  78.242  301139947 42951.6531
+## 1632                  Uruguay  Americas 2007  76.384    3447496 10611.4630
+## 1644                Venezuela  Americas 2007  73.747   26084662 11415.8057
+## 1656                  Vietnam      Asia 2007  74.249   85262356  2441.5764
+## 1668       West Bank and Gaza      Asia 2007  73.422    4018332  3025.3498
+## 1680              Yemen, Rep.      Asia 2007  62.698   22211743  2280.7699
+## 1692                   Zambia    Africa 2007  42.384   11746035  1271.2116
+## 1704                 Zimbabwe    Africa 2007  43.487   12311143   469.7093
+```
 
 ---
 ## data.frame - indexing
@@ -85,11 +2824,20 @@ gapminder$lifeExp
 ```
 
 
+```
+## [1] 28.801 30.332 31.997 34.020 36.088 38.438
+```
+
+
 ```r
 gapminder$continent
 ```
 
 
+```
+## [1] Asia Asia Asia Asia Asia Asia
+## Levels: Africa Americas Asia Europe Oceania
+```
 ---
 ## **dplyr**
 
@@ -100,17 +2848,16 @@ gapminder$continent
 library('dplyr')
 ```
 
-- **dplyr** to pakiet służący do podstawowych operacji przetwarzania danych z wykrzystaniem obiektów typu data.frame
-- podstawowe funkcje pakietu **dplyr** to *select*, *arrange*, *filter*, *mutate*, oraz *summarize*
-- dodatkowo ważną rolę spełnia funkcja *group_by*
-- inne możliwości pakietu **dplyr** to operator łączący funkcje ( %&gt;% ), złączenia ("join") czy operacje w ruchomym oknie 
+- **dplyr** is a package for data exploration and transformation
+- Basic functions of **dplyr** package are *select*, *arrange*, *filter*, *mutate*, and *summarize*
+- Another important function is *group_by*
+- Additionally, **dplyr** package implements a pipe operator (*%&gt;%*), joins and set operations, and moving window operations
 
 ---
 ## **dplyr** - *select*
 
-- funkcja *select* pozwala na stworzenie obiektu zawierającego tylko wybrane kolumny
-- ta funkcja pozwala zarówno na wybór pozytywny jak i negatywny
-- wiele dodatkowych możliwości - ?dplyr::select
+- *select* function picks columns by its name
+- Many additional features - *?dplyr::select*
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -241,7 +2988,7 @@ gapminder_sel2 &lt;- select(gapminder, -continent)
 ---
 ## **dplyr** - *arrange*
 
-- funkcja *arrange* sortuje wybrane kolumny w kolejności rosnącej...
+- *arrange* reorder rows in ascending order...
 
 
 ```r
@@ -306,7 +3053,7 @@ gapminder_arr1 &lt;- arrange(gapminder, lifeExp)
 ---
 ## **dplyr** - *arrange*
 
-- ...lub malejącej
+- ...or descending order
 
 
 ```r
@@ -371,8 +3118,8 @@ gapminder_arr1 &lt;- arrange(gapminder, desc(lifeExp))
 ---
 ## **dplyr** - *filter*
 
-- funkcja *filter* pozwala na wybranie tylko tych obserwacji (wierszy), które spełniają zadane warunki
-- warunki określane są przez operatory logiczne: ==, !=, &gt;, &gt;=, &lt;, &lt;=, &amp;, |
+- *filter* keeps rows matching given criteria
+- Logical operators, such as ==, !=, &gt;, &gt;=, &lt;, &lt;=, &amp;, |, can be used
 
 
 ```r
@@ -488,7 +3235,7 @@ gapminder_fil2 &lt;- filter(gapminder, continent != 'Asia' |  lifeExp &lt; 30)
 ---
 ## **dplyr** - *mutate*
 
-- funkcja *mutate* dodaje nowe zmienne (kolumny) na podstawe zadanego wyrażenia
+- *mutate* function creates new variables based on existing variables
 
 
 ```r
@@ -559,7 +3306,7 @@ gapminder_mut1 &lt;- mutate(gapminder, gdp_mil = (gdpPercap * pop) / 1000000)
 ---
 ## **dplyr** - *summarize*
 
-- funkcja *summarize* służy do tworzenia podsumowań statystycznych; tworzy kolumny z zadanymi statystykami opisowymi
+- *summarize* function can be used to reduce variables to values
 
 
 ```r
@@ -586,7 +3333,7 @@ gapminder_sum2 &lt;- summarize(gapminder, mean_le = mean(lifeExp), min_le = min(
 ---
 ## **dplyr** - *group_by*
 
-- funkcja *group_by* sama nie tworzy wyników, pozwala jednak na wyliczanie wyniów według zadanej agregacji
+- *group_by* do not change data. Its role is to create the groups of variables to be use by the previous functions
 
 
 ```r
@@ -650,8 +3397,6 @@ gapminder_grp1 &lt;- summarize(gapminder_grp1, mean_lifeExp = mean(lifeExp))
 &lt;/table&gt;
 
 ---
-# **tidyr**
-
 ## **tidyr**
 
 
@@ -660,23 +3405,23 @@ gapminder_grp1 &lt;- summarize(gapminder_grp1, mean_lifeExp = mean(lifeExp))
 library('tidyr')
 ```
 
-- często dane jakie posiadamy są ułożone nie w ten sposób jaki my czy też różne funkcje R oczekują; ważne jest, aby dane były uporządkowane (tzw. "tidy data"), co oznacza, że:
-    - każda kolumna to zmienna
-    - każdy wiersz to obserwacja
-- istnieją dwie podstawowe układy danych, tzw. dane szerokie (wide) oraz dane długie (long)      
-- więcej szczegółów można znaleźć pod adresem http://vita.had.co.nz/papers/tidy-data.html
-- pakiet **tidyr** posiada dwie główne funkcje - *gather* and *spread* oraz szereg dodatkowych
+- Many of real world datasets are messy - they are not organized in a way we (or R functions) expect. It is important to use "tidy data" framework to ease the manipulation, modeling, and visualisation of datasets. In "tidy data":
+    - Each varaible forms a column
+    - Each observation forms a row
+    - Each type of observational unit forms a table (data frame)
+- There are two data formats in "tidy data" - wide format and long format 
+- More information about "tidy data" can be found here - http://vita.had.co.nz/papers/tidy-data.html
+- **tidyr** package has two main functions - *gather* and *spread*, and several additional functions
 
 ---
 ## **tidyr** - *spread*
 
-- celem funkcji *spread* jest przetworzenie danych na tzw. dane szerokie 
-- konieczne jest, aby dane miały tylko jeden unikalny identyfikator
+- *spread* function takes two columns (key &amp; value) and spreads in to multiple columns (creates data in "wide" format)
 
 
 ```r
-gapminder &lt;- select(gapminder, -continent, -lifeExp, -gdpPercap)
-gapminder_spread &lt;- spread(gapminder, country, pop)
+gapminder_sel &lt;- select(gapminder, -continent, -lifeExp, -gdpPercap)
+gapminder_spread &lt;- spread(gapminder_sel, country, pop)
 ```
 
 &lt;table&gt;
@@ -761,7 +3506,7 @@ gapminder_spread &lt;- spread(gapminder, country, pop)
 ---
 ## **tidyr** - *gather*
 
-- funkcja *gather* przetwarza dane na postać tzw. długą
+- *gather* function reshape data from wide format to long format
 
 
 ```r
@@ -801,6 +3546,159 @@ gapminder_gather &lt;- gather(gapminder_spread, country, pop, -year)
    &lt;td style="text-align:right;"&gt; 1972 &lt;/td&gt;
    &lt;td style="text-align:left;"&gt; Afghanistan &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 13079460 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+## ** %&gt;% **
+
+- The usual approach to perform multiply operations in R is either by creating many "subobjects" or by nesting
+
+
+```r
+gapminder_sel &lt;- select(gapminder, country, continent, pop)
+gapminder_africa &lt;- filter(gapminder_sel, continent=='Africa')
+```
+
+
+```r
+gapminder_africa &lt;- filter(select(gapminder, country, continent, pop), continent=='Africa')
+```
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; country &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; continent &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; pop &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Algeria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Africa &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9279525 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Algeria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Africa &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10270856 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Algeria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Africa &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11000948 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Algeria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Africa &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12760499 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Algeria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Africa &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14760787 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+## ** %&gt;% **
+
+- Nowadays, it could be easier with the use of *%&gt;%* ("pipe") operator
+- In this approach, commands are written in a natural order
+
+
+```r
+gapminder_africa &lt;- gapminder %&gt;% 
+        select(country, continent, pop) %&gt;% 
+        filter(continent=='Africa')
+```
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; country &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; continent &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; pop &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Algeria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Africa &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9279525 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Algeria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Africa &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10270856 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Algeria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Africa &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11000948 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Algeria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Africa &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12760499 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Algeria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Africa &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14760787 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+## ** %&gt;% **
+
+
+```r
+gapminder_proc &lt;- gapminder %&gt;% 
+        filter(continent=='Europe', year==2007) %&gt;% 
+        mutate(pop_in_thousands=pop/1000) %&gt;% 
+        select(country, gdpPercap, pop_in_thousands) %&gt;% 
+        gather(key, value, gdpPercap, pop_in_thousands)
+```
+
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; country &lt;/th&gt;
+   &lt;th style="text-align:left;"&gt; key &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Albania &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; gdpPercap &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5937.030 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Austria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; gdpPercap &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36126.493 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Belgium &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; gdpPercap &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33692.605 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Bosnia and Herzegovina &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; gdpPercap &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7446.299 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Bulgaria &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; gdpPercap &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10680.793 &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;

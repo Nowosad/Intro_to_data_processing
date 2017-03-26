@@ -21,8 +21,6 @@ options(scipen = 5)
 options(htmltools.dir.version = FALSE)
 ```
 
-
----
 ## Dataset
 
 ```{r, eval=FALSE}
@@ -79,8 +77,8 @@ gapminder$country
 - The result is a vector
 
 ```{r}
-kraje <- gapminder$country
-kraje
+countries <- gapminder$country
+countries
 ```
 
 ---
@@ -235,17 +233,16 @@ head(gapminder$continent)
 library('dplyr')
 ```
 
-- **dplyr** to pakiet służący do podstawowych operacji przetwarzania danych z wykrzystaniem obiektów typu data.frame
-- podstawowe funkcje pakietu **dplyr** to *select*, *arrange*, *filter*, *mutate*, oraz *summarize*
-- dodatkowo ważną rolę spełnia funkcja *group_by*
-- inne możliwości pakietu **dplyr** to operator łączący funkcje ( %>% ), złączenia ("join") czy operacje w ruchomym oknie 
+- **dplyr** is a package for data exploration and transformation
+- Basic functions of **dplyr** package are *select*, *arrange*, *filter*, *mutate*, and *summarize*
+- Another important function is *group_by*
+- Additionally, **dplyr** package implements a pipe operator (*%>%*), joins and set operations, and moving window operations
 
 ---
 ## **dplyr** - *select*
 
-- funkcja *select* pozwala na stworzenie obiektu zawierającego tylko wybrane kolumny
-- ta funkcja pozwala zarówno na wybór pozytywny jak i negatywny
-- wiele dodatkowych możliwości - ?dplyr::select
+- *select* function picks columns by its name
+- Many additional features - *?dplyr::select*
 
 ```{r, echo=FALSE}
 knitr::kable(head(gapminder), 'html')
@@ -273,7 +270,7 @@ knitr::kable(gapminder_sel2[1:2, ], 'html')
 ---
 ## **dplyr** - *arrange*
 
-- funkcja *arrange* sortuje wybrane kolumny w kolejności rosnącej...
+- *arrange* reorder rows in ascending order...
 
 ```{r}
 gapminder_arr1 <- arrange(gapminder, lifeExp)
@@ -286,7 +283,7 @@ knitr::kable(gapminder_arr1[1:5, ], 'html')
 ---
 ## **dplyr** - *arrange*
 
-- ...lub malejącej
+- ...or descending order
 
 ```{r}
 gapminder_arr1 <- arrange(gapminder, desc(lifeExp))
@@ -299,8 +296,8 @@ knitr::kable(gapminder_arr1[1:5, ], 'html')
 ---
 ## **dplyr** - *filter*
 
-- funkcja *filter* pozwala na wybranie tylko tych obserwacji (wierszy), które spełniają zadane warunki
-- warunki określane są przez operatory logiczne: ==, !=, >, >=, <, <=, &, |
+- *filter* keeps rows matching given criteria
+- Logical operators, such as ==, !=, >, >=, <, <=, &, |, can be used
 
 ```{r}
 gapminder_fil1 <- filter(gapminder, year == 2007)
@@ -332,7 +329,7 @@ knitr::kable(gapminder_fil2[1:2, ], 'html')
 ---
 ## **dplyr** - *mutate*
 
-- funkcja *mutate* dodaje nowe zmienne (kolumny) na podstawe zadanego wyrażenia
+- *mutate* function creates new variables based on existing variables
 
 ```{r}
 gapminder_mut1 <- mutate(gapminder, gdp_mil = (gdpPercap * pop) / 1000000)
@@ -345,7 +342,7 @@ knitr::kable(gapminder_mut1[1:5, ], 'html')
 ---
 ## **dplyr** - *summarize*
 
-- funkcja *summarize* służy do tworzenia podsumowań statystycznych; tworzy kolumny z zadanymi statystykami opisowymi
+- *summarize* function can be used to reduce variables to values
 
 ```{r}
 gapminder_sum1 <- summarize(gapminder, mean_le = mean(lifeExp))
@@ -366,7 +363,7 @@ gapminder_sum2
 ---
 ## **dplyr** - *group_by*
 
-- funkcja *group_by* sama nie tworzy wyników, pozwala jednak na wyliczanie wyniów według zadanej agregacji
+- *group_by* do not change data. Its role is to create the groups of variables to be use by the previous functions
 
 ```{r}
 gapminder2007 <- filter(gapminder, year == 2007)
@@ -397,22 +394,22 @@ knitr::kable(gapminder_grp1[1:5, ], 'html')
 library('tidyr')
 ```
 
-- często dane jakie posiadamy są ułożone nie w ten sposób jaki my czy też różne funkcje R oczekują; ważne jest, aby dane były uporządkowane (tzw. "tidy data"), co oznacza, że:
-    - każda kolumna to zmienna
-    - każdy wiersz to obserwacja
-- istnieją dwie podstawowe układy danych, tzw. dane szerokie (wide) oraz dane długie (long)      
-- więcej szczegółów można znaleźć pod adresem http://vita.had.co.nz/papers/tidy-data.html
-- pakiet **tidyr** posiada dwie główne funkcje - *gather* and *spread* oraz szereg dodatkowych
+- Many of real world datasets are messy - they are not organized in a way we (or R functions) expect. It is important to use "tidy data" framework to ease the manipulation, modeling, and visualisation of datasets. In "tidy data":
+    - Each varaible forms a column
+    - Each observation forms a row
+    - Each type of observational unit forms a table (data frame)
+- There are two data formats in "tidy data" - wide format and long format 
+- More information about "tidy data" can be found here - http://vita.had.co.nz/papers/tidy-data.html
+- **tidyr** package has two main functions - *gather* and *spread*, and several additional functions
 
 ---
 ## **tidyr** - *spread*
 
-- celem funkcji *spread* jest przetworzenie danych na tzw. dane szerokie 
-- konieczne jest, aby dane miały tylko jeden unikalny identyfikator
+- *spread* function takes two columns (key & value) and spreads in to multiple columns (creates data in "wide" format)
 
 ```{r}
-gapminder <- select(gapminder, -continent, -lifeExp, -gdpPercap)
-gapminder_spread <- spread(gapminder, country, pop)
+gapminder_sel <- select(gapminder, -continent, -lifeExp, -gdpPercap)
+gapminder_spread <- spread(gapminder_sel, country, pop)
 ```
 
 ```{r, echo=FALSE}
@@ -422,7 +419,7 @@ knitr::kable(gapminder_spread[c(1:5), 1:10], 'html')
 ---
 ## **tidyr** - *gather*
 
-- funkcja *gather* przetwarza dane na postać tzw. długą
+- *gather* function reshape data from wide format to long format
 
 ```{r}
 gapminder_gather <- gather(gapminder_spread, country, pop, -year)
@@ -432,6 +429,52 @@ gapminder_gather <- gather(gapminder_spread, country, pop, -year)
 knitr::kable(gapminder_gather[1:5, ], 'html')
 ```
 
+---
+## ** %>% **
+
+- The usual approach to perform multiply operations in R is either by creating many "subobjects" or by nesting
+
+```{r}
+gapminder_sel <- select(gapminder, country, continent, pop)
+gapminder_africa <- filter(gapminder_sel, continent=='Africa')
+```
+
+```{r}
+gapminder_africa <- filter(select(gapminder, country, continent, pop), continent=='Africa')
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_africa[1:5, ], 'html')
+```
 
 ---
 ## ** %>% **
+
+- Nowadays, it could be easier with the use of *%>%* ("pipe") operator
+- In this approach, commands are written in a natural order
+
+```{r}
+gapminder_africa <- gapminder %>% 
+        select(country, continent, pop) %>% 
+        filter(continent=='Africa')
+```
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_africa[1:5, ], 'html')
+```
+
+---
+## ** %>% **
+
+```{r}
+gapminder_proc <- gapminder %>% 
+        filter(continent=='Europe', year==2007) %>% 
+        mutate(pop_in_thousands=pop/1000) %>% 
+        select(country, gdpPercap, pop_in_thousands) %>% 
+        gather(key, value, gdpPercap, pop_in_thousands)
+```
+
+
+```{r, echo=FALSE}
+knitr::kable(gapminder_proc[1:5, ], 'html')
+```
