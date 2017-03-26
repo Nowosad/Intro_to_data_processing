@@ -46,12 +46,148 @@ http://www.youtube.com/watch?v=jbkSRLYSojo
 ---
 # Vectors - indexing
 
-- brak indeksu
-- indeks dodatni
-- indeks zerowy
-- indeks ujemny
-- indeks logiczny
-- indeks tekstowy
+- empty index
+- positive index
+- zero index
+- negative index
+- logical index
+- name index
+
+---
+## data.frame - indexing
+- A data frame is (at least) a two-dimensional object
+- There are many ways to subset a data frame. Some of them are *[]* operator, *$* operator, or *subset()* function
+
+```{r}
+head(gapminder)
+```
+
+---
+## data.frame - indexing
+
+- *$* operator can be used to retrieve a variable (column) by its name
+- The result is a vector
+
+```{r}
+gapminder$country
+```
+
+---
+## data.frame - indexing
+
+- *$* operator can be used to retrieve a variable (column) by its name
+- The result is a vector
+
+```{r}
+kraje <- gapminder$country
+kraje
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+```{r}
+head(gapminder)
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+```{r}
+gapminder[3, ]
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+```{r}
+gapminder[2, 3]
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+```{r}
+gapminder[-(1:1650), 3]
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+```{r}
+gapminder[c(2,4), -3]
+```
+
+---
+## data.frame - indexing
+
+- *[]* operator can be used to subset rows and columns
+- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+
+```{r}
+gapminder[c(2,4), c("country", "pop")]
+```
+
+---
+## data.frame - indexing
+
+- Logical operators, such as ==, !=, >, >=, <, <=, &, | can be also used for indexing
+
+```{r}
+gapminder[gapminder$lifeExp>82, c("country", "pop")]
+```
+
+```{r}
+subset(gapminder, pop>1000000000)
+```
+
+---
+## data.frame - indexing
+
+- Logical operators, such as ==, !=, >, >=, <, <=, &, | can be also used for indexing
+
+```{r}
+subset(gapminder, pop>1000000000 & country=='India')
+```
+
+```{r}
+subset(gapminder, pop>1000000000 | continent=='Oceania')
+```
+
+---
+## data.frame - indexing
+
+- A new object can be created from the results of indexing
+
+```{r}
+africa <- subset(gapminder, continent=='Africa')
+africa
+```
+
+---
+## data.frame - indexing
+
+- A new object can be created from the results of indexing
+
+```{r}
+year_2007 <- gapminder[gapminder$year==2007, ]
+year_2007
+```
 
 ---
 ## data.frame - indexing
