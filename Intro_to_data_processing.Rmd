@@ -44,17 +44,20 @@ http://www.youtube.com/watch?v=jbkSRLYSojo
 ---
 # Vectors - indexing
 
-- empty index
-- positive index
-- zero index
-- negative index
-- logical index
-- name index
+- empty index - `[ ]`
+- positive index - `[5]`
+- zero index - `[0]`
+- negative index - `[-1]`
+- logical index - `[x>5]`
+- name index - `["country"]`
 
 ---
 ## data.frame - indexing
 - A data frame is (at least) a two-dimensional object
-- There are many ways to subset a data frame. Some of them are *[]* operator, *$* operator, or *subset()* function
+- There are many ways to subset a data frame. Some of them are:
+    - `[]` operator
+    - `$` operator
+    - or `subset()` function
 
 ```{r}
 head(gapminder)
@@ -63,7 +66,7 @@ head(gapminder)
 ---
 ## data.frame - indexing
 
-- *$* operator can be used to retrieve a variable (column) by its name
+- `$` operator can be used to retrieve a variable (column) by its name
 - The result is a vector
 
 ```{r}
@@ -73,7 +76,7 @@ gapminder$country
 ---
 ## data.frame - indexing
 
-- *$* operator can be used to retrieve a variable (column) by its name
+- `$` operator can be used to retrieve a variable (column) by its name
 - The result is a vector
 
 ```{r}
@@ -84,8 +87,8 @@ countries
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 head(gapminder)
@@ -94,8 +97,8 @@ head(gapminder)
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 gapminder[3, ]
@@ -104,8 +107,8 @@ gapminder[3, ]
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 gapminder[2, 3]
@@ -114,8 +117,8 @@ gapminder[2, 3]
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 gapminder[-(1:1650), 3]
@@ -124,8 +127,8 @@ gapminder[-(1:1650), 3]
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 gapminder[c(2,4), -3]
@@ -134,8 +137,8 @@ gapminder[c(2,4), -3]
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 gapminder[c(2,4), c("country", "pop")]
@@ -144,7 +147,7 @@ gapminder[c(2,4), c("country", "pop")]
 ---
 ## data.frame - indexing
 
-- Logical operators, such as ==, !=, >, >=, <, <=, &, | can be also used for indexing
+- Logical operators, such as `==, !=, >, >=, <, <=, &, |` can also be used for indexing
 
 ```{r}
 gapminder[gapminder$lifeExp>82, c("country", "pop")]
@@ -157,7 +160,7 @@ subset(gapminder, pop>1000000000)
 ---
 ## data.frame - indexing
 
-- Logical operators, such as ==, !=, >, >=, <, <=, &, | can be also used for indexing
+- Logical operators, such as `==, !=, >, >=, <, <=, &, |` can also be used for indexing
 
 ```{r}
 subset(gapminder, pop>1000000000 & country=='India')
@@ -234,22 +237,22 @@ library('dplyr')
 ```
 
 - **dplyr** is a package for data exploration and transformation
-- Basic functions of **dplyr** package are *select*, *arrange*, *filter*, *mutate*, and *summarize*
-- Another important function is *group_by*
-- Additionally, **dplyr** package implements a pipe operator (*%>%*), joins and set operations, and moving window operations
+- Basic functions of **dplyr** package are `select()`, `arrange()`, `filter()`, `mutate()`, and `summarize()`
+- Another important function is `group_by()`
+- Additionally, **dplyr** package implements a pipe operator (`%>%`), joins and set operations, and moving window operations
 
 ---
-## **dplyr** - *select*
+## **dplyr** - `select()`
 
-- *select* function picks columns by its name
-- Many additional features - *?dplyr::select*
+- `select()` function picks columns by its name
+- Many additional features - `?dplyr::select()`
 
 ```{r, echo=FALSE}
 knitr::kable(head(gapminder), 'html')
 ```
 
 ---
-## **dplyr** - *select*
+## **dplyr** - `select()`
 
 ```{r}
 gapminder_sel1 <- select(gapminder, country, year, pop)
@@ -268,9 +271,9 @@ knitr::kable(gapminder_sel2[1:2, ], 'html')
 ```
 
 ---
-## **dplyr** - *arrange*
+## **dplyr** - `arrange()`
 
-- *arrange* reorder rows in ascending order...
+- `arrange()` reorder rows in ascending order...
 
 ```{r}
 gapminder_arr1 <- arrange(gapminder, lifeExp)
@@ -281,7 +284,7 @@ knitr::kable(gapminder_arr1[1:5, ], 'html')
 ```
 
 ---
-## **dplyr** - *arrange*
+## **dplyr** - `arrange()`
 
 - ...or descending order
 
@@ -294,10 +297,10 @@ knitr::kable(gapminder_arr1[1:5, ], 'html')
 ```
 
 ---
-## **dplyr** - *filter*
+## **dplyr** - `filter()`
 
-- *filter* keeps rows matching given criteria
-- Logical operators, such as ==, !=, >, >=, <, <=, &, |, can be used
+- `filter()` keeps rows matching given criteria
+- Logical operators, such as `==, !=, >, >=, <, <=, &, |` can be used
 
 ```{r}
 gapminder_fil1 <- filter(gapminder, year == 2007)
@@ -308,7 +311,7 @@ knitr::kable(gapminder_fil1[1:2, ], 'html')
 ```
 
 ---
-## **dplyr** - *filter*
+## **dplyr** - `filter()`
 
 ```{r}
 gapminder_fil2 <- filter(gapminder, year == 2007 & pop <= 999999)
@@ -327,9 +330,9 @@ knitr::kable(gapminder_fil2[1:2, ], 'html')
 ```
 
 ---
-## **dplyr** - *mutate*
+## **dplyr** - `mutate()`
 
-- *mutate* function creates new variables based on existing variables
+- `mutate()` function creates new variables based on existing variables
 
 ```{r}
 gapminder_mut1 <- mutate(gapminder, gdp_mil = (gdpPercap * pop) / 1000000)
@@ -340,9 +343,9 @@ knitr::kable(gapminder_mut1[1:5, ], 'html')
 ```
 
 ---
-## **dplyr** - *summarize*
+## **dplyr** - `summarize()`
 
-- *summarize* function can be used to reduce variables to values
+- `summarize()` function can be used to reduce variables to values
 
 ```{r}
 gapminder_sum1 <- summarize(gapminder, mean_le = mean(lifeExp))
@@ -361,9 +364,9 @@ gapminder_sum2
 ```
 
 ---
-## **dplyr** - *group_by*
+## **dplyr** - `group_by()`
 
-- *group_by* do not change data. Its role is to create the groups of variables to be use by the previous functions
+- `group_by()` does not change data. Its role is to create the groups of variables to be used by the previous functions
 
 ```{r}
 gapminder2007 <- filter(gapminder, year == 2007)
@@ -375,7 +378,7 @@ head(gapminder_grp1)
 ```
 
 ---
-## **dplyr** - *group_by*
+## **dplyr** - `group_by()`
 
 ```{r}
 gapminder_grp1 <- summarize(gapminder_grp1, mean_lifeExp = mean(lifeExp))
@@ -395,17 +398,17 @@ library('tidyr')
 ```
 
 - Many of real world datasets are messy - they are not organized in a way we (or R functions) expect. It is important to use "tidy data" framework to ease the manipulation, modeling, and visualisation of datasets. In "tidy data":
-    - Each varaible forms a column
+    - Each variable forms a column
     - Each observation forms a row
     - Each type of observational unit forms a table (data frame)
 - There are two data formats in "tidy data" - wide format and long format 
 - More information about "tidy data" can be found here - http://vita.had.co.nz/papers/tidy-data.html
-- **tidyr** package has two main functions - *gather* and *spread*, and several additional functions
+- **tidyr** package has two main functions - `gather()` and `spread()`, and several additional functions
 
 ---
-## **tidyr** - *spread*
+## **tidyr** - `spread()`
 
-- *spread* function takes two columns (key & value) and spreads in to multiple columns (creates data in "wide" format)
+- `spread()` function takes two columns (key & value) and spreads in to multiple columns (creates data in a "wide" format)
 
 ```{r}
 gapminder_sel <- select(gapminder, -continent, -lifeExp, -gdpPercap)
@@ -417,9 +420,9 @@ knitr::kable(gapminder_spread[c(1:5), 1:10], 'html')
 ```
 
 ---
-## **tidyr** - *gather*
+## **tidyr** - `gather()`
 
-- *gather* function reshape data from wide format to long format
+- `gather()` function reshape data from wide format to a long format
 
 ```{r}
 gapminder_gather <- gather(gapminder_spread, country, pop, -year)
@@ -430,14 +433,18 @@ knitr::kable(gapminder_gather[1:5, ], 'html')
 ```
 
 ---
-## ** %>% **
+## `%>%`
 
-- The usual approach to perform multiply operations in R is either by creating many "subobjects" or by nesting
+- The usual approach to perform numerous operations in R is either:
+
+by creating many "subobjects":
 
 ```{r}
 gapminder_sel <- select(gapminder, country, continent, pop)
 gapminder_africa <- filter(gapminder_sel, continent=='Africa')
 ```
+
+...or by nesting:
 
 ```{r}
 gapminder_africa <- filter(select(gapminder, country, continent, pop), continent=='Africa')
@@ -448,9 +455,9 @@ knitr::kable(gapminder_africa[1:5, ], 'html')
 ```
 
 ---
-## ** %>% **
+## `%>%`
 
-- Nowadays, it could be easier with the use of *%>%* ("pipe") operator
+- Nowadays, it could be easier with the use of `%>%` ("pipe") operator
 - In this approach, commands are written in a natural order
 
 ```{r}
@@ -464,7 +471,7 @@ knitr::kable(gapminder_africa[1:5, ], 'html')
 ```
 
 ---
-## ** %>% **
+## `%>%`
 
 ```{r}
 gapminder_proc <- gapminder %>% 

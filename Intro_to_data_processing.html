@@ -43,17 +43,20 @@ http://www.youtube.com/watch?v=jbkSRLYSojo
 ---
 # Vectors - indexing
 
-- empty index
-- positive index
-- zero index
-- negative index
-- logical index
-- name index
+- empty index - `[ ]`
+- positive index - `[5]`
+- zero index - `[0]`
+- negative index - `[-1]`
+- logical index - `[x&gt;5]`
+- name index - `["country"]`
 
 ---
 ## data.frame - indexing
 - A data frame is (at least) a two-dimensional object
-- There are many ways to subset a data frame. Some of them are *[]* operator, *$* operator, or *subset()* function
+- There are many ways to subset a data frame. Some of them are:
+    - `[]` operator
+    - `$` operator
+    - or `subset()` function
 
 
 ```r
@@ -73,7 +76,7 @@ head(gapminder)
 ---
 ## data.frame - indexing
 
-- *$* operator can be used to retrieve a variable (column) by its name
+- `$` operator can be used to retrieve a variable (column) by its name
 - The result is a vector
 
 
@@ -940,7 +943,7 @@ gapminder$country
 ---
 ## data.frame - indexing
 
-- *$* operator can be used to retrieve a variable (column) by its name
+- `$` operator can be used to retrieve a variable (column) by its name
 - The result is a vector
 
 
@@ -1808,8 +1811,8 @@ countries
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 
 ```r
@@ -1829,8 +1832,8 @@ head(gapminder)
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 
 ```r
@@ -1845,8 +1848,8 @@ gapminder[3, ]
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 
 ```r
@@ -1860,8 +1863,8 @@ gapminder[2, 3]
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 
 ```r
@@ -1878,8 +1881,8 @@ gapminder[-(1:1650), 3]
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 
 ```r
@@ -1895,8 +1898,8 @@ gapminder[c(2,4), -3]
 ---
 ## data.frame - indexing
 
-- *[]* operator can be used to subset rows and columns
-- *[]* operator requres two arguments - one for rows (observations) and one for columns (variables) - *[rows, columns]*
+- `[]` operator can be used to subset rows and columns
+- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 
 ```r
@@ -1912,7 +1915,7 @@ gapminder[c(2,4), c("country", "pop")]
 ---
 ## data.frame - indexing
 
-- Logical operators, such as ==, !=, &gt;, &gt;=, &lt;, &lt;=, &amp;, | can be also used for indexing
+- Logical operators, such as `==, !=, &gt;, &gt;=, &lt;, &lt;=, &amp;, |` can also be used for indexing
 
 
 ```r
@@ -1945,7 +1948,7 @@ subset(gapminder, pop&gt;1000000000)
 ---
 ## data.frame - indexing
 
-- Logical operators, such as ==, !=, &gt;, &gt;=, &lt;, &lt;=, &amp;, | can be also used for indexing
+- Logical operators, such as `==, !=, &gt;, &gt;=, &lt;, &lt;=, &amp;, |` can also be used for indexing
 
 
 ```r
@@ -2849,15 +2852,15 @@ library('dplyr')
 ```
 
 - **dplyr** is a package for data exploration and transformation
-- Basic functions of **dplyr** package are *select*, *arrange*, *filter*, *mutate*, and *summarize*
-- Another important function is *group_by*
-- Additionally, **dplyr** package implements a pipe operator (*%&gt;%*), joins and set operations, and moving window operations
+- Basic functions of **dplyr** package are `select()`, `arrange()`, `filter()`, `mutate()`, and `summarize()`
+- Another important function is `group_by()`
+- Additionally, **dplyr** package implements a pipe operator (`%&gt;%`), joins and set operations, and moving window operations
 
 ---
-## **dplyr** - *select*
+## **dplyr** - `select()`
 
-- *select* function picks columns by its name
-- Many additional features - *?dplyr::select*
+- `select()` function picks columns by its name
+- Many additional features - `?dplyr::select()`
 
 &lt;table&gt;
  &lt;thead&gt;
@@ -2923,7 +2926,7 @@ library('dplyr')
 &lt;/table&gt;
 
 ---
-## **dplyr** - *select*
+## **dplyr** - `select()`
 
 
 ```r
@@ -2986,9 +2989,9 @@ gapminder_sel2 &lt;- select(gapminder, -continent)
 &lt;/table&gt;
 
 ---
-## **dplyr** - *arrange*
+## **dplyr** - `arrange()`
 
-- *arrange* reorder rows in ascending order...
+- `arrange()` reorder rows in ascending order...
 
 
 ```r
@@ -3051,7 +3054,7 @@ gapminder_arr1 &lt;- arrange(gapminder, lifeExp)
 &lt;/table&gt;
 
 ---
-## **dplyr** - *arrange*
+## **dplyr** - `arrange()`
 
 - ...or descending order
 
@@ -3116,10 +3119,10 @@ gapminder_arr1 &lt;- arrange(gapminder, desc(lifeExp))
 &lt;/table&gt;
 
 ---
-## **dplyr** - *filter*
+## **dplyr** - `filter()`
 
-- *filter* keeps rows matching given criteria
-- Logical operators, such as ==, !=, &gt;, &gt;=, &lt;, &lt;=, &amp;, |, can be used
+- `filter()` keeps rows matching given criteria
+- Logical operators, such as `==, !=, &gt;, &gt;=, &lt;, &lt;=, &amp;, |` can be used
 
 
 ```r
@@ -3158,7 +3161,7 @@ gapminder_fil1 &lt;- filter(gapminder, year == 2007)
 &lt;/table&gt;
 
 ---
-## **dplyr** - *filter*
+## **dplyr** - `filter()`
 
 
 ```r
@@ -3233,9 +3236,9 @@ gapminder_fil2 &lt;- filter(gapminder, continent != 'Asia' |  lifeExp &lt; 30)
 &lt;/table&gt;
 
 ---
-## **dplyr** - *mutate*
+## **dplyr** - `mutate()`
 
-- *mutate* function creates new variables based on existing variables
+- `mutate()` function creates new variables based on existing variables
 
 
 ```r
@@ -3304,9 +3307,9 @@ gapminder_mut1 &lt;- mutate(gapminder, gdp_mil = (gdpPercap * pop) / 1000000)
 &lt;/table&gt;
 
 ---
-## **dplyr** - *summarize*
+## **dplyr** - `summarize()`
 
-- *summarize* function can be used to reduce variables to values
+- `summarize()` function can be used to reduce variables to values
 
 
 ```r
@@ -3331,9 +3334,9 @@ gapminder_sum2 &lt;- summarize(gapminder, mean_le = mean(lifeExp), min_le = min(
 ```
 
 ---
-## **dplyr** - *group_by*
+## **dplyr** - `group_by()`
 
-- *group_by* do not change data. Its role is to create the groups of variables to be use by the previous functions
+- `group_by()` does not change data. Its role is to create the groups of variables to be used by the previous functions
 
 
 ```r
@@ -3357,7 +3360,7 @@ gapminder_grp1 &lt;- group_by(gapminder2007, continent)
 ```
 
 ---
-## **dplyr** - *group_by*
+## **dplyr** - `group_by()`
 
 
 ```r
@@ -3406,17 +3409,17 @@ library('tidyr')
 ```
 
 - Many of real world datasets are messy - they are not organized in a way we (or R functions) expect. It is important to use "tidy data" framework to ease the manipulation, modeling, and visualisation of datasets. In "tidy data":
-    - Each varaible forms a column
+    - Each variable forms a column
     - Each observation forms a row
     - Each type of observational unit forms a table (data frame)
 - There are two data formats in "tidy data" - wide format and long format 
 - More information about "tidy data" can be found here - http://vita.had.co.nz/papers/tidy-data.html
-- **tidyr** package has two main functions - *gather* and *spread*, and several additional functions
+- **tidyr** package has two main functions - `gather()` and `spread()`, and several additional functions
 
 ---
-## **tidyr** - *spread*
+## **tidyr** - `spread()`
 
-- *spread* function takes two columns (key &amp; value) and spreads in to multiple columns (creates data in "wide" format)
+- `spread()` function takes two columns (key &amp; value) and spreads in to multiple columns (creates data in a "wide" format)
 
 
 ```r
@@ -3504,9 +3507,9 @@ gapminder_spread &lt;- spread(gapminder_sel, country, pop)
 &lt;/table&gt;
 
 ---
-## **tidyr** - *gather*
+## **tidyr** - `gather()`
 
-- *gather* function reshape data from wide format to long format
+- `gather()` function reshape data from wide format to a long format
 
 
 ```r
@@ -3551,15 +3554,19 @@ gapminder_gather &lt;- gather(gapminder_spread, country, pop, -year)
 &lt;/table&gt;
 
 ---
-## ** %&gt;% **
+## `%&gt;%`
 
-- The usual approach to perform multiply operations in R is either by creating many "subobjects" or by nesting
+- The usual approach to perform numerous operations in R is either:
+
+by creating many "subobjects":
 
 
 ```r
 gapminder_sel &lt;- select(gapminder, country, continent, pop)
 gapminder_africa &lt;- filter(gapminder_sel, continent=='Africa')
 ```
+
+...or by nesting:
 
 
 ```r
@@ -3604,9 +3611,9 @@ gapminder_africa &lt;- filter(select(gapminder, country, continent, pop), contin
 &lt;/table&gt;
 
 ---
-## ** %&gt;% **
+## `%&gt;%`
 
-- Nowadays, it could be easier with the use of *%&gt;%* ("pipe") operator
+- Nowadays, it could be easier with the use of `%&gt;%` ("pipe") operator
 - In this approach, commands are written in a natural order
 
 
@@ -3654,7 +3661,7 @@ gapminder_africa &lt;- gapminder %&gt;%
 &lt;/table&gt;
 
 ---
-## ** %&gt;% **
+## `%&gt;%`
 
 
 ```r
@@ -3709,7 +3716,7 @@ gapminder_proc &lt;- gapminder %&gt;%
 "highlightLines": true,
 "countIncrementalSlides": false
 });
-if (window.HTMLWidgets) slideshow.on('showSlide', function (slide) {setTimeout(function() {window.dispatchEvent(new Event('resize'));}, 100)});</script>
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});</script>
 
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
