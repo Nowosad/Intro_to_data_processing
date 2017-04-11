@@ -88,7 +88,7 @@ countries
 ## data.frame - indexing
 
 - `[]` operator can be used to subset rows and columns
-- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
+- `[]` operator requires two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 head(gapminder)
@@ -98,7 +98,7 @@ head(gapminder)
 ## data.frame - indexing
 
 - `[]` operator can be used to subset rows and columns
-- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
+- `[]` operator requires two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 gapminder[3, ]
@@ -108,7 +108,7 @@ gapminder[3, ]
 ## data.frame - indexing
 
 - `[]` operator can be used to subset rows and columns
-- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
+- `[]` operator requires two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 gapminder[2, 3]
@@ -118,7 +118,7 @@ gapminder[2, 3]
 ## data.frame - indexing
 
 - `[]` operator can be used to subset rows and columns
-- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
+- `[]` operator requires two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 gapminder[-(1:1650), 3]
@@ -128,7 +128,7 @@ gapminder[-(1:1650), 3]
 ## data.frame - indexing
 
 - `[]` operator can be used to subset rows and columns
-- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
+- `[]` operator requires two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 gapminder[c(2,4), -3]
@@ -138,7 +138,7 @@ gapminder[c(2,4), -3]
 ## data.frame - indexing
 
 - `[]` operator can be used to subset rows and columns
-- `[]` operator requres two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
+- `[]` operator requires two arguments - one for rows (observations) and one for columns (variables) - `[rows, columns]`
 
 ```{r}
 gapminder[c(2,4), c("country", "pop")]
@@ -237,7 +237,7 @@ library('dplyr')
 ```
 
 - **dplyr** is a package for data exploration and transformation
-- Basic functions of **dplyr** package are `select()`, `arrange()`, `filter()`, `mutate()`, and `summarize()`
+- Basic functions of the **dplyr** package are `select()`, `arrange()`, `filter()`, `mutate()`, and `summarize()`
 - Another important function is `group_by()`
 - Additionally, **dplyr** package implements a pipe operator (`%>%`), joins and set operations, and moving window operations
 
@@ -433,7 +433,7 @@ knitr::kable(gapminder_gather[1:5, ], 'html')
 ```
 
 ---
-## `%>%`
+## `%>%` operator
 
 - The usual approach to perform numerous operations in R is either:
 
@@ -455,9 +455,9 @@ knitr::kable(gapminder_africa[1:5, ], 'html')
 ```
 
 ---
-## `%>%`
+## `%>%` operator
 
-- Nowadays, it could be easier with the use of `%>%` ("pipe") operator
+- Nowadays, it could be easier with the use of `%>%` ("pipe") operator (**magrittr** or **dplyr** package)
 - In this approach, commands are written in a natural order
 
 ```{r}
@@ -471,7 +471,7 @@ knitr::kable(gapminder_africa[1:5, ], 'html')
 ```
 
 ---
-## `%>%`
+## `%>%` operator
 
 ```{r}
 gapminder_proc <- gapminder %>% 
@@ -485,3 +485,6 @@ gapminder_proc <- gapminder %>%
 ```{r, echo=FALSE}
 knitr::kable(gapminder_proc[1:5, ], 'html')
 ```
+
+---
+## Resources
