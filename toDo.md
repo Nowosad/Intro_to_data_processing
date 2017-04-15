@@ -1,1 +1,1 @@
-1. add resources
+1. add resources descriptions
