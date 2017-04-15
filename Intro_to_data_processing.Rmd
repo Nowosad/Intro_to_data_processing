@@ -1,8 +1,8 @@
 ---
 title: "Intro to data processing"
 subtitle: ""
-author: "Jakub Nowosad"
-date: ""
+author: "Jakub Nowosad <br>nowosad.jakub@gmail.com"
+date: "2017-04-24"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -488,3 +488,4 @@ knitr::kable(gapminder_proc[1:5, ], 'html')
 
 ---
 ## Resources
+
