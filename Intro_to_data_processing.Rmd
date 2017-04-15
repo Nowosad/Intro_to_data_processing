@@ -232,7 +232,7 @@ head(gapminder$continent)
 
 ```{r}
 # install.packages('dplyr')
-# devtools::install_github("hadley/dplyr")
+# devtools::install_github("tidyverse/dplyr")
 library('dplyr')
 ```
 
