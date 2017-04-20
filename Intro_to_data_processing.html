@@ -25,7 +25,6 @@ class: center, middle, inverse, title-slide
 
 ```r
 # install.packages('devtools')
-# devtools::install_github("jennybc/gapminder")
 library('gapminder')
 ```
 
@@ -2167,7 +2166,10 @@ gapminder_sum1 &lt;- summarize(gapminder, mean_le = mean(lifeExp))
 
 
 ```r
-gapminder_sum2 &lt;- summarize(gapminder, mean_le = mean(lifeExp), min_le = min(lifeExp), max_le = max(lifeExp))
+gapminder_sum2 &lt;- summarize(gapminder, 
+                            mean_le = mean(lifeExp), 
+                            min_le = min(lifeExp), 
+                            max_le = max(lifeExp))
 ```
 
 
@@ -2257,12 +2259,12 @@ library('tidyr')
     - Each type of observational unit forms a table (data frame)
 - There are two data formats in "tidy data" - wide format and long format 
 - More information about "tidy data" can be found here - http://vita.had.co.nz/papers/tidy-data.html
-- **tidyr** package has two main functions - `gather()` and `spread()`, and several additional functions
+- The **tidyr** package has two main functions - `gather()` and `spread()`, and several additional functions
 
 ---
 ## **tidyr** - `spread()`
 
-- `spread()` function takes two columns (key &amp; value) and spreads in to multiple columns (creates data in a "wide" format)
+- `spread()` takes two columns (key &amp; value) and spreads them into multiple columns (creates data in a "wide" format)
 
 
 ```r
@@ -2352,7 +2354,7 @@ gapminder_spread &lt;- spread(gapminder_sel, country, pop)
 ---
 ## **tidyr** - `gather()`
 
-- `gather()` function reshape data from wide format to a long format
+- `gather()` reshapes data from a wide format to a long format
 
 
 ```r
@@ -2399,9 +2401,9 @@ gapminder_gather &lt;- gather(gapminder_spread, country, pop, -year)
 ---
 ## `%&gt;%` operator
 
-- The usual approach to perform numerous operations in R is either:
+The usual approach to perform numerous operations in R is either:
 
-by creating many "subobjects":
+- by creating many "subobjects":
 
 
 ```r
@@ -2409,7 +2411,7 @@ gapminder_sel &lt;- select(gapminder, country, continent, pop)
 gapminder_africa &lt;- filter(gapminder_sel, continent=='Africa')
 ```
 
-...or by nesting:
+- ...or by nesting:
 
 
 ```r
@@ -2456,8 +2458,8 @@ gapminder_africa &lt;- filter(select(gapminder, country, continent, pop), contin
 ---
 ## `%&gt;%` operator
 
-- Nowadays, it could be easier with the use of `%&gt;%` ("pipe") operator (**magrittr** or **dplyr** package)
-- In this approach, commands are written in a natural order
+- Nowadays, it could be easier done with the use of the `%&gt;%` ("pipe") operator (**magrittr** or **dplyr** package)
+- In this approach, commands are written in a (more) natural order
 
 
 ```r
@@ -2556,16 +2558,15 @@ gapminder_proc &lt;- gapminder %&gt;%
 ---
 ## Resources
 
-- [R for Data Science](http://r4ds.had.co.nz/)
-- [Tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html)
-- [Tidyverse](http://tidyverse.org/)
-- [dplyr](http://dplyr.tidyverse.org/)
-- [tidyr](http://tidyr.tidyverse.org/)
-- [Introduction to dplyr](http://stat545.com/block009_dplyr-intro.html)
-- [Tidy data lesson using Lord of the Rings data](https://github.com/jennybc/lotr-tidy#readme)
-- [Data Wrangling with dplyr and tidyr Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)
-- [Cheatsheet for dplyr join functions](http://stat545.com/bit001_dplyr-cheatsheet.html)
-- [A new data processing workflow for R: dplyr, magrittr, tidyr, ggplot2](http://zevross.com/blog/2015/01/13/a-new-data-processing-workflow-for-r-dplyr-magrittr-tidyr-ggplot2/)
+- [R for Data Science](http://r4ds.had.co.nz/) - a great book which contains chapters for beginners and for more advanced users
+- [Tidy data](https://cran.r-project.org/web/packages/tidyr/vignettes/tidy-data.html) - an overview of a "tidy data" approach
+- [dplyr](http://dplyr.tidyverse.org/) - an official website of the `dplyr` package
+- [tidyr](http://tidyr.tidyverse.org/) - an official website of the `tidyr` package
+- [Introduction to dplyr](http://stat545.com/block009_dplyr-intro.html) - a clear introdution to the `dplyr` package
+- [Tidy data lesson using Lord of the Rings data](https://github.com/jennybc/lotr-tidy#readme) - an introduction to a "tidy data" and the `tidyr` package using Lord of the Rings data
+- [Data Wrangling with dplyr and tidyr Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) - a two-pages summary of `dplyr` and `tidyr` functions
+- [Cheatsheet for dplyr join functions](http://stat545.com/bit001_dplyr-cheatsheet.html) - examples of `dplyr` join functions
+- [A new data processing workflow for R: dplyr, magrittr, tidyr, ggplot2](http://zevross.com/blog/2015/01/13/a-new-data-processing-workflow-for-r-dplyr-magrittr-tidyr-ggplot2/) - a data processing workflow example
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
