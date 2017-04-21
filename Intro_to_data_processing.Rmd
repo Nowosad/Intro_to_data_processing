@@ -24,7 +24,6 @@ options(htmltools.dir.version = FALSE)
 ## Dataset
 
 ```{r, eval=FALSE}
-# install.packages('devtools')
 library('gapminder')
 ```
 
