@@ -2,7 +2,7 @@
 
 ## Slides
 
-- [Slides are available here](https://rawcdn.githack.com/Nowosad/Intro_to_data_processing/master/Intro_to_data_processing.html)
+- [Slides are available here](https://cdn.rawgit.com/Nowosad/Intro_to_data_processing/5d0da6a7/Intro_to_data_processing.html)
 - [The code is available here](https://raw.githubusercontent.com/Nowosad/Intro_to_data_processing/master/Intro_to_data_processing.R)
 
 
