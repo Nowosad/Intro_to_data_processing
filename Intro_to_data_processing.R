@@ -1,5 +1,5 @@
 ## ---- eval=FALSE---------------------------------------------------------
-## library('gapminder')
+library('gapminder')
 
 ## ------------------------------------------------------------------------
 gapminder <- readRDS('data/gapminder.rds')
@@ -53,27 +53,27 @@ year_2007 <- gapminder[gapminder$year==2007, ]
 year_2007
 
 ## ---- eval=FALSE---------------------------------------------------------
-## gapminder[2, 1]
-## gapminder[1, 3]
-## gapminder[, 1]
-## gapminder[1]
-## gapminder[1, ]
-## gapminder[0, 3]
-## gapminder[-2, ]
-## gapminder[, -1]
-## gapminder[c(1,5,7), ]
-## gapminder[, c(1,2)]
-## gapminder[gapminder$pop<100000, ]
-## gapminder[gapminder$year==1952, c(4)]
+gapminder[2, 1]
+gapminder[1, 3]
+gapminder[, 1]
+gapminder[1]
+gapminder[1, ]
+gapminder[0, 3]
+gapminder[-2, ]
+gapminder[, -1]
+gapminder[c(1,5,7), ]
+gapminder[, c(1,2)]
+gapminder[gapminder$pop<100000, ]
+gapminder[gapminder$year==1952, c(4)]
 
 ## ---- eval=FALSE---------------------------------------------------------
-## gapminder$lifeExp
+gapminder$lifeExp
 
 ## ---- echo=FALSE---------------------------------------------------------
 head(gapminder$lifeExp)
 
 ## ---- eval=FALSE---------------------------------------------------------
-## gapminder$continent
+gapminder$continent
 
 ## ---- echo=FALSE---------------------------------------------------------
 head(gapminder$continent)
